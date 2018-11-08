@@ -1,5 +1,6 @@
 package br.ufac.laboratorio.logic;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,22 +23,24 @@ public class DataLogic {
 
 		List<String> camposInvalidos = new ArrayList<>();
 		boolean testField = false;
-
-		if(sigla.isEmpty() || sigla.length() > 5) {
+		if(horaInicio.length() < 5) {
 			testField = true;
-			camposInvalidos.add("Centro");
+			camposInvalidos.add("Hora Inicio");
 		}
-		if(nome.isEmpty() || nome.length() > 100) {
+		if(horaTermino.length() < 5) {
 			testField = true;
-			camposInvalidos.add("Nome");
+			camposInvalidos.add("Hora Termino");
 		}
+		
+		String novadata = this.formataDatasql(data);
 
 		if(testField) {
-			throw new InvalidFieldException("Centro", camposInvalidos);
+			throw new InvalidFieldException("Data", camposInvalidos);
 		}
-
-		Centro c = new Centro(sigla, nome);		
-		return cdb.addCentro(c);
+		
+		Data date = new Data(novadata, horaInicio, horaTermino);
+		return ddb.addData(date);
+		
 	}
 
 	public Centro getCentroSigla(String sigla) throws
@@ -108,4 +111,13 @@ public class DataLogic {
 		return cdb.getCentrosPorNome(nome);
 	}
 
+	
+	private String formataDatasql(String data) {
+		
+		String[] arraydatanova;
+		arraydatanova = data.split("/");
+		System.out.println(arraydatanova[2]+"/"+arraydatanova[1]+"/"+arraydatanova[0]);
+		return arraydatanova[2]+"-"+arraydatanova[1]+"-"+arraydatanova[0];
+		
+	}
 }

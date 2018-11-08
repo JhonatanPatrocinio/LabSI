@@ -1,21 +1,19 @@
 package br.ufac.laboratorio.entity;
 
-import java.util.Date;
-
 public class Data {
 	private int id;
-	private Date data;
+	private String data;
 	private String horarioInicio;
 	private String horarioTermino;
 	
-	public Data(int id, Date data, String horarioInicio, String horarioTermino) {
+	public Data(int id, String data, String horarioInicio, String horarioTermino) {
 		this.id = id;
 		this.data = data;
 		this.horarioInicio = horarioInicio;
 		this.horarioTermino = horarioTermino;
 	}
 	
-	public Data(Date data, String horarioInicio, String horarioTermino) {
+	public Data(String data, String horarioInicio, String horarioTermino) {
 		this.horarioInicio = horarioInicio;
 		this.horarioTermino = horarioTermino;
 		this.data = data;
