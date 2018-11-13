@@ -1,6 +1,5 @@
 package br.ufac.laboratorio.logic;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +22,9 @@ public class DataLogic {
 
 		List<String> camposInvalidos = new ArrayList<>();
 		boolean testField = false;
+		
+		String novadata = this.formataDatasql(data);
+		
 		if(horaInicio.length() < 5) {
 			testField = true;
 			camposInvalidos.add("Hora Inicio");
@@ -31,8 +33,11 @@ public class DataLogic {
 			testField = true;
 			camposInvalidos.add("Hora Termino");
 		}
+		if(novadata.length() < 10) {
+			testField = true;
+			camposInvalidos.add("Data");
+		}
 		
-		String novadata = this.formataDatasql(data);
 
 		if(testField) {
 			throw new InvalidFieldException("Data", camposInvalidos);
@@ -42,73 +47,44 @@ public class DataLogic {
 		return ddb.addData(date);
 		
 	}
+	
+	public Data getDataId(int id) throws
+	DataBaseGenericException,
+	DataBaseNotConnectedException,
+	EntityNotExistException {
+		
+		return ddb.getDataId(id);
+	}
 
-	public Centro getCentroSigla(String sigla) throws
+	public Data getDataDia(String data) throws
 	DataBaseGenericException,
 	DataBaseNotConnectedException,
 	EntityNotExistException {
 
-		return cdb.getCentro(sigla);
-
-
+		return ddb.getData(data);
 	}
-
-	public Centro getCentroId(int id) throws
+	
+	public Data getDataHoraInicio(String horaInicio) throws
 	DataBaseGenericException,
 	DataBaseNotConnectedException,
 	EntityNotExistException {
 
-		return cdb.getCentroId(id);
-
+		return ddb.getDataHoraInicio(horaInicio);
 	}
-
-	public boolean updCentro(String sigla, String nome) throws
+	
+	public Data getDataHoraTermino(String horaTermino) throws
 	DataBaseGenericException,
 	DataBaseNotConnectedException,
-	InvalidFieldException,
 	EntityNotExistException {
 
-		List<String> camposInvalidos = new ArrayList<>();
-		boolean testField = false;
-
-		if(sigla.isEmpty() || sigla.length() > 5) {
-			testField = true;
-			camposInvalidos.add("Centro");
-		}
-		if(nome.isEmpty() || nome.length() > 100) {
-			testField = true;
-			camposInvalidos.add("Nome");
-		}
-
-		if(testField) {
-			throw new InvalidFieldException("Centro", camposInvalidos);
-		}
-
-		Centro c = new Centro(sigla, nome);		
-		return cdb.updCentro(c);
+		return ddb.getDataHoraTermino(horaTermino);	
 	}
 
-
-	public boolean delCentro(String sigla, String nome) throws
-	DataBaseGenericException, 
-	DataBaseNotConnectedException, 
-	EntityNotExistException {
-		Centro c = new Centro(sigla, nome);
-		return cdb.delCentro(c);
-	}
-
-	public List<Centro> getCentros() throws
+	public List<Data> getDatas() throws
 	DataBaseGenericException,
 	DataBaseNotConnectedException, 
 	EntityTableIsEmptyException {
-		return cdb.getCentros();
-	}
-
-	public List<Centro> getCentrosPorNome(String nome) throws
-	DataBaseGenericException,
-	DataBaseNotConnectedException,
-	EntityTableIsEmptyException {
-		return cdb.getCentrosPorNome(nome);
+		return ddb.getDatas();
 	}
 
 	
@@ -116,7 +92,7 @@ public class DataLogic {
 		
 		String[] arraydatanova;
 		arraydatanova = data.split("/");
-		System.out.println(arraydatanova[2]+"/"+arraydatanova[1]+"/"+arraydatanova[0]);
+		System.out.println(arraydatanova[2]+"-"+arraydatanova[1]+"-"+arraydatanova[0]);
 		return arraydatanova[2]+"-"+arraydatanova[1]+"-"+arraydatanova[0];
 		
 	}
