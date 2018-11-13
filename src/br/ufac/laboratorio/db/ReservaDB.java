@@ -61,7 +61,7 @@ public class ReservaDB {
 			if(rs.next()) {
 				professor = pdb.getProfessorId(rs.getInt(2));
 				lab = ldb.getLaboratorio(rs.getInt(3));
-				data = dDB.getData(rs.getInt(4));
+		//		data = dDB.getData(rs.getInt(4));
 				r = new Reserva(rs.getInt(1), professor,
 						lab, data,
 						rs.getInt(5), rs.getString(6));

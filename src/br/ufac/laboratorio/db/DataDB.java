@@ -62,7 +62,7 @@ public class DataDB {
 
 		Data d = null;
 		String sqlBusca = "SELECT id, data_reserva, horario_inicio, horario_termino FROM datas "
-				+ "WHERE data_reserva = '" + data + "' AND ;";
+				+ "WHERE data_reserva = '" + data + "' AND  ;";
 		rs = cnx.consulte(sqlBusca);
 		try {
 			if(rs.next())
