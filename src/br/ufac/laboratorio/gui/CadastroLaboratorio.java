@@ -1,5 +1,6 @@
 package br.ufac.laboratorio.gui;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,20 +13,30 @@ import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class CadastroLaboratorio extends JFrame {
+public class CadastroLaboratorio extends JDialog{
 
 	private JPanel contentPane;
 	private JTextField tdNomeLab;
 
+	
+
+	/**
+	 * Create the frame.
+	 */
 	public CadastroLaboratorio() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
 		setBounds(100, 100, 450, 450);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setModal(true);
 		
 		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
 		lblAdministrador.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -46,11 +57,11 @@ public class CadastroLaboratorio extends JFrame {
 				
 				if(e.getSource()==btnVoltar){
 
-					MenuAdministrador ma = new MenuAdministrador();
+					//MenuAdministrador ma = new MenuAdministrador();
 
 					dispose();
 
-					ma.setVisible(true);
+					//ma.setVisible(true);
 				}
 				
 			}

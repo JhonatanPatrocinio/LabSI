@@ -11,6 +11,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextArea;
@@ -18,35 +19,24 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ReservaLaboratorio extends JFrame {
+public class ReservaLaboratorio extends JDialog {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ReservaLaboratorio frame = new ReservaLaboratorio();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public ReservaLaboratorio() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 500, 450);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setModal(true);
 		
 		JLabel lblReservaLaboratorio = new JLabel("RESERVA LABORATORIO");
 		lblReservaLaboratorio.setFont(new Font("Lucida Grande", Font.BOLD, 25));
@@ -98,7 +88,7 @@ public class ReservaLaboratorio extends JFrame {
 					//pp.setVisible(true);
 				}
 				
-			}																																								
+			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(

@@ -13,40 +13,29 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ListaHorariosProf extends JFrame {
+public class ListaHorariosProf extends JDialog {
 
 	private JPanel contentPane;
 	private JTable tabListaHorarios;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ListaHorariosProf frame = new ListaHorariosProf();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public ListaHorariosProf() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setModal(true);
 		
 		JLabel lblhorario = new JLabel("HORARIOS");
 		lblhorario.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
@@ -58,11 +47,11 @@ public class ListaHorariosProf extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource()==btnVoltar){
 
-				//	PerfilProfessor pp = new PerfilProfessor();
+					//PerfilProfessor pp = new PerfilProfessor();
 
 					dispose();
 
-				//	pp.setVisible(true);
+					//pp.setVisible(true);
 				}
 				
 			}

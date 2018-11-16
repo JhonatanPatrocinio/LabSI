@@ -1,5 +1,6 @@
 package br.ufac.laboratorio.gui;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,42 +13,34 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class EditarCentro extends JFrame {
+public class EditarCentro extends JDialog{
 
 	private JPanel contentPane;
 	private JTable tabEditarCentro;
 	private JTextField tfEditarCentro;
+	private JTextField tfSigla;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EditarCentro frame = new EditarCentro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public EditarCentro() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 500, 500);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setModal(true);
 		
 		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
 		lblAdministrador.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -62,11 +55,11 @@ public class EditarCentro extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource()==btnVoltar){
 
-					MenuAdministrador ma = new MenuAdministrador();
+					//MenuAdministrador ma = new MenuAdministrador();
 
 					dispose();
 
-					ma.setVisible(true);
+					//ma.setVisible(true);
 				}
 			}
 		});
@@ -77,54 +70,75 @@ public class EditarCentro extends JFrame {
 		tfEditarCentro.setColumns(40);
 		
 		JButton btnSalvarCentro = new JButton("Salvar");
+		btnSalvarCentro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+			}
+		});
+		
+		JLabel lblSigla = new JLabel("SIGLA");
+		
+		tfSigla = new JTextField();
+		tfSigla.setColumns(10);
+		
+		JButton btnExcluir = new JButton("Excluir");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(363, Short.MAX_VALUE)
-					.addComponent(lblAdministrador)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap(369, Short.MAX_VALUE)
+							.addComponent(lblAdministrador))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(164)
+							.addComponent(lbEditarCentro))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(tabEditarCentro, GroupLayout.PREFERRED_SIZE, 476, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnVoltar)
+							.addGap(118)
+							.addComponent(btnSalvarCentro)
+							.addPreferredGap(ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+							.addComponent(btnExcluir))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(78)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblNome)
+								.addComponent(lblSigla))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(tfSigla)
+								.addComponent(tfEditarCentro, GroupLayout.PREFERRED_SIZE, 262, GroupLayout.PREFERRED_SIZE))))
 					.addContainerGap())
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(tabEditarCentro, GroupLayout.PREFERRED_SIZE, 476, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(8, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(btnVoltar)
-					.addGap(122)
-					.addComponent(btnSalvarCentro)
-					.addContainerGap(206, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(163)
-					.addComponent(lbEditarCentro)
-					.addContainerGap(167, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(97)
-					.addComponent(lblNome)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(tfEditarCentro, GroupLayout.PREFERRED_SIZE, 253, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(96, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblAdministrador)
-					.addGap(43)
+					.addGap(23)
 					.addComponent(lbEditarCentro)
-					.addGap(66)
-					.addComponent(tabEditarCentro, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
+					.addComponent(tabEditarCentro, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblSigla)
+						.addComponent(tfSigla, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblNome)
 						.addComponent(tfEditarCentro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(19)
-							.addComponent(btnVoltar))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnSalvarCentro)))
-					.addGap(8))
+					.addGap(47)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnVoltar)
+						.addComponent(btnSalvarCentro)
+						.addComponent(btnExcluir))
+					.addGap(52))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

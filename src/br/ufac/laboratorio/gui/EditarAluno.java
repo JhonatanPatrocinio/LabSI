@@ -1,5 +1,6 @@
 package br.ufac.laboratorio.gui;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -19,7 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
-public class EditarAluno extends JFrame {
+public class EditarAluno extends JDialog {
 
 	private JPanel contentPane;
 	private JTextField tdEditarAlu;
@@ -28,31 +30,21 @@ public class EditarAluno extends JFrame {
 	private JPasswordField jpfEditarSenhaAlu;
 	private JPasswordField jpfEditarConfSenhaAlu;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EditarAluno frame = new EditarAluno();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public EditarAluno() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 500, 500);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setModal(true);
+		
 		
 		JLabel lblMatricula = new JLabel("MATRICULA");
 		
@@ -102,11 +94,11 @@ public class EditarAluno extends JFrame {
 					
 				else {
 						JOptionPane.showMessageDialog(null, "Edição realizada com sucesso! ");
-						PerfilAluno pa = new PerfilAluno();
+						//PerfilAluno pa = new PerfilAluno();
 
 						dispose();
 
-						pa.setVisible(true);
+						//pa.setVisible(true);
 					}
 				}
 				
@@ -124,11 +116,11 @@ public class EditarAluno extends JFrame {
 				
 				if(e.getSource()==btnVoltar){
 
-					PerfilAluno pa = new PerfilAluno();
+					//PerfilAluno pa = new PerfilAluno();
 
 					dispose();
 
-					pa.setVisible(true);
+					//pa.setVisible(true);
 				}
 				
 			}

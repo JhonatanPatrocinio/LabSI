@@ -13,40 +13,30 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ListaReservas extends JFrame {
+public class ListaReservas extends JDialog{
 
 	private JPanel contentPane;
 	private JTable tabListaReservas;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ListaReservas frame = new ListaReservas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */
 	public ListaReservas() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		setBounds(100, 100, 500, 500);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setModal(true);
+		
 		
 		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
 		lblAdministrador.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -61,11 +51,11 @@ public class ListaReservas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource()==btnVoltar){
 
-					MenuAdministrador ma = new MenuAdministrador();
+					//MenuAdministrador ma = new MenuAdministrador();
 
 					dispose();
 
-					ma.setVisible(true);
+					//ma.setVisible(true);
 				}
 			}
 		});

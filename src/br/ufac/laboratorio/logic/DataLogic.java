@@ -18,8 +18,8 @@ public class DataLogic {
 	DataBaseGenericException,
 	DataBaseNotConnectedException,
 	EntityAlreadyExistException,
-	InvalidFieldException {
-
+	InvalidFieldException, EntityTableIsEmptyException {
+		
 		List<String> camposInvalidos = new ArrayList<>();
 		boolean testField = false;
 		
@@ -37,11 +37,11 @@ public class DataLogic {
 			testField = true;
 			camposInvalidos.add("Data");
 		}
-		
 
 		if(testField) {
 			throw new InvalidFieldException("Data", camposInvalidos);
 		}
+		
 		
 		Data date = new Data(novadata, horaInicio, horaTermino);
 		return ddb.addData(date);
@@ -56,29 +56,6 @@ public class DataLogic {
 		return ddb.getDataId(id);
 	}
 
-	public Data getDataDia(String data) throws
-	DataBaseGenericException,
-	DataBaseNotConnectedException,
-	EntityNotExistException {
-
-		return ddb.getData(data);
-	}
-	
-	public Data getDataHoraInicio(String horaInicio) throws
-	DataBaseGenericException,
-	DataBaseNotConnectedException,
-	EntityNotExistException {
-
-		return ddb.getDataHoraInicio(horaInicio);
-	}
-	
-	public Data getDataHoraTermino(String horaTermino) throws
-	DataBaseGenericException,
-	DataBaseNotConnectedException,
-	EntityNotExistException {
-
-		return ddb.getDataHoraTermino(horaTermino);	
-	}
 
 	public List<Data> getDatas() throws
 	DataBaseGenericException,
@@ -86,7 +63,14 @@ public class DataLogic {
 	EntityTableIsEmptyException {
 		return ddb.getDatas();
 	}
-
+	
+	public List<Data> getDatasPorDia(String data) throws
+	DataBaseGenericException,
+	DataBaseNotConnectedException, 
+	EntityTableIsEmptyException {
+		
+		return ddb.getDatasPorDia(this.formataDatasql(data));
+	}
 	
 	private String formataDatasql(String data) {
 		

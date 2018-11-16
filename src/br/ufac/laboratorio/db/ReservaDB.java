@@ -83,8 +83,6 @@ public class ReservaDB {
 
 		String sqlDelete = "DELETE FROM reservas WHERE id = '" + r.getId() + "';";
 		getReserva(r.getId());
-		
-		dDB.delData(r.getIdData());
 		return cnx.atualiza(sqlDelete) > 0;
 
 	}
@@ -111,7 +109,7 @@ public class ReservaDB {
 				while(rs.next()) {
 					professor = pdb.getProfessorId(rs.getInt(2));
 					lab = ldb.getLaboratorio(rs.getInt(3));
-					data = dDB.getData(rs.getInt(4));
+					data = dDB.getDataId(rs.getInt(4));
 					r = new Reserva(rs.getInt(1), professor,
 							lab, data,
 							rs.getInt(5), rs.getString(6));
@@ -149,7 +147,7 @@ public class ReservaDB {
 				while (rs.next()) {
 					professor = pdb.getProfessorId(rs.getInt(2));
 					lab = ldb.getLaboratorio(rs.getInt(3));
-					data = dDB.getData(rs.getInt(4));
+					data = dDB.getDataId(rs.getInt(4));
 					r = new Reserva(rs.getInt(1), professor,
 							lab, datas,
 							rs.getInt(5), rs.getString(6));

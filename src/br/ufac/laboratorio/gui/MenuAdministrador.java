@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -14,108 +15,57 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JToolBar;
+import javax.swing.JTabbedPane;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
 
 public class MenuAdministrador extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MenuAdministrador frame = new MenuAdministrador();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public MenuAdministrador() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 500);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		setBounds(100, 100, 700, 500);
+		setLocationRelativeTo(null);
 		
-		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
-		lblAdministrador.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
 		
-		JButton btnAnaliseDeReservas = new JButton("Analise de Reservas");
-		btnAnaliseDeReservas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				if(e.getSource()==btnAnaliseDeReservas){
-
-					AnaliseReservas ar = new AnaliseReservas();
-
-					dispose();
-
-					ar.setVisible(true);
-				}
-				
-				
-			}
-		});
-		
-		JButton btnListaDeReservas = new JButton("Lista de Reservas");
-		btnListaDeReservas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				if(e.getSource()==btnListaDeReservas){
-
-					ListaReservas lr = new ListaReservas();
-
-					dispose();
-
-					lr.setVisible(true);
-				}
-				
-				
-			}
-		});
-		
-		JButton btnCadastrarLaboratorio = new JButton("Cadastrar Laboratorio");
-		btnCadastrarLaboratorio.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				if(e.getSource()==btnCadastrarLaboratorio){
-
-					CadastroLaboratorio cl = new CadastroLaboratorio();
-
-					dispose();
-
-					cl.setVisible(true);
-				}
-				
-				
-			}
-		});
+		JMenu mnCentro = new JMenu("Centro");
+		mnCentro.setMnemonic('C');
+		menuBar.add(mnCentro);
 		
 		JButton btnCadastrarCentro = new JButton("Cadastrar Centro");
-		btnCadastrarCentro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
-				if(e.getSource()==btnCadastrarCentro){
-
-					CadastroCentro cc = new CadastroCentro();
-
-					dispose();
-
-					cc.setVisible(true);
-				}
-			
-			}
-		});
+		mnCentro.add(btnCadastrarCentro);
+		
+		JButton btnEditarCentro = new JButton("Editar Centro");
+		mnCentro.add(btnEditarCentro);
+		
+		JMenu mnReservas = new JMenu("Reservas");
+		mnReservas.setMnemonic('R');
+		menuBar.add(mnReservas);
+		
+		JButton btnAnaliseDeReservas = new JButton("Analise de Reservas");
+		mnReservas.add(btnAnaliseDeReservas);
+		
+		JButton btnListaDeReservas = new JButton("Lista de Reservas");
+		mnReservas.add(btnListaDeReservas);
+		
+		JMenu mnLaboratorio = new JMenu("Laboratorio");
+		mnLaboratorio.setMnemonic('L');
+		menuBar.add(mnLaboratorio);
+		
+		JButton btnCadastrarLaboratorio = new JButton("Cadastrar Laboratorio");
+		mnLaboratorio.add(btnCadastrarLaboratorio);
 		
 		JButton btnEditarLaboratorio = new JButton("Editar Laboratorio");
+		mnLaboratorio.add(btnEditarLaboratorio);
 		btnEditarLaboratorio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -123,15 +73,58 @@ public class MenuAdministrador extends JFrame {
 
 					EditarLaboratorio el = new EditarLaboratorio();
 
-					dispose();
+					//dispose();
 
 					el.setVisible(true);
 				}
 				
 			}
 		});
-		
-		JButton btnEditarCentro = new JButton("Editar Centro");
+		btnCadastrarLaboratorio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(e.getSource()==btnCadastrarLaboratorio){
+
+					CadastroLaboratorio cl = new CadastroLaboratorio();
+
+					//dispose();
+
+					cl.setVisible(true);
+				}
+				
+				
+			}
+		});
+		btnListaDeReservas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(e.getSource()==btnListaDeReservas){
+
+					ListaReservas lr = new ListaReservas();
+
+					//dispose();
+
+					lr.setVisible(true);
+				}
+				
+				
+			}
+		});
+		btnAnaliseDeReservas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(e.getSource()==btnAnaliseDeReservas){
+
+					AnaliseReservas ar = new AnaliseReservas();
+
+					//dispose();
+
+					ar.setVisible(true);
+				}
+				
+				
+			}
+		});
 		btnEditarCentro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -139,13 +132,33 @@ public class MenuAdministrador extends JFrame {
 
 					EditarCentro ec = new EditarCentro();
 
-					dispose();
+					//dispose();
 
 					ec.setVisible(true);
 				}
 				
 			}
 		});
+		btnCadastrarCentro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				if(e.getSource()==btnCadastrarCentro){
+
+					CadastroCentro cc = new CadastroCentro();
+
+					//dispose();
+
+					cc.setVisible(true);
+				}
+			
+			}
+		});
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		
+		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
+		lblAdministrador.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		
 		JButton btnSair = new JButton("Sair");
 		btnSair.addActionListener(new ActionListener() {
@@ -162,52 +175,37 @@ public class MenuAdministrador extends JFrame {
 				
 			}
 		});
+		
+		JLabel lblImagem = new JLabel("");
+		lblImagem.setIcon(new ImageIcon("/Users/tiagoprata/eclipse-workspace/Tesi1Job/img/ufac.png"));
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(423, Short.MAX_VALUE)
-					.addComponent(lblAdministrador)
-					.addContainerGap())
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(btnCadastrarCentro, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnAnaliseDeReservas, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnListaDeReservas, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnCadastrarLaboratorio, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(btnEditarCentro, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnEditarLaboratorio, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addContainerGap(137, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnSair)
-					.addContainerGap(367, Short.MAX_VALUE))
+					.addContainerGap(262, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblAdministrador)
+								.addComponent(btnSair))
+							.addGap(16))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(lblImagem, GroupLayout.PREFERRED_SIZE, 374, GroupLayout.PREFERRED_SIZE)
+							.addGap(54))))
 		);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblAdministrador)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnAnaliseDeReservas)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnListaDeReservas)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnCadastrarLaboratorio)
-						.addComponent(btnEditarLaboratorio))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnCadastrarCentro)
-						.addComponent(btnEditarCentro))
-					.addPreferredGap(ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(lblImagem, GroupLayout.PREFERRED_SIZE, 311, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
 					.addComponent(btnSair)
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-
 }

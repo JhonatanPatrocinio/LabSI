@@ -27,8 +27,8 @@ public class DataDB {
 				+ d.getHorarioInicio()			+ "', '"
 				+ d.getHorarioTermino()			+ "');";
 		try {
-			getDataId(d.getId());
-			throw new EntityAlreadyExistException("Datas (id ='" + d.getId()+"')");
+			procuraData(d);
+			throw new EntityAlreadyExistException("Data (id ='" + d.getId()+"')");
 		} catch (EntityNotExistException e) {
 			// TODO: handle exception
 			return cnx.atualiza(sqlIncluir) > 0;
@@ -55,97 +55,32 @@ public class DataDB {
 		return d;
 	}
 	
-	public Data getDataCompleta(String data, String horarioInicio, String horarioTermino) throws 
+	public Data procuraData(Data data) throws 
 	DataBaseGenericException,
 	DataBaseNotConnectedException,
 	EntityNotExistException {
 
 		Data d = null;
-		String sqlBusca = "SELECT id, data_reserva, horario_inicio, horario_termino FROM datas "
-				+ "WHERE data_reserva = '" + data + "' AND  ;";
+		String sqlBusca = "SELECT * FROM datas " + 
+				"WHERE " + 
+				"   (" + 
+				"       (horario_inicio BETWEEN '"+data.getHorarioInicio()+"' AND '"+data.getHorarioTermino()+"') OR " + 
+				"       (horario_termino    BETWEEN '"+data.getHorarioInicio()+"' AND '"+data.getHorarioTermino()+"') OR " + 
+				"       ('"+data.getHorarioInicio()+"' BETWEEN horario_inicio AND horario_termino  ) OR " + 
+				"       ('"+data.getHorarioTermino()+"' BETWEEN horario_inicio AND horario_termino   )" + 
+				"   )" + 
+				"AND data_reserva = '"+data.getData()+"';";
 		rs = cnx.consulte(sqlBusca);
 		try {
 			if(rs.next())
 				d = new Data(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
 			else
-				throw new EntityNotExistException("Data (dia = '"+ data +"')");
+				throw new EntityNotExistException("Data (Horarios no dia = '"+  data.getDataUsuario() +"')");
 		}catch (SQLException e) {
 			// TODO: handle exception
 			throw new DataBaseGenericException(e.getErrorCode(), e.getMessage());
 		}
 		return d;
-	}
-	
-	public Data getData(String data) throws 
-	DataBaseGenericException,
-	DataBaseNotConnectedException,
-	EntityNotExistException {
-
-		Data d = null;
-		String sqlBusca = "SELECT id, data_reserva, horario_inicio, horario_termino FROM datas WHERE data_reserva = '" + data + "';";
-		rs = cnx.consulte(sqlBusca);
-		try {
-			if(rs.next())
-				d = new Data(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
-			else
-				throw new EntityNotExistException("Data (dia = '"+ data +"')");
-		}catch (SQLException e) {
-			// TODO: handle exception
-			throw new DataBaseGenericException(e.getErrorCode(), e.getMessage());
-		}
-		return d;
-	}
-	
-	public Data getDataHoraInicio(String horaInicio) throws 
-	DataBaseGenericException,
-	DataBaseNotConnectedException,
-	EntityNotExistException {
-
-		Data d = null;
-		String sqlBusca = "SELECT id, data_reserva, horario_inicio, horario_termino FROM datas WHERE horario_inicio = '" + horaInicio + "';";
-		rs = cnx.consulte(sqlBusca);
-		try {
-			if(rs.next())
-				d = new Data(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
-			else
-				throw new EntityNotExistException("Data (Horario Inicio = '"+ horaInicio +"')");
-		}catch (SQLException e) {
-			// TODO: handle exception
-			throw new DataBaseGenericException(e.getErrorCode(), e.getMessage());
-		}
-		return d;
-	}
-	
-	public Data getDataHoraTermino(String horaTermino) throws 
-	DataBaseGenericException,
-	DataBaseNotConnectedException,
-	EntityNotExistException {
-
-		Data d = null;
-		String sqlBusca = "SELECT id, data_reserva, horario_inicio, horario_termino FROM datas WHERE horario_inicio = '" + horaTermino + "';";
-		rs = cnx.consulte(sqlBusca);
-		try {
-			if(rs.next())
-				d = new Data(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
-			else
-				throw new EntityNotExistException("Data (Horario Termino = '"+ horaTermino +"')");
-		}catch (SQLException e) {
-			// TODO: handle exception
-			throw new DataBaseGenericException(e.getErrorCode(), e.getMessage());
-		}
-		return d;
-	}
-
-	public boolean delData(Data d) throws
-	DataBaseGenericException,
-	DataBaseNotConnectedException,
-	EntityNotExistException {
-
-		String sqlDelete = "DELETE FROM datas WHERE id = " + d.getId() + " ;";
-
-		getDataId(d.getId());
-		return cnx.atualiza(sqlDelete) > 0;
-
 	}
 
 	public List<Data> getDatas() throws
@@ -194,7 +129,7 @@ public class DataDB {
 					datas.add(d);
 				}
 			} else 
-				throw new EntityTableIsEmptyException("Laboratorio");
+				throw new EntityTableIsEmptyException("Datas");
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new DataBaseGenericException(e.getErrorCode(), e.getMessage());
@@ -202,4 +137,6 @@ public class DataDB {
 
 		return datas;
 	}
+	
+	
 }

@@ -1,6 +1,8 @@
 package br.ufac.laboratorio.gui;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,22 +13,30 @@ import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class CadastroCentro extends JFrame {
+public class CadastroCentro extends JDialog {
 
 	private JPanel contentPane;
-	private JTextField tdNomeCentro;
-	private JTextField textField;
+	private JTextField tfNomeCentro;
+	private JTextField tfSiglaCadas;
 
-
+	
+	/**
+	 * Create the frame.
+	 */
 	public CadastroCentro() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 450, 450);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setModal(true);
 		
 		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
 		lblAdministrador.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -36,8 +46,8 @@ public class CadastroCentro extends JFrame {
 		
 		JLabel lblNome = new JLabel("NOME");
 		
-		tdNomeCentro = new JTextField();
-		tdNomeCentro.setColumns(40);
+		tfNomeCentro = new JTextField();
+		tfNomeCentro.setColumns(40);
 		
 		JButton btnCadastrarCentro = new JButton("Cadastrar");
 		
@@ -47,11 +57,11 @@ public class CadastroCentro extends JFrame {
 				
 				if(e.getSource()==btnVoltar){
 
-					MenuAdministrador ma = new MenuAdministrador();
+					//MenuAdministrador ma = new MenuAdministrador();
 
 					dispose();
 
-					ma.setVisible(true);
+					//ma.setVisible(true);
 				}
 				
 			}
@@ -59,39 +69,39 @@ public class CadastroCentro extends JFrame {
 		
 		JLabel lblSigla = new JLabel("SIGLA");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		tfSiglaCadas = new JTextField();
+		tfSiglaCadas.setColumns(10);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap(317, Short.MAX_VALUE)
+							.addContainerGap(319, Short.MAX_VALUE)
 							.addComponent(lblAdministrador))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(100)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNome)
-								.addComponent(lblSigla, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
+							.addGap(77)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblSigla)
+								.addComponent(lblNome))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(textField)
-								.addComponent(tdNomeCentro, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED, 100, Short.MAX_VALUE)))
+								.addComponent(tfSiglaCadas)
+								.addComponent(tfNomeCentro, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED, 132, Short.MAX_VALUE)))
 					.addContainerGap())
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(btnVoltar)
-					.addContainerGap(351, Short.MAX_VALUE))
+					.addContainerGap(353, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(172, Short.MAX_VALUE)
+					.addContainerGap(173, Short.MAX_VALUE)
 					.addComponent(btnCadastrarCentro)
 					.addGap(163))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(115)
 					.addComponent(lblCadastroCentro)
-					.addContainerGap(123, Short.MAX_VALUE))
+					.addContainerGap(127, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -100,22 +110,22 @@ public class CadastroCentro extends JFrame {
 					.addComponent(lblAdministrador)
 					.addGap(13)
 					.addComponent(lblCadastroCentro)
-					.addGap(81)
+					.addGap(94)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblSigla)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(2)
+						.addComponent(tfSiglaCadas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(31)
+							.addGap(19)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblNome)
-								.addComponent(tdNomeCentro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+								.addComponent(tfNomeCentro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
 							.addComponent(btnCadastrarCentro)
 							.addGap(32))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
 							.addComponent(btnVoltar))))
 		);
 		contentPane.setLayout(gl_contentPane);

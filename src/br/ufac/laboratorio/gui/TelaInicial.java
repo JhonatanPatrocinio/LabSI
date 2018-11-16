@@ -1,7 +1,6 @@
 package br.ufac.laboratorio.gui;
 
 import java.awt.BorderLayout;
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,12 +10,22 @@ import javax.swing.border.EmptyBorder;
 import br.ufac.laboratorio.db.Conexao;
 import br.ufac.laboratorio.entity.Login;
 import br.ufac.laboratorio.entity.Professor;
-import br.ufac.laboratorio.exception.*;
+import br.ufac.laboratorio.exception.AccessDeniedForUserException;
+import br.ufac.laboratorio.exception.DataBaseAlreadyConnectedException;
+import br.ufac.laboratorio.exception.DataBaseGenericException;
+import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
+import br.ufac.laboratorio.exception.EntityLoginNotExistException;
+import br.ufac.laboratorio.exception.EntityNotExistException;
+import br.ufac.laboratorio.gui.MenuAdministrador;
+import br.ufac.laboratorio.gui.PerfilAluno;
+import br.ufac.laboratorio.gui.PerfilProfessor;
 import br.ufac.laboratorio.logic.LoginLogic;
 import br.ufac.laboratorio.logic.ProfessorLogic;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.UnsupportedEncodingException;
@@ -27,6 +36,7 @@ import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import java.awt.Toolkit;
 
 public class TelaInicial extends JFrame {
 
@@ -37,35 +47,32 @@ public class TelaInicial extends JFrame {
 	private ProfessorLogic pl;
 	static Conexao cnx;
 
-	/**
-	 * Launch the application.
-	 */
-	static final String DB_URL = "jdbc:mysql://localhost/laboratorio?useSSL=false";
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaInicial frame = new TelaInicial();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
+	static final String DB_URL = "jdbc:mysql://localhost/laboratorio?useSSL=false";
+
+	 public static void main(String[] args) {
+		  EventQueue.invokeLater(new Runnable() {
+		   public void run() {
+		    try {
+		     TelaInicial frame = new TelaInicial();
+		     frame.setVisible(true);
+		    } catch (Exception e) {
+		     e.printStackTrace();
+		    }
+		   }
+		  });
+		 }
 	/**
 	 * Create the frame.
 	 */
 	public TelaInicial() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		setTitle("SISTEMA DE  GERENCIAMENTO DE LABORATORIO");
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-
+		Icon imgufac = new ImageIcon(getClass().getResource("images/ufac.png"));
 		cnx = new Conexao();
 		try {
 			cnx.conecte(DB_URL, "root", "1995");
@@ -75,10 +82,10 @@ public class TelaInicial extends JFrame {
 			JOptionPane.showMessageDialog(null, e.getMessage(), 
 					"Falha na Conexao", JOptionPane.ERROR_MESSAGE);
 		}	
-		
+
 		loginLogic = new LoginLogic(cnx);
 		pl = new ProfessorLogic(cnx);
-		
+
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -134,33 +141,37 @@ public class TelaInicial extends JFrame {
 				
 			}
 		});
-		
+
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource()==btnCadastrar){
 					CadastroEscolha ce = new CadastroEscolha(cnx);
-					
+
 					dispose();
-					
+
 					ce.setVisible(true);
 				}
-				
-				
+
+
 			}
 		});
-		
+
 		JLabel lblLogin = new JLabel("LOGIN");
-		
+
 		JLabel lblSenha = new JLabel("SENHA");
-		
+
 		tfLogin = new JTextField();
 		tfLogin.setColumns(40);
-		
+
 		jpfSenha = new JPasswordField();
 		jpfSenha.setColumns(40);
-		
+
 		JLabel lblUfac = new JLabel("UNIVERSIDADE FEDERAL DO ACRE");
+
+		JLabel lblSistemaDeCadastro = new JLabel("SISTEMA DE  GERENCIAMENTO DE LABORATORIO");
+		
+		JLabel lbFoto = new JLabel(imgufac);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -176,6 +187,9 @@ public class TelaInicial extends JFrame {
 								.addComponent(jpfSenha, 0, 0, Short.MAX_VALUE)
 								.addComponent(tfLogin, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)))
 						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(60)
+							.addComponent(lblSistemaDeCadastro))
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(168)
 							.addComponent(btnEntrar))
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -183,7 +197,10 @@ public class TelaInicial extends JFrame {
 							.addComponent(btnCadastrar))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(105)
-							.addComponent(lblUfac)))
+							.addComponent(lblUfac))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(182)
+							.addComponent(lbFoto)))
 					.addContainerGap(51, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -191,7 +208,11 @@ public class TelaInicial extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblUfac)
-					.addPreferredGap(ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(lbFoto)
+					.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+					.addComponent(lblSistemaDeCadastro)
+					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblLogin)
 						.addComponent(tfLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))

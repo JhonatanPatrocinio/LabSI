@@ -27,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -36,7 +37,7 @@ import java.security.NoSuchAlgorithmException;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
-public class EditarProfessor extends JFrame {
+public class EditarProfessor extends JDialog {
 
 	private JPanel contentPane;
 	private JTextField tfEditarMatriculaProf;
@@ -55,11 +56,12 @@ public class EditarProfessor extends JFrame {
 	public EditarProfessor(Professor professor, Conexao cnx) {
 		this.cl = new CentroLogic(cnx);
 		this.pl = new ProfessorLogic(cnx);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setModal(true);
 
 		JLabel lblMatricula = new JLabel("MATRICULA");
 
@@ -147,11 +149,11 @@ public class EditarProfessor extends JFrame {
 						}
 						
 						
-						PerfilProfessor pp = new PerfilProfessor(prof, cnx);
+						//PerfilProfessor pp = new PerfilProfessor(prof, cnx);
 
 						dispose();
 
-						pp.setVisible(true);
+						//pp.setVisible(true);
 
 					} else {
 						JOptionPane.showMessageDialog(null, "Senhas Diferentes", 
@@ -172,11 +174,11 @@ public class EditarProfessor extends JFrame {
 
 				if(e.getSource()==btnVoltar){
 
-					PerfilProfessor pp = new PerfilProfessor(professor, cnx);
+					//PerfilProfessor pp = new PerfilProfessor(professor, cnx);
 
 					dispose();
 
-					pp.setVisible(true);
+					//pp.setVisible(true);
 				}
 
 			}
