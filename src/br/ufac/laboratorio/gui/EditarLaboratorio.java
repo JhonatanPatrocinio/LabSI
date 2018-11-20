@@ -6,6 +6,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import br.ufac.laboratorio.db.Conexao;
+import br.ufac.laboratorio.logic.LaboratorioLogic;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -24,13 +29,13 @@ public class EditarLaboratorio extends JDialog {
 	private JPanel contentPane;
 	private JTable tabEditarLab;
 	private JTextField tfEditarLab;
-
-	
+	private LaboratorioLogic lc;
+	private DefaultTableModel tableModel = new DefaultTableModel();
 	/**
 	 * Create the frame.
 	 */
-	public EditarLaboratorio() {
-		
+	public EditarLaboratorio(Conexao cnx) {
+		this.lc = new LaboratorioLogic(cnx);
 		setBounds(100, 100, 500, 500);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
@@ -45,8 +50,8 @@ public class EditarLaboratorio extends JDialog {
 		JLabel lbEditarLab = new JLabel("EDITAR LABORATORIO");
 		lbEditarLab.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		
-		tabEditarLab = new JTable();
-		
+		tabEditarLab = new JTable(tableModel);
+		tableModel.addColumn("id");
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

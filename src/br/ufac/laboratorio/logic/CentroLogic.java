@@ -21,9 +21,9 @@ public class CentroLogic {
 		List<String> camposInvalidos = new ArrayList<>();
 		boolean testField = false;
 
-		if(sigla.isEmpty() || sigla.length() > 5) {
+		if(sigla.isEmpty() || sigla.length() > 6) {
 			testField = true;
-			camposInvalidos.add("Centro");
+			camposInvalidos.add("Sigla");
 		}
 		if(nome.isEmpty() || nome.length() > 100) {
 			testField = true;
@@ -68,7 +68,7 @@ public class CentroLogic {
 
 		if(sigla.isEmpty() || sigla.length() > 5) {
 			testField = true;
-			camposInvalidos.add("Centro");
+			camposInvalidos.add("Sigla");
 		}
 		if(nome.isEmpty() || nome.length() > 100) {
 			testField = true;

@@ -50,6 +50,7 @@ public class EditarProfessor extends JDialog {
 	private JTextField tfTelefone;
 	private ProfessorLogic pl;
 
+	
 	/**
 	 * Create the frame.
 	 */
@@ -112,18 +113,25 @@ public class EditarProfessor extends JDialog {
 
 				if(e.getSource()==btnEditarProf){
 					if(jpfEditarSenhaProf.getText().equals(jpfEditarConfSenhaProf.getText())) {
-						System.out.println(professor.getId());			
-						System.out.println(professor.getMatricula());
-						System.out.println(tfEditarNomeProf.getText());
-						System.out.println(tfEmail.getText());				
-						System.out.println(tfTelefone.getText());
-						System.out.println(professor.getLogin().getLogin());
-						System.out.println(jpfEditarSenhaProf.getText());
-						
+												
+						Professor prof = null;
 						try {
 							pl.updProfessor(professor.getId(),professor.getMatricula(), tfEditarNomeProf.getText(), tfEmail.getText(), 
 									tfTelefone.getText(), professor.getLogin().getLogin(), 
 									jpfEditarSenhaProf.getText(), 2);
+							
+							
+							try {
+								prof = pl.getProfessor(professor.getId());
+								PerfilProfessor pp = new PerfilProfessor(prof, cnx);
+								dispose();
+								pp.setVisible(true);
+							} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityNotExistException
+									| EntityLoginNotExistException e1) {
+								JOptionPane.showMessageDialog(null, e1.getMessage(), 
+										"Falha ao Editar2", JOptionPane.ERROR_MESSAGE);
+							}
+							
 							JOptionPane.showMessageDialog(null, " Editado! ");
 							
 						} catch (NoSuchAlgorithmException | UnsupportedEncodingException | DataBaseGenericException
@@ -137,24 +145,6 @@ public class EditarProfessor extends JDialog {
 							
 							
 						}
-						
-						Professor prof = null;
-						
-						try {
-							prof = pl.getProfessor(professor.getId());
-						} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityNotExistException
-								| EntityLoginNotExistException e1) {
-							JOptionPane.showMessageDialog(null, e1.getMessage(), 
-									"Falha ao Editar", JOptionPane.ERROR_MESSAGE);
-						}
-						
-						
-						//PerfilProfessor pp = new PerfilProfessor(prof, cnx);
-
-						dispose();
-
-						//pp.setVisible(true);
-
 					} else {
 						JOptionPane.showMessageDialog(null, "Senhas Diferentes", 
 								"Falha ao Editar", JOptionPane.ERROR_MESSAGE);
@@ -174,11 +164,11 @@ public class EditarProfessor extends JDialog {
 
 				if(e.getSource()==btnVoltar){
 
-					//PerfilProfessor pp = new PerfilProfessor(professor, cnx);
+					PerfilProfessor pp = new PerfilProfessor(professor, cnx);
 
 					dispose();
 
-					//pp.setVisible(true);
+					pp.setVisible(true);
 				}
 
 			}

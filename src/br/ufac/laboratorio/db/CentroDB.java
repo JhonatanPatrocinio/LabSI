@@ -2,9 +2,6 @@ package br.ufac.laboratorio.db;
 
 import java.sql.*;
 import java.util.*;
-
-import javax.swing.JOptionPane;
-
 import br.ufac.laboratorio.entity.Centro;
 import br.ufac.laboratorio.exception.DataBaseGenericException;
 import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
@@ -29,18 +26,12 @@ public class CentroDB {
 		try {
 			getCentro(c.getSigla());
 			throw new EntityAlreadyExistException("Centro (sigla='" + c.getSigla() + "')");
-		} catch (EntityNotExistException e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			return cnx.atualiza(sqlIncluir) > 0;
 		}
 		
 	}
-	
-	
-	
-	
-	
-	
 	
 	public Centro getCentro(String sigla) throws
 		DataBaseGenericException,
@@ -55,7 +46,7 @@ public class CentroDB {
 			if(rs.next())
 				c = new Centro(rs.getInt(1),rs.getString(2), rs.getString(3));
 			else
-				JOptionPane.showMessageDialog(null, new EntityNotExistException("Centro (sigla='" + sigla + "')") );
+				throw new EntityNotExistException("Centro (sigla='"+ sigla +" )");
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new DataBaseGenericException(e.getErrorCode(), e.getMessage());
@@ -63,16 +54,6 @@ public class CentroDB {
 		
 		return c;		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	public Centro getCentroId(int id) throws

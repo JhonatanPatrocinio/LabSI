@@ -6,9 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import br.ufac.laboratorio.db.Conexao;
+import br.ufac.laboratorio.exception.DataBaseGenericException;
+import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
+import br.ufac.laboratorio.exception.EntityAlreadyExistException;
+import br.ufac.laboratorio.exception.InvalidFieldException;
+import br.ufac.laboratorio.logic.CentroLogic;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
@@ -23,13 +33,13 @@ public class CadastroCentro extends JDialog {
 	private JPanel contentPane;
 	private JTextField tfNomeCentro;
 	private JTextField tfSiglaCadas;
-
+	private CentroLogic cl;
 	
 	/**
 	 * Create the frame.
 	 */
-	public CadastroCentro() {
-		
+	public CadastroCentro(Conexao cnx) {
+		cl = new CentroLogic(cnx);
 		setBounds(100, 100, 450, 450);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
@@ -50,6 +60,23 @@ public class CadastroCentro extends JDialog {
 		tfNomeCentro.setColumns(40);
 		
 		JButton btnCadastrarCentro = new JButton("Cadastrar");
+		btnCadastrarCentro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource()==btnCadastrarCentro) {
+					try {
+						cl.addCentro(tfSiglaCadas.getText(), tfNomeCentro.getText());
+						JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso! ");
+						dispose();
+					}catch (DataBaseGenericException | DataBaseNotConnectedException |
+							EntityAlreadyExistException | InvalidFieldException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), 
+								"Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
+						tfSiglaCadas.setText("");
+						tfNomeCentro.setText("");
+					}
+				}
+			}
+		});
 		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {

@@ -72,7 +72,6 @@ public class TelaInicial extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		Icon imgufac = new ImageIcon(getClass().getResource("images/ufac.png"));
 		cnx = new Conexao();
 		try {
 			cnx.conecte(DB_URL, "root", "1995");
@@ -109,7 +108,7 @@ public class TelaInicial extends JFrame {
 				if(login1.getLogin().equals(login.getLogin()) && login1.getSenha().equals(login.getSenha())) {
 						
 					if(login.getTipo() == 1) {
-						MenuAdministrador ma = new MenuAdministrador();
+						MenuAdministrador ma = new MenuAdministrador(cnx);
 						dispose();
 						ma.setVisible(true);						
 					} else if (login.getTipo() == 2) {
@@ -170,8 +169,6 @@ public class TelaInicial extends JFrame {
 		JLabel lblUfac = new JLabel("UNIVERSIDADE FEDERAL DO ACRE");
 
 		JLabel lblSistemaDeCadastro = new JLabel("SISTEMA DE  GERENCIAMENTO DE LABORATORIO");
-		
-		JLabel lbFoto = new JLabel(imgufac);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -197,10 +194,7 @@ public class TelaInicial extends JFrame {
 							.addComponent(btnCadastrar))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(105)
-							.addComponent(lblUfac))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(182)
-							.addComponent(lbFoto)))
+							.addComponent(lblUfac)))
 					.addContainerGap(51, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -208,9 +202,7 @@ public class TelaInicial extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblUfac)
-					.addGap(18)
-					.addComponent(lbFoto)
-					.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
 					.addComponent(lblSistemaDeCadastro)
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)

@@ -6,6 +6,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import br.ufac.laboratorio.db.Conexao;
+import br.ufac.laboratorio.exception.DataBaseGenericException;
+import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
+
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
@@ -18,18 +23,18 @@ import java.awt.event.ActionEvent;
 import javax.swing.JToolBar;
 import javax.swing.JTabbedPane;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 
 public class MenuAdministrador extends JFrame {
 
 	private JPanel contentPane;
-
 	
 
 	/**
 	 * Create the frame.
 	 */
-	public MenuAdministrador() {
+	public MenuAdministrador(Conexao cnx) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		setLocationRelativeTo(null);
@@ -71,7 +76,7 @@ public class MenuAdministrador extends JFrame {
 				
 				if(e.getSource()==btnEditarLaboratorio){
 
-					EditarLaboratorio el = new EditarLaboratorio();
+					EditarLaboratorio el = new EditarLaboratorio(cnx);
 
 					//dispose();
 
@@ -85,7 +90,7 @@ public class MenuAdministrador extends JFrame {
 				
 				if(e.getSource()==btnCadastrarLaboratorio){
 
-					CadastroLaboratorio cl = new CadastroLaboratorio();
+					CadastroLaboratorio cl = new CadastroLaboratorio(cnx);
 
 					//dispose();
 
@@ -130,7 +135,7 @@ public class MenuAdministrador extends JFrame {
 				
 				if(e.getSource()==btnEditarCentro){
 
-					EditarCentro ec = new EditarCentro();
+					EditarCentro ec = new EditarCentro(cnx);
 
 					//dispose();
 
@@ -144,7 +149,7 @@ public class MenuAdministrador extends JFrame {
 			
 				if(e.getSource()==btnCadastrarCentro){
 
-					CadastroCentro cc = new CadastroCentro();
+					CadastroCentro cc = new CadastroCentro(cnx);
 
 					//dispose();
 
@@ -166,8 +171,14 @@ public class MenuAdministrador extends JFrame {
 				
 				if(e.getSource()==btnSair){
 
+					try {
+						cnx.desconecte();
+					} catch (DataBaseNotConnectedException | DataBaseGenericException e1) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e1.getMessage(), 
+								"Falha ao Desconectar", JOptionPane.ERROR_MESSAGE);
+					}
 					TelaInicial ti = new TelaInicial();
-
 					dispose();
 
 					ti.setVisible(true);

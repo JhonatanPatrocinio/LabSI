@@ -23,8 +23,8 @@ public class LaboratorioDB {
 
 		String sqlIncluir = "INSERT INTO laboratorios (nome) VALUES ('" + l.getNome() + "');";
 		try {
-			getLaboratorio(l.getId());
-			throw new EntityAlreadyExistException("Laboratorio (id ='" + l.getId() +"')");
+			getLaboratorioNome(l.getNome());
+			throw new EntityAlreadyExistException("Laboratorio (Nome ='" + l.getNome() +"')");
 		} catch (EntityNotExistException e) {
 			// TODO: handle exception
 			return cnx.atualiza(sqlIncluir) > 0;
@@ -50,6 +50,26 @@ public class LaboratorioDB {
 		}
 		return l;
 	}
+	
+	public Laboratorio getLaboratorioNome(String nome) throws 
+	DataBaseGenericException,
+	DataBaseNotConnectedException,
+	EntityNotExistException {
+
+		Laboratorio l = null;
+		String sqlBusca = "SELECT id, nome FROM laboratorios WHERE nome LIKE '%" + nome + "%';";
+		rs = cnx.consulte(sqlBusca);
+		try {
+			if(rs.next())
+				l = new Laboratorio(rs.getInt(1), rs.getString(2));
+			else
+				throw new EntityNotExistException("Laboratorio (nome = '"+ nome +"')");
+		}catch (SQLException e) {
+			// TODO: handle exception
+			throw new DataBaseGenericException(e.getErrorCode(), e.getMessage());
+		}
+		return l;
+	}
 
 	public boolean updLaboratorio(Laboratorio l) throws
 	DataBaseGenericException,
@@ -59,7 +79,7 @@ public class LaboratorioDB {
 		//Analisar essa STRING DE UPDATE PARA ALTERAR NOME COM CHAVE PRIMARIA
 		String sqlAtualiza = "UPDATE laboratorios SET nome = '" + l.getNome() + " WHERE id = '" + l.getId() +"';";
 
-		getLaboratorio(l.getId());
+		getLaboratorioNome(l.getNome());
 		return cnx.atualiza(sqlAtualiza) > 0;
 	}
 

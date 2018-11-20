@@ -93,10 +93,9 @@ public class LoginLogic {
 
 		if(testField) {
 			throw new InvalidFieldException("Login", camposInvalidos);
-		}
-
-		
-		return ldb.updLogin(novo);
+			
+		} else
+			return ldb.updLogin(novo);
 	}
 
 

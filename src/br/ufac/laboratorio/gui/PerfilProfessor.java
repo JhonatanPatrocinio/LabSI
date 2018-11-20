@@ -37,7 +37,9 @@ public class PerfilProfessor extends JFrame {
 	
 	private JPanel contentPane;
 
-
+	public static void atualiza(Professor professor) {
+		
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -64,15 +66,15 @@ public class PerfilProfessor extends JFrame {
 				if(e.getSource()==btnEditarInforProf){
 
 					EditarProfessor ep = new EditarProfessor(professor, cnx);
-
-					//dispose();
-
+					
+					dispose();
+					
 					ep.setVisible(true);
+					
 				}
 
 			}
 		});
-
 		JMenu mnReservas = new JMenu("Reservas");
 		mnReservas.setMnemonic('R');
 		menuBar.add(mnReservas);
@@ -101,7 +103,7 @@ public class PerfilProfessor extends JFrame {
 				if(e.getSource()==btnVerificarReservas){
 
 					ListaHorariosProf lhp = new ListaHorariosProf();
-
+					
 					//dispose();
 
 					lhp.setVisible(true);
@@ -127,7 +129,7 @@ public class PerfilProfessor extends JFrame {
 						cnx.desconecte();
 					} catch (DataBaseNotConnectedException | DataBaseGenericException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), 
-								"Falha ao Editar", JOptionPane.ERROR_MESSAGE);
+								"Falha ao Sair", JOptionPane.ERROR_MESSAGE);
 					}
 					TelaInicial ti = new TelaInicial();
 
@@ -140,7 +142,7 @@ public class PerfilProfessor extends JFrame {
 		});
 		
 		JLabel lblImagem = new JLabel("");
-		lblImagem.setIcon(new ImageIcon("/Users/tiagoprata/eclipse-workspace/Tesi1Job/img/ufac.png"));
+		lblImagem.setIcon(new ImageIcon("/images/ufac.png"));
 		
 
 		
@@ -182,5 +184,6 @@ public class PerfilProfessor extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 
+	
 
 }

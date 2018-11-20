@@ -6,9 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import br.ufac.laboratorio.db.Conexao;
+import br.ufac.laboratorio.exception.DataBaseGenericException;
+import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
+import br.ufac.laboratorio.exception.EntityAlreadyExistException;
+import br.ufac.laboratorio.exception.InvalidFieldException;
+import br.ufac.laboratorio.logic.LaboratorioLogic;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
@@ -22,14 +32,14 @@ public class CadastroLaboratorio extends JDialog{
 
 	private JPanel contentPane;
 	private JTextField tdNomeLab;
-
+	private LaboratorioLogic llc;
 	
 
 	/**
 	 * Create the frame.
 	 */
-	public CadastroLaboratorio() {
-	
+	public CadastroLaboratorio(Conexao cnx) {
+		this.llc = new LaboratorioLogic(cnx);
 		setBounds(100, 100, 450, 450);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
@@ -50,6 +60,24 @@ public class CadastroLaboratorio extends JDialog{
 		tdNomeLab.setColumns(40);
 		
 		JButton btnCadastrarLab = new JButton("Cadastrar");
+		btnCadastrarLab.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource() == btnCadastrarLab) {
+					try {
+						llc.addLaboratorio(tdNomeLab.getText());
+						
+						JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso! ");
+						dispose();
+					} catch (DataBaseGenericException | DataBaseNotConnectedException |
+							EntityAlreadyExistException | InvalidFieldException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), 
+								"Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
+						
+					}
+				}
+				
+			}
+		});
 		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
