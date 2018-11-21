@@ -30,7 +30,7 @@ public class EditarLaboratorio extends JDialog {
 	private JTable tabEditarLab;
 	private JTextField tfEditarLab;
 	private LaboratorioLogic lc;
-	private DefaultTableModel tableModel = new DefaultTableModel();
+	//private DefaultTableModel tableModel = new DefaultTableModel();
 	/**
 	 * Create the frame.
 	 */
@@ -50,8 +50,8 @@ public class EditarLaboratorio extends JDialog {
 		JLabel lbEditarLab = new JLabel("EDITAR LABORATORIO");
 		lbEditarLab.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		
-		tabEditarLab = new JTable(tableModel);
-		tableModel.addColumn("id");
+		tabEditarLab = new JTable();
+		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

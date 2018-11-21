@@ -23,9 +23,9 @@ public class LoginTeste {
 		
 		try {
 			cnx.conecte(DB_URL, "root", "1995");
-//			
+		
 //			loginLogic = new LoginLogic(cnx);
-//			loginLogic.addLogin("admin", "senha123");
+//			loginLogic.addLogin("admin", "senha123", 1);
 //			
 			
 			
