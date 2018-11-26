@@ -38,7 +38,7 @@ public class CentroTableModel extends AbstractTableModel {
 		case 0: dado = c.getId(); break;
 		case 1: dado = c.getSigla(); break;
 		case 2: dado = c.getNome(); break;
-		default: throw new IndexOutOfBoundsException(columnIndex);
+		default: throw new IndexOutOfBoundsException();
 		}
 		
 		return dado;

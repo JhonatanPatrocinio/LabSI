@@ -37,7 +37,7 @@ public class LaboratorioTableModel extends AbstractTableModel {
 		case 1: dado = l.getNome(); break;
 		case 2: dado = l.getCentro().getSigla(); break;
 		case 3: dado = l.getComputadores(); break;
-		default: throw new IndexOutOfBoundsException(columnIndex);
+		default: throw new IndexOutOfBoundsException();
 		}
 		
 		return dado;

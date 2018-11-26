@@ -129,5 +129,27 @@ public class CursoDB {
 
 		return cursos;
 	}
+	
+	public Curso getCursoId(int id) throws
+	DataBaseGenericException,
+	EntityNotExistException,
+	DataBaseNotConnectedException {
+	
+	Curso c = null;
+	String sqlBusca = "SELECT id, cod, nome FROM cursos WHERE id = '"+ id + "';";
+	
+	rs = cnx.consulte(sqlBusca);
+	try {
+		if(rs.next())
+			c = new Curso(rs.getInt(1),rs.getInt(2), rs.getString(3));
+		else
+			throw new EntityNotExistException("Curso (id='" + id + "')");
+	} catch (SQLException e) {
+		// TODO: handle exception
+		throw new DataBaseGenericException(e.getErrorCode(), e.getMessage());
+	}
+	
+		return c;		
+	}
 
 }

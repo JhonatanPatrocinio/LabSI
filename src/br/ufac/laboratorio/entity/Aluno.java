@@ -1,20 +1,20 @@
 package br.ufac.laboratorio.entity;
-//teste andre
+
 public class Aluno {
-  private int id;
-	private int matricula;
+	private int id;
+	private String matricula;
 	private String nome;
 	private Curso curso;
 	private Login login;
 	
-	public Aluno(int matricula, String nome, Curso curso, Login login) {
+	public Aluno(String matricula, String nome, Curso curso, Login login) {
 		this.curso = curso;
 		this.login = login;
 		this.matricula = matricula;
 		this.nome = nome;
 	}
 
-	public Aluno(int id, int matricula, String nome, Curso curso, Login login) {
+	public Aluno(int id, String matricula, String nome, Curso curso, Login login) {
 		this.curso = curso;
 		this.id = id;
 		this.login = login;
@@ -30,11 +30,11 @@ public class Aluno {
 		this.id = id;
 	}
 
-	public int getMatricula() {
+	public String getMatricula() {
 		return matricula;
 	}
 
-	public void setMatricula(int matricula) {
+	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
 

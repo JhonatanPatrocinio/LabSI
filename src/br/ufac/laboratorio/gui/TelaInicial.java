@@ -79,7 +79,7 @@ public class TelaInicial extends JFrame {
 		Icon imgufac = new ImageIcon(getClass().getResource("images/ufac.png"));
 		cnx = new Conexao();
 		try {
-			cnx.conecte(DB_URL, "root", "1995");
+			cnx.conecte(DB_URL, "root", "1997");
 		} catch (DataBaseAlreadyConnectedException | 
 				AccessDeniedForUserException | 
 				DataBaseGenericException e) {

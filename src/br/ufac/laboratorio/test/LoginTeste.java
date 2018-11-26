@@ -22,11 +22,11 @@ public class LoginTeste {
 		Conexao cnx = new Conexao();
 		
 		try {
-			cnx.conecte(DB_URL, "root", "1995");
+			cnx.conecte(DB_URL, "root", "1997");
 		
 //			loginLogic = new LoginLogic(cnx);
 //			loginLogic.addLogin("admin", "senha123", 1);
-//			
+			
 			
 			
 		} catch (DataBaseAlreadyConnectedException | 
