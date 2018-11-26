@@ -97,5 +97,13 @@ public class LaboratorioLogic {
 		return ldb.updLaboratorio(l);		
 	}
 	
+	public List<Laboratorio> getLaboratorios() throws
+	DataBaseGenericException,
+	DataBaseNotConnectedException,
+	EntityTableIsEmptyException, 
+	EntityNotExistException {
+		return ldb.getLaboratorios();
+		
+	}
 	
 }

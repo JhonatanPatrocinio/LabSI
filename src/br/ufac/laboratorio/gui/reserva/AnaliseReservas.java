@@ -1,4 +1,4 @@
-package br.ufac.laboratorio.gui;
+package br.ufac.laboratorio.gui.reserva;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import br.ufac.laboratorio.db.Conexao;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -28,7 +31,7 @@ public class AnaliseReservas extends JDialog {
 	/**
 	 * Create the frame.
 	 */
-	public AnaliseReservas() {
+	public AnaliseReservas(Conexao cnx) {
 		
 		setBounds(100, 100, 500, 500);
 		setLocationRelativeTo(null);

@@ -1,6 +1,4 @@
-package br.ufac.laboratorio.gui;
-
-import java.awt.EventQueue;
+package br.ufac.laboratorio.gui.professor;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -8,17 +6,10 @@ import javax.swing.border.EmptyBorder;
 
 import br.ufac.laboratorio.db.Conexao;
 import br.ufac.laboratorio.entity.Centro;
-import br.ufac.laboratorio.exception.DataBaseGenericException;
-import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
-import br.ufac.laboratorio.exception.EntityAlreadyExistException;
-import br.ufac.laboratorio.exception.EntityLoginAlreadyExistException;
-import br.ufac.laboratorio.exception.EntityLoginNotExistException;
-import br.ufac.laboratorio.exception.EntityNotExistException;
-import br.ufac.laboratorio.exception.EntityTableIsEmptyException;
-import br.ufac.laboratorio.exception.InvalidFieldException;
-import br.ufac.laboratorio.logic.CentroLogic;
-import br.ufac.laboratorio.logic.LoginLogic;
-import br.ufac.laboratorio.logic.ProfessorLogic;
+import br.ufac.laboratorio.exception.*;
+import br.ufac.laboratorio.gui.TelaInicial;
+import br.ufac.laboratorio.logic.*;
+
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -34,14 +25,18 @@ import java.awt.event.ActionListener;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
-import java.util.Vector;
+
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
 public class CadastroProfessor extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tfMatriculaProf;
 	private JTextField tfNomeProf;
@@ -49,7 +44,7 @@ public class CadastroProfessor extends JFrame {
 	private JPasswordField jpfSenhaProf;
 	private JPasswordField jpfConfSenhaProf;
 	private ProfessorLogic pl;
-	private LoginLogic loginLogic;
+
 	private CentroLogic cl;
 	private JTextField tfEmailProf;
 	private JTextField tfTelefoneProf;
@@ -60,7 +55,6 @@ public class CadastroProfessor extends JFrame {
 	 */
 	public CadastroProfessor(Conexao cnx) {
 		this.pl = new ProfessorLogic(cnx);
-		this.loginLogic = new LoginLogic(cnx);
 		this.cl = new CentroLogic(cnx);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
@@ -137,7 +131,7 @@ public class CadastroProfessor extends JFrame {
 								| EntityLoginAlreadyExistException e1) {
 							// TODO Auto-generated catch block
 							JOptionPane.showMessageDialog(null, e1.getMessage(), 
-									"Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
+									"Falha no Cadastro Professor", JOptionPane.ERROR_MESSAGE);
 							jpfConfSenhaProf.setText("");
 							jpfSenhaProf.setText("");
 							tfLoginProf.setText("");
@@ -146,7 +140,7 @@ public class CadastroProfessor extends JFrame {
 
 					} else {
 						JOptionPane.showMessageDialog(null, "Senhas Diferentes", 
-								"Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
+								"Falha no Cadastro Professor", JOptionPane.ERROR_MESSAGE);
 					}
 
 
@@ -172,6 +166,8 @@ public class CadastroProfessor extends JFrame {
 
 		tfTelefoneProf = new JTextField();
 		tfTelefoneProf.setColumns(10);
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 				gl_contentPane.createParallelGroup(Alignment.LEADING)

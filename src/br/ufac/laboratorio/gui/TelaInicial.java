@@ -17,8 +17,8 @@ import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
 import br.ufac.laboratorio.exception.EntityLoginNotExistException;
 import br.ufac.laboratorio.exception.EntityNotExistException;
 import br.ufac.laboratorio.gui.MenuAdministrador;
-import br.ufac.laboratorio.gui.PerfilAluno;
-import br.ufac.laboratorio.gui.PerfilProfessor;
+import br.ufac.laboratorio.gui.aluno.PerfilAluno;
+import br.ufac.laboratorio.gui.professor.PerfilProfessor;
 import br.ufac.laboratorio.logic.LoginLogic;
 import br.ufac.laboratorio.logic.ProfessorLogic;
 
@@ -36,10 +36,14 @@ import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import java.awt.Toolkit;
+
 
 public class TelaInicial extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tfLogin;
 	private JPasswordField jpfSenha;
@@ -67,11 +71,12 @@ public class TelaInicial extends JFrame {
 	 */
 	public TelaInicial() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 458, 527);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		Icon imgufac = new ImageIcon(getClass().getResource("images/ufac.png"));
 		cnx = new Conexao();
 		try {
 			cnx.conecte(DB_URL, "root", "1995");
@@ -168,7 +173,10 @@ public class TelaInicial extends JFrame {
 
 		JLabel lblUfac = new JLabel("UNIVERSIDADE FEDERAL DO ACRE");
 
-		JLabel lblSistemaDeCadastro = new JLabel("SISTEMA DE  GERENCIAMENTO DE LABORATORIO");
+		JLabel lblSistemaDeCadastro = new JLabel("SISTEMA DE GERENCIAMENTO DE LABORATORIO");
+		
+		JLabel lbFoto = new JLabel(imgufac);
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -196,13 +204,19 @@ public class TelaInicial extends JFrame {
 							.addGap(105)
 							.addComponent(lblUfac)))
 					.addContainerGap(51, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap(152, Short.MAX_VALUE)
+					.addComponent(lbFoto)
+					.addGap(134))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblUfac)
-					.addPreferredGap(ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(lbFoto)
+					.addPreferredGap(ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
 					.addComponent(lblSistemaDeCadastro)
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)

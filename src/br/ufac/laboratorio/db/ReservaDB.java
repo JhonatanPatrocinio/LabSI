@@ -37,7 +37,7 @@ public class ReservaDB {
 				+ r.getStatus() 					+ "', '" 
 				+ r.getObs() + "');";
 		try {
-			getReserva(r.getId());
+			getReservaId(r.getId());
 			throw new EntityAlreadyExistException("Reserva (id='" + r.getId() +"')");
 		} catch (EntityNotExistException e) {
 			// TODO: handle exception
@@ -45,7 +45,7 @@ public class ReservaDB {
 		}
 	}
 
-	public Reserva getReserva(int id) throws 
+	public Reserva getReservaId(int id) throws 
 		DataBaseGenericException,
 		DataBaseNotConnectedException,
 		EntityNotExistException, 
@@ -72,19 +72,6 @@ public class ReservaDB {
 			throw new DataBaseGenericException(e.getErrorCode(), e.getMessage());
 		}
 		return r;
-	}
-
-
-	public boolean delReserva(Reserva r) throws
-		DataBaseGenericException,
-		DataBaseNotConnectedException,
-		EntityNotExistException,
-		EntityLoginNotExistException {
-
-		String sqlDelete = "DELETE FROM reservas WHERE id = '" + r.getId() + "';";
-		getReserva(r.getId());
-		return cnx.atualiza(sqlDelete) > 0;
-
 	}
 
 	public List<Reserva> getReservas() throws

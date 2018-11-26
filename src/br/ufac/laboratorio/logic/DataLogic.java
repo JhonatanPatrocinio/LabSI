@@ -18,7 +18,7 @@ public class DataLogic {
 	DataBaseGenericException,
 	DataBaseNotConnectedException,
 	EntityAlreadyExistException,
-	InvalidFieldException, EntityTableIsEmptyException {
+	InvalidFieldException {
 		
 		List<String> camposInvalidos = new ArrayList<>();
 		boolean testField = false;
@@ -54,6 +54,16 @@ public class DataLogic {
 	EntityNotExistException {
 		
 		return ddb.getDataId(id);
+	}
+	
+	public Data procuraData(String data, String horaInicio, String horaTermino) throws 
+	DataBaseGenericException,
+	DataBaseNotConnectedException,
+	EntityNotExistException {
+		
+		String novadata = this.formataDatasql(data);
+		Data date = new Data(novadata, horaInicio, horaTermino);
+		return ddb.procuraData(date);
 	}
 
 

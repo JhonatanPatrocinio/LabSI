@@ -40,7 +40,7 @@ public class Data {
 	}
 	public String getDataUsuario() {
 		String[] stringData;
-		stringData = data.split("/");
+		stringData = data.split("-");
 		
 		return stringData[2]+"/"+stringData[1]+"/"+stringData[0];
 	}

@@ -1,4 +1,4 @@
-package br.ufac.laboratorio.gui;
+package br.ufac.laboratorio.gui.aluno;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

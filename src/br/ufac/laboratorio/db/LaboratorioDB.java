@@ -25,8 +25,8 @@ public class LaboratorioDB {
 	DataBaseNotConnectedException {
 
 		String sqlIncluir = "INSERT INTO laboratorios (nome, id_centro, computadores) VALUES ('" 
-				+ l.getNome()			+ "', '"
-				+ l.getCentro().getId() +", '"
+				+ l.getNome()			+ "', "
+				+ l.getCentro().getId() +", "
 				+ l.getComputadores()	+");";
 		try {
 			getLaboratorioNome(l.getNome());
@@ -118,7 +118,7 @@ public class LaboratorioDB {
 		Laboratorio l = null;
 		Centro centro = null;
 		List<Laboratorio> laboratorios = new ArrayList<>();
-		String sqlBusca = "SELECT id, nome FROM laboratorios;";
+		String sqlBusca = "SELECT id, nome, id_centro, computadores FROM laboratorios;";
 
 		rs = cnx.consulte(sqlBusca);
 
@@ -131,36 +131,6 @@ public class LaboratorioDB {
 					laboratorios.add(l);
 				}
 			} else
-				throw new EntityTableIsEmptyException("Laboratorio");
-		} catch (SQLException e) {
-			// TODO: handle exception
-			throw new DataBaseGenericException(e.getErrorCode(), e.getMessage());
-		}
-
-		return laboratorios;
-	}
-
-	public List<Laboratorio> getLaboratoriosPorNome(String nome) throws
-	DataBaseGenericException,
-	DataBaseNotConnectedException,
-	EntityTableIsEmptyException,
-	EntityNotExistException {
-
-		Laboratorio l = null;
-		Centro centro = null;
-		List<Laboratorio> laboratorios = new ArrayList<>();
-
-		String sqlBusca = "SELECT id, nome FROM laboratorios WHERE nome LIKE '%" + nome + "%';";
-		rs = cnx.consulte(sqlBusca);
-		try {
-			if(rs.next()) {
-				rs.beforeFirst();
-				while (rs.next()) {
-					centro = cl.getCentroId(rs.getInt(3));
-					l = new Laboratorio(rs.getInt(1), rs.getString(2), centro, rs.getInt(4));
-					laboratorios.add(l);
-				}
-			} else 
 				throw new EntityTableIsEmptyException("Laboratorio");
 		} catch (SQLException e) {
 			// TODO: handle exception

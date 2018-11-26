@@ -1,4 +1,4 @@
-package br.ufac.laboratorio.gui;
+package br.ufac.laboratorio.gui.aluno;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,9 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.MatteBorder;
+
+import br.ufac.laboratorio.gui.TelaInicial;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -109,8 +113,8 @@ public class PerfilAluno extends JFrame {
 		});
 
 
-		JLabel lblImagem = new JLabel("");
-		lblImagem.setIcon(new ImageIcon("/Users/tiagoprata/eclipse-workspace/Tesi1Job/img/ufac.png"));
+		Icon imagemUfac = new ImageIcon(getClass().getResource("images/ufac.png"));
+		JLabel lblImagem = new JLabel(imagemUfac);
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(

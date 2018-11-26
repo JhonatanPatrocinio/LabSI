@@ -1,4 +1,4 @@
-package br.ufac.laboratorio.gui;
+package br.ufac.laboratorio.gui.centro;
 
 import java.util.List;
 

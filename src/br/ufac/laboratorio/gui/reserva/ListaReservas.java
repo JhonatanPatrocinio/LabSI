@@ -1,4 +1,4 @@
-package br.ufac.laboratorio.gui;
+package br.ufac.laboratorio.gui.reserva;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import br.ufac.laboratorio.db.Conexao;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -18,66 +21,75 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ListaHorariosProf extends JDialog {
+public class ListaReservas extends JDialog{
 
 	private JPanel contentPane;
-	private JTable tabListaHorarios;
+	private JTable tabListaReservas;
 
 	
-
 	/**
 	 * Create the frame.
 	 */
-	public ListaHorariosProf() {
-	
+	public ListaReservas(Conexao cnx) {
+
 		setBounds(100, 100, 500, 500);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setModal(true);
 		
-		JLabel lblhorario = new JLabel("HORARIOS");
-		lblhorario.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		
-		tabListaHorarios = new JTable();
+		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
+		lblAdministrador.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		
+		JLabel lblListaDeReservas = new JLabel("LISTA DE RESERVAS");
+		lblListaDeReservas.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		
+		tabListaReservas = new JTable();
 		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource()==btnVoltar){
 
-					//PerfilProfessor pp = new PerfilProfessor();
+					//MenuAdministrador ma = new MenuAdministrador();
 
 					dispose();
 
-					//pp.setVisible(true);
+					//ma.setVisible(true);
 				}
-				
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(363, Short.MAX_VALUE)
+					.addComponent(lblAdministrador)
+					.addContainerGap())
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(tabListaHorarios, GroupLayout.PREFERRED_SIZE, 476, GroupLayout.PREFERRED_SIZE)
+					.addComponent(tabListaReservas, GroupLayout.PREFERRED_SIZE, 476, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(8, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 					.addComponent(btnVoltar)
 					.addContainerGap(409, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(194, Short.MAX_VALUE)
-					.addComponent(lblhorario)
-					.addGap(192))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(153, Short.MAX_VALUE)
+					.addComponent(lblListaDeReservas)
+					.addGap(147))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblAdministrador)
+					.addGap(42)
+					.addComponent(lblListaDeReservas)
 					.addGap(67)
-					.addComponent(lblhorario)
-					.addGap(67)
-					.addComponent(tabListaHorarios, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
+					.addComponent(tabListaReservas, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
 					.addGap(53)
 					.addComponent(btnVoltar)
 					.addContainerGap())

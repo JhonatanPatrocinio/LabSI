@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import br.ufac.laboratorio.db.Conexao;
+import br.ufac.laboratorio.gui.aluno.CadastroAluno;
+import br.ufac.laboratorio.gui.professor.CadastroProfessor;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
