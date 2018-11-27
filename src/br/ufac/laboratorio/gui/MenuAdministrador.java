@@ -89,6 +89,43 @@ public class MenuAdministrador extends JFrame {
 			}
 		});
 		mnCentro.add(mntmEditarCentro);
+		
+		JMenu mnCurso = new JMenu("Curso");
+		mnCurso.setMnemonic('u');
+		menuBar.add(mnCurso);
+		
+		JMenuItem mntmAdicionarCurso = new JMenuItem("Adicionar Curso");
+		mntmAdicionarCurso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		mnCurso.add(mntmAdicionarCurso);
+		
+		JMenuItem mntmListarCursos = new JMenuItem("Listar Cursos");
+		mnCurso.add(mntmListarCursos);
+		
+				JMenu mnLaboratorio = new JMenu("Laboratorio");
+				mnLaboratorio.setMnemonic('L');
+				menuBar.add(mnLaboratorio);
+				
+				JMenuItem mntmCadastrarLaboratrio = new JMenuItem("Cadastrar Laboratório");
+				mntmCadastrarLaboratrio.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						CadastroLaboratorio cl = new CadastroLaboratorio(cnx);
+						cl.setVisible(true);
+					}
+				});
+				mnLaboratorio.add(mntmCadastrarLaboratrio);
+				
+				JMenuItem mntmListarLaboratrios = new JMenuItem("Listar Laboratórios");
+				mntmListarLaboratrios.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						EditarLaboratorio el = new EditarLaboratorio(cnx);
+						el.setVisible(true);
+					}
+				});
+				mnLaboratorio.add(mntmListarLaboratrios);
 
 		JMenu mnReservas = new JMenu("Reservas");
 		mnReservas.setMnemonic('R');
@@ -111,28 +148,16 @@ public class MenuAdministrador extends JFrame {
 			}
 		});
 		mnReservas.add(mntmListarReservas);
-
-		JMenu mnLaboratorio = new JMenu("Laboratorio");
-		mnLaboratorio.setMnemonic('L');
-		menuBar.add(mnLaboratorio);
 		
-		JMenuItem mntmCadastrarLaboratrio = new JMenuItem("Cadastrar Laboratório");
-		mntmCadastrarLaboratrio.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CadastroLaboratorio cl = new CadastroLaboratorio(cnx);
-				cl.setVisible(true);
-			}
-		});
-		mnLaboratorio.add(mntmCadastrarLaboratrio);
+		JMenu mnMais = new JMenu("Mais");
+		mnMais.setMnemonic('m');
+		menuBar.add(mnMais);
 		
-		JMenuItem mntmListarLaboratrios = new JMenuItem("Listar Laboratórios");
-		mntmListarLaboratrios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EditarLaboratorio el = new EditarLaboratorio(cnx);
-				el.setVisible(true);
-			}
-		});
-		mnLaboratorio.add(mntmListarLaboratrios);
+		JMenuItem mntmListarAlunosCadastrados = new JMenuItem("Listar Alunos Cadastrados");
+		mnMais.add(mntmListarAlunosCadastrados);
+		
+		JMenuItem mntmListarProfessoresCadastrados = new JMenuItem("Listar Professores Cadastrados");
+		mnMais.add(mntmListarProfessoresCadastrados);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

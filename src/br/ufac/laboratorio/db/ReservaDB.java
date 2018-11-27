@@ -112,7 +112,7 @@ public class ReservaDB {
 		return reservas;
 	}
 
-	public List<Reserva> getReservasPorData(Data data) throws
+	public List<Reserva> getReservasPorStatus(int status) throws
 	DataBaseGenericException,
 	DataBaseNotConnectedException,
 	EntityTableIsEmptyException,
@@ -126,7 +126,7 @@ public class ReservaDB {
 		List<Reserva> reservas = new ArrayList<>();
 
 		String sqlBusca = "SELECT id, id_professor, id_laboratorio, id_data, status, obs FROM"
-				+ " reservas WHERE id_data LIKE '%" + data.getData() + "%';";
+				+ " reservas WHERE status = "+ status + ";";
 		rs = cnx.consulte(sqlBusca);
 		try {
 			if(rs.next()) {
@@ -134,14 +134,14 @@ public class ReservaDB {
 				while (rs.next()) {
 					professor = pdb.getProfessorId(rs.getInt(2));
 					lab = ldb.getLaboratorio(rs.getInt(3));
-					data = dDB.getDataId(rs.getInt(4));
+					datas = dDB.getDataId(rs.getInt(4));
 					r = new Reserva(rs.getInt(1), professor,
 							lab, datas,
 							rs.getInt(5), rs.getString(6));
 					reservas.add(r);
 				}
 			} else 
-				throw new EntityTableIsEmptyException("Reservas");
+				throw new EntityTableIsEmptyException("Reservas Para Analises");
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new DataBaseGenericException(e.getErrorCode(), e.getMessage());

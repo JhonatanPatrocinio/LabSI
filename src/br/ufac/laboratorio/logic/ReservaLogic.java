@@ -88,4 +88,13 @@ public class ReservaLogic {
 
 		return rdb.addReserva(r);
 	}
+	
+	public List<Reserva> getReservasPorStatus(int status) throws
+	DataBaseGenericException,
+	DataBaseNotConnectedException,
+	EntityTableIsEmptyException,
+	EntityNotExistException,
+	EntityLoginNotExistException {
+		return rdb.getReservasPorStatus(status);
+	}
 }
