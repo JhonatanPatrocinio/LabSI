@@ -34,8 +34,8 @@ public class ProfessorDB {
 				+ "'" + p.getNome()				+"',"
 				+ "'" + p.getEmail()			+"',"
 				+ "'" + p.getTelefone()			+"',"
-				+ "'" + p.getCentro().getId()	+"',"
-				+ "'" + p.getLogin().getId()	+"');";
+				+ "" + p.getCentro().getId()	+","
+				+ "" + p.getLogin().getId()	+");";
 
 		try {
 			getProfessor(p.getMatricula());

@@ -6,6 +6,21 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import br.ufac.laboratorio.db.Conexao;
+import br.ufac.laboratorio.entity.Curso;
+import br.ufac.laboratorio.exception.DataBaseGenericException;
+import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
+import br.ufac.laboratorio.exception.EntityAlreadyExistException;
+import br.ufac.laboratorio.exception.EntityLoginAlreadyExistException;
+import br.ufac.laboratorio.exception.EntityLoginNotExistException;
+import br.ufac.laboratorio.exception.EntityNotExistException;
+import br.ufac.laboratorio.exception.EntityTableIsEmptyException;
+import br.ufac.laboratorio.exception.InvalidFieldException;
+import br.ufac.laboratorio.gui.TelaInicial;
+import br.ufac.laboratorio.logic.AlunoLogic;
+import br.ufac.laboratorio.logic.CursoLogic;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -17,23 +32,36 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
 public class CadastroAluno extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tfMatriculaAlu;
 	private JTextField tfNomeAlu;
 	private JTextField tfLoginAlu;
 	private JPasswordField jpfSenhaAlu;
 	private JPasswordField jpfConfSenhaAlu;
+	
+	private CursoLogic cl;
+	private AlunoLogic al;
 
 	
 	/**
 	 * Create the frame.
 	 */
-	public CadastroAluno() {
+	public CadastroAluno(Conexao cnx) {
+		this.cl = new CursoLogic(cnx);
+		this.al = new AlunoLogic(cnx);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -62,7 +90,20 @@ public class CadastroAluno extends JFrame {
 		tfLoginAlu.setColumns(20);
 
 		JComboBox cbCursoAlu = new JComboBox();
-		cbCursoAlu.setModel(new DefaultComboBoxModel(new String[] {"ABI - Ciências Sociais", "Bacharelado em Ciências Biológicas", "Bacharelado em Ciências Econômicas", "Bacharelado em Ciências Sociais", "Bacharelado em Ciências Sociais", "Bacharelado em Ciências Sociais com Habilitação em Antropologia", "Bacharelado em Ciências Sociais com Habilitação em Ciências Políticas", "Bacharelado em Ciências Sociais com Habilitação em Sociologia", "Bacharelado em Comunicação Social com habilitação em Jornalismo", "Bacharelado em Comunicação Social com Habilitação em Jornalismo", "Bacharelado em Direito", "Bacharelado em Direito", "Bacharelado em Direito", "Bacharelado em Educação Física", "Bacharelado em Enfermagem", "Bacharelado em Enfermagem", "Bacharelado em Engenharia Agronômica", "Bacharelado em Engenharia Agronômica", "Bacharelado em Engenharia Civil", "Bacharelado em Engenharia Elétrica", "Bacharelado em Engenharia Florestal", "Bacharelado em Engenharia Florestal", "Bacharelado em Geografia", "Bacharelado em História", "Bacharelado em Jornalismo", "Bacharelado em Medicina Veterinária", "Bacharelado em Nutrição", "Bacharelado em Psicologia", "Bacharelado em Psicologia com Ênfase em Avaliação Psicológica", "Bacharelado em Psicologia com Ênfase em Psicologia Social e Políticas Públicas", "Bacharelado em Saúde Coletiva", "Bacharelado em Sistemas de Informação", "Especialização em Enfermagem Obstétrica", "Especialização em História e Cultura Afro-Brasileira e Africana", "Especialização em História e Cultura Afro-Brasileira e Africana", "Especialização UNIAFRO: Política de Promoção da Igualdade Racial na Escola", "Especialização UNIAFRO: Política de Promoção da Igualdade Racial na Escola", "Licenciatura em Artes Cênicas: Teatro", "Licenciatura em ciências sociais", "Licenciatura em Ciências Biológicas", "Licenciatura em Ciências Biológicas", "Licenciatura em Educação Física", "Licenciatura em Filosofia", "Licenciatura em Física", "Licenciatura em Geografia", "Licenciatura em História", "Licenciatura em História", "Licenciatura em Letras Espanhol", "Licenciatura em Letras Espanhol", "Licenciatura em Letras Francês", "Licenciatura em Letras Inglês", "Licenciatura em Letras Inglês", "Licenciatura em Letras Libras", "Licenciatura em Letras Português", "Licenciatura em Letras Português", "Licenciatura em Letras Português/Espanhol", "Licenciatura em Matemática", "Licenciatura em Matemática na Modalidade à Distância", "Licenciatura em Música", "Licenciatura em Pedagogia", "Licenciatura em Pedagogia", "Licenciatura em Química", "Licenciatura Indígena", "Medicina", "Pós-Graduação Lato Sensu em Atenção Primária a Saúde", "Pós-Graduação Lato Sensu em Ciências da Religião", "Pós-Graduação Lato Sensu em Comunicação e Política", "Pós-Graduação Lato Sensu em Coordenação Pedagógica", "Pós-Graduação Lato Sensu em Desenvolvimento de Software e Infraestrutura para Internet", "Pós-Graduação Lato Sensu em Desenvolvimento de Software e Infraestrutura para Internet", "Pós-Graduação Lato Sensu em Economia Regional e Políticas Públicas", "Pós-Graduação Lato Sensu em Gestão da Segurança Pública e Direitos Humanos", "Pós-Graduação Lato Sensu em Gestão Escolar", "Pós-Graduação Lato Sensu em Língua Portuguesa", "Pós-Graduação Lato Sensu em Ontologia, Conhecimento e Linguagem na História da Filosofia", "Pós-Graduação Lato Sensu em Saúde Pública", "Pós-Graduação Lato Sensu em Tecnologias da Informação e Comunicação", "Pós-Graduação Lato Sensu em Tecnologias da Informação e Comunicação", "Pós-Graduação Lato Sensu em Tecnologias da Informação e Comunicação", "Pós-Graduação Lato Sensu em Tecnologias da Informação e Comunicação", "Pós-Graduação Lato Sensu em Tecnologias da Informação e Comunicação", "Programa de Pós-graduação Stricto Sensu em nível de Mestrado em Desenvolvimento Regional.", "Programa de Pós-Graduação Stricto Sensu em nível de Doutorado em Produção Vegetal", "Programa de Pós-Graduação Stricto Sensu em nível de Doutorado em Biodiversidade e Biotecnologia - Rede Bionorte", "Programa de Pós-Graduação Stricto Sensu em nível de Doutorado em Sanidade e Produção Animal Sustentável na Amazônia Ocidental", "Programa de Pós-Graduação Stricto Sensu em nível de Doutorado em Saúde Coletiva", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado em Ciência Florestal", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado em Ciência, Inovação e Tecnologia para a Amazônia", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado em Ciências da Saúde na Amazônia Ocidental", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado em Ecologia e Manejo de Recursos Naturais", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado em Educação", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado em Letras: Linguagem e Identidade", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado em Produção Vegetal", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado em Sanidade e Produção Animal Sustentável na Amazônia Ocidental", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado em Saúde Coletiva", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado Profissional em Ensino de Física", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado Profissional em Ensino de Ciências e Matemática", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado Profissional em Ensino de Ciências e Matemática", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado Profissional em Ensino de Ciências e Matemática", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado Profissional em Letras", "Programa de Pós-Graduação Stricto Sensu em nível de Mestrado Profissional em Matemática", "Residência em Enfermagem Obstétrica", "Residência Multiprofissional com Ênfase em Terapia Intensiva", "Residência Multiprofissional Integrada em Saúde da Família e Comunidade"}));
+		
+		List<Curso> cursos = new ArrayList<>();
+		DefaultComboBoxModel<?> modelo = (DefaultComboBoxModel) cbCursoAlu.getModel();
+		try {
+			cursos = cl.getCursos();
+		}catch(DataBaseGenericException | DataBaseNotConnectedException | EntityTableIsEmptyException e2) {
+			JOptionPane.showMessageDialog(null, e2.getMessage(),
+					"Falha no Curso", JOptionPane.ERROR_MESSAGE);
+		}
+		String str = null;
+		for(int i = 0; i < cursos.size(); i++) {
+			str = (String) Integer.toString(cursos.get(i).getCod())+" -"+ " "+ cursos.get(i).getNome();
+			cbCursoAlu.addItem(str);
+		}
 		cbCursoAlu.setSelectedIndex(-1);
 		
 		JLabel lblCadastroAluno = new JLabel("CADASTRO ALUNO");
@@ -71,26 +112,43 @@ public class CadastroAluno extends JFrame {
 		JButton btnCadastrarAlu = new JButton("Cadastrar");
 		btnCadastrarAlu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String Vazia = "";
 				
-				if(e.getSource()==btnCadastrarAlu){
-					if(tfMatriculaAlu.getText().compareTo(Vazia)== 0 ||tfLoginAlu.getText().compareTo(Vazia)== 0 || tfNomeAlu.getText().compareTo(Vazia)== 0 || jpfSenhaAlu.getText().compareTo(Vazia)== 0 || jpfConfSenhaAlu.getText().compareTo(Vazia)== 0 || cbCursoAlu.getSelectedIndex()== -1 ) {
-						JOptionPane.showMessageDialog(null, "Confira todas as informações! ");
+				if(e.getSource()==btnCadastrarAlu){	
+					if(jpfSenhaAlu.getText().equals(jpfConfSenhaAlu.getText())) {
+						String s = cbCursoAlu.getSelectedItem().toString();
+						String [] s2 = s.split(" ");
 						
-					}else 
 						
-					if(jpfSenhaAlu.getText().compareTo(jpfConfSenhaAlu.getText()) !=0) {
-						JOptionPane.showMessageDialog(null, "Confira a senha ");
-					}
+						try {
+							al.addAluno(tfMatriculaAlu.getText(), tfNomeAlu.getText(), Integer.parseInt(s2[0]), tfLoginAlu.getText(), 
+								jpfSenhaAlu.getText(), 3);
+							JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso! ");
+							cnx.desconecte();
+							TelaInicial ti = new TelaInicial();
+
+							dispose();
+
+							ti.setVisible(true);
+						}catch(NoSuchAlgorithmException | UnsupportedEncodingException | DataBaseGenericException
+								| DataBaseNotConnectedException | EntityAlreadyExistException | InvalidFieldException
+								| EntityNotExistException | EntityLoginNotExistException
+								| EntityLoginAlreadyExistException e1) {
+							JOptionPane.showMessageDialog(null, e1.getMessage(), 
+								"Falha no Cadastro Aluno", JOptionPane.ERROR_MESSAGE);
+							jpfConfSenhaAlu.setText("");
+							jpfSenhaAlu.setText("");
+							tfLoginAlu.setText("");
+						
+						}
+				
+					} else {
+						JOptionPane.showMessageDialog(null, "Senhas Diferentes",
+								"Falha no Cadastro Aluno", JOptionPane.ERROR_MESSAGE);
 					
-				else {
-						JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso! ");
-						PerfilAluno pa = new PerfilAluno();
-
-						dispose();
-
-						pa.setVisible(true);
 					}
+				
+				
+			
 				}
 
 
@@ -102,6 +160,7 @@ public class CadastroAluno extends JFrame {
 		
 		jpfConfSenhaAlu = new JPasswordField();
 		jpfConfSenhaAlu.setColumns(20);
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)

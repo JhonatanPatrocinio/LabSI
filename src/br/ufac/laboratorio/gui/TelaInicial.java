@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import br.ufac.laboratorio.db.Conexao;
+import br.ufac.laboratorio.entity.Aluno;
 import br.ufac.laboratorio.entity.Login;
 import br.ufac.laboratorio.entity.Professor;
 import br.ufac.laboratorio.exception.AccessDeniedForUserException;
@@ -19,6 +20,7 @@ import br.ufac.laboratorio.exception.EntityNotExistException;
 import br.ufac.laboratorio.gui.MenuAdministrador;
 import br.ufac.laboratorio.gui.aluno.PerfilAluno;
 import br.ufac.laboratorio.gui.professor.PerfilProfessor;
+import br.ufac.laboratorio.logic.AlunoLogic;
 import br.ufac.laboratorio.logic.LoginLogic;
 import br.ufac.laboratorio.logic.ProfessorLogic;
 
@@ -49,6 +51,7 @@ public class TelaInicial extends JFrame {
 	private JPasswordField jpfSenha;
 	private LoginLogic loginLogic;
 	private ProfessorLogic pl;
+	private AlunoLogic al;
 	static Conexao cnx;
 
 
@@ -89,6 +92,7 @@ public class TelaInicial extends JFrame {
 
 		loginLogic = new LoginLogic(cnx);
 		pl = new ProfessorLogic(cnx);
+		al = new AlunoLogic(cnx);
 
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {
@@ -130,7 +134,15 @@ public class TelaInicial extends JFrame {
 						dispose();
 						pp.setVisible(true);
 					} else if (login.getTipo() == 3) {
-						PerfilAluno pa = new PerfilAluno();
+						Aluno aluno = null;
+						try {
+							aluno = al.getAlunoIdSenha(login.getId());
+						} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityNotExistException
+							| EntityLoginNotExistException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), 
+								"Falha no Login", JOptionPane.ERROR_MESSAGE);
+					}
+						PerfilAluno pa = new PerfilAluno(aluno, cnx);
 						dispose();
 						pa.setVisible(true);
 					}

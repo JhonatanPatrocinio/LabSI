@@ -45,7 +45,7 @@ public class CadastroEscolha extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if(e.getSource()==btnAluno){
-					CadastroAluno ca = new CadastroAluno();
+					CadastroAluno ca = new CadastroAluno(cnx);
 
 					dispose();
 
