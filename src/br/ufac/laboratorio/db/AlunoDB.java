@@ -28,12 +28,12 @@ public class AlunoDB {
 	DataBaseNotConnectedException, 
 	EntityAlreadyExistException {
 		
-		String sqlIncluir = "INSERT INTO alunos("
-				+ "matricula, nome, id_curso, id login) "
-				+ "VALUES ("+ a.getMatricula() +","
-				+ "'" + a.getNome()			   +","
-				+ "'" + a.getCurso().getId()   +","
-				+ "'" + a.getLogin().getId()   +"');";
+		String sqlIncluir = "INSERT INTO alunos ("
+				+ "matricula, nome, id_curso, id_login) "
+				+ "VALUES ('"+ a.getMatricula() +"',"
+				+ "'" + a.getNome()			   +"',"
+				+ "" + a.getCurso().getId()   +","
+				+ "" + a.getLogin().getId()   +");";
 		
 		try {
 			getAluno(a.getMatricula());
@@ -60,8 +60,8 @@ public class AlunoDB {
 		try {
 			if(rs.next()) {
 
-				curso = cdb.getCursoId(rs.getInt(6));
-				login = ldb.getLoginId(rs.getInt(7));
+				curso = cdb.getCursoId(rs.getInt(4));
+				login = ldb.getLoginId(rs.getInt(5));
 				aluno = new Aluno(rs.getInt(1), 
 						rs.getString(2), 
 						rs.getString(3),
@@ -82,8 +82,8 @@ public class AlunoDB {
 	EntityLoginNotExistException{
 		
 		String sqlBusca = "SELECT id, matricula, nome, id_curso, id_login"
-				+"FROM alunos"
-				+"WHERE id_login ="+ id + ";";
+				+" FROM alunos"
+				+" WHERE id_login ="+ id + ";";
 		
 		Aluno aluno = null;
 		Curso curso = null;
@@ -92,8 +92,8 @@ public class AlunoDB {
 		try {
 			if(rs.next()) {
 
-				curso = cdb.getCursoId(rs.getInt(6));
-				login = ldb.getLoginId(rs.getInt(7));
+				curso = cdb.getCursoId(rs.getInt(4));
+				login = ldb.getLoginId(rs.getInt(5));
 				aluno = new Aluno(rs.getInt(1), 
 						rs.getString(2), 
 						rs.getString(3), 
@@ -113,8 +113,8 @@ public class AlunoDB {
 	EntityLoginNotExistException{
 		
 		String sqlBusca = "SELECT id, matricula, nome, id_curso, id_login"
-				+"FROM alunos"
-				+"WHERE id_login ="+ id + ";";
+				+" FROM alunos"
+				+" WHERE id_login ="+ id + ";";
 		
 		Aluno aluno = null;
 		Curso curso = null;
@@ -123,8 +123,8 @@ public class AlunoDB {
 		try {
 			if(rs.next()) {
 
-				curso = cdb.getCursoId(rs.getInt(6));
-				login = ldb.getLoginId(rs.getInt(7));
+				curso = cdb.getCursoId(rs.getInt(4));
+				login = ldb.getLoginId(rs.getInt(5));
 				aluno = new Aluno(rs.getInt(1), 
 						rs.getString(2), 
 						rs.getString(3), 
@@ -181,8 +181,8 @@ public class AlunoDB {
 			if(rs.next()) {
 				rs.beforeFirst();
 				while (rs.next()) {
-					curso = cdb.getCursoId(rs.getInt(6));
-					login = ldb.getLoginId(rs.getInt(7));
+					curso = cdb.getCursoId(rs.getInt(4));
+					login = ldb.getLoginId(rs.getInt(5));
 					aluno = new Aluno(rs.getInt(1), rs.getString(2),
 							rs.getString(3), curso, login);
 					listaAlunos.add(aluno);
@@ -215,8 +215,8 @@ public class AlunoDB {
 			if(rs.next()) {
 				rs.beforeFirst();
 				while(rs.next()) {
-					curso = cdb.getCurso(rs.getInt(6));
-					login = ldb.getLoginId(rs.getInt(7));
+					curso = cdb.getCurso(rs.getInt(4));
+					login = ldb.getLoginId(rs.getInt(5));
 					aluno = new Aluno(rs.getInt(1), rs.getString(2),
 					rs.getString(3), curso, login);
 					listaAlunosPorNome.add(aluno);
