@@ -172,3 +172,11 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- DADOS `laboratorio`.`POPULANDO BANCO`
+-- -----------------------------------------------------
+
+INSERT INTO logins (login, senha, tipo) VALUES ('admin', 'E7D80FFEEFA212B7C5C55700E4F7193E', 1);
+INSERT INTO cursos (cod, nome) VALUES (30, 'Sistemas de Informação');
+INSERT INTO centros (sigla, nome) VALUES ('CCET', 'Centro Ciências Exatas da Terra');
