@@ -25,6 +25,7 @@ import br.ufac.laboratorio.entity.Laboratorio;
 import br.ufac.laboratorio.exception.*;
 import br.ufac.laboratorio.logic.CentroLogic;
 import br.ufac.laboratorio.logic.LaboratorioLogic;
+import javax.swing.ImageIcon;
 
 public class EditLab extends JDialog {
 
@@ -63,6 +64,7 @@ public class EditLab extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
+		setResizable(false);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		this.setModal(true);
 		tfComputadorLab = new JTextField();
@@ -103,6 +105,7 @@ public class EditLab extends JDialog {
 		lblAdministrador.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		{
 			btnVoltar = new JButton("Voltar");
+			btnVoltar.setIcon(new ImageIcon(EditLab.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 			btnVoltar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					dispose();
@@ -111,6 +114,7 @@ public class EditLab extends JDialog {
 		}
 		{
 			btnSalvar = new JButton("Salvar");
+			btnSalvar.setIcon(new ImageIcon(EditLab.class.getResource("/br/ufac/laboratorio/gui/images/Save16.gif")));
 			btnSalvar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(e.getSource() == btnSalvar) {
@@ -137,63 +141,69 @@ public class EditLab extends JDialog {
 			btnSalvar.setActionCommand("OK");
 			getRootPane().setDefaultButton(btnSalvar);
 		}
+		
+		JLabel label_3 = new JLabel("");
+		label_3.setIcon(new ImageIcon(EditLab.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addContainerGap()
 					.addComponent(btnVoltar)
-					.addPreferredGap(ComponentPlacement.RELATED, 261, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
 					.addComponent(btnSalvar)
 					.addContainerGap())
 				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addContainerGap(304, Short.MAX_VALUE)
-					.addComponent(lblAdministrador, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addContainerGap(55, Short.MAX_VALUE)
+					.addContainerGap(56, Short.MAX_VALUE)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addComponent(label, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(tfComputadorLab, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_contentPanel.createSequentialGroup()
+						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(label_2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-								.addComponent(label_1, Alignment.TRAILING))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(Alignment.TRAILING, gl_contentPanel.createSequentialGroup()
-									.addComponent(cbCentroLab, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
-									.addGap(60))
-								.addGroup(Alignment.TRAILING, gl_contentPanel.createSequentialGroup()
+								.addComponent(label_1)
+								.addComponent(label_2))
+							.addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+							.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPanel.createSequentialGroup()
+									.addComponent(lbEditLab, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE)
+									.addGap(64))
+								.addGroup(gl_contentPanel.createSequentialGroup()
 									.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-										.addComponent(lbEditLab, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE)
-										.addComponent(tfNomeLab, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE))
-									.addGap(64))))))
+										.addComponent(tfNomeLab, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE)
+										.addComponent(cbCentroLab, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE))
+									.addGap(60))))))
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
+					.addComponent(lblAdministrador))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addComponent(lblAdministrador, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(lbEditLab, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addGap(24)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tfNomeLab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label_2))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(cbCentroLab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label_1))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label)
-						.addComponent(tfComputadorLab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(57)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnVoltar)
-						.addComponent(btnSalvar))
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addComponent(lblAdministrador, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(lbEditLab, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addGap(24)
+							.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(tfNomeLab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_2))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(cbCentroLab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_1))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(label)
+								.addComponent(tfComputadorLab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addGap(51)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnSalvar)
+						.addComponent(btnVoltar))
 					.addContainerGap())
 		);
 		contentPanel.setLayout(gl_contentPanel);

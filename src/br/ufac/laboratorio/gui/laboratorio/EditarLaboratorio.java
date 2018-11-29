@@ -25,6 +25,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.ImageIcon;
 
 public class EditarLaboratorio extends JDialog {
 
@@ -54,8 +55,9 @@ public class EditarLaboratorio extends JDialog {
 	
 	public EditarLaboratorio(Conexao cnx) {
 		this.lc = new LaboratorioLogic(cnx);
-		setBounds(100, 100, 500, 382);
+		setBounds(100, 100, 623, 382);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -67,6 +69,7 @@ public class EditarLaboratorio extends JDialog {
 		
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setIcon(new ImageIcon(EditarLaboratorio.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource()==btnVoltar){
@@ -81,6 +84,7 @@ public class EditarLaboratorio extends JDialog {
 		});
 		
 		this.btnSalvarLab = new JButton("Editar");
+		btnSalvarLab.setIcon(new ImageIcon(EditarLaboratorio.class.getResource("/br/ufac/laboratorio/gui/images/Edit16.gif")));
 		btnSalvarLab.setEnabled(false);
 		btnSalvarLab.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -103,36 +107,50 @@ public class EditarLaboratorio extends JDialog {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
+		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(EditarLaboratorio.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(81, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lbEditarLab)
-							.addGap(172))
+							.addContainerGap()
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnSalvarLab)
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addComponent(btnVoltar))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 462, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(16, Short.MAX_VALUE))
+							.addComponent(btnVoltar)
+							.addPreferredGap(ComponentPlacement.RELATED, 472, Short.MAX_VALUE)
+							.addComponent(btnSalvarLab))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+							.addComponent(lbEditarLab)
+							.addGap(127)
+							.addComponent(lblAdministrador)))
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(19)
-					.addComponent(lbEditarLab)
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblAdministrador)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lbEditarLab)))
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
-					.addGap(32)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnVoltar)
-						.addComponent(btnSalvarLab))
-					.addGap(127))
+						.addComponent(btnSalvarLab)))
 		);
 		
 		table = new JTable(new LaboratorioTableModel(carregaDados()));

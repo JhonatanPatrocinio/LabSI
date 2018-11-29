@@ -47,11 +47,12 @@ public class PerfilProfessor extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		setLocationRelativeTo(null);
-
+		setResizable(false);
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
 		JMenu mnPerfil = new JMenu("Perfil");
+		mnPerfil.setIcon(new ImageIcon(PerfilProfessor.class.getResource("/br/ufac/laboratorio/gui/images/icon_user.gif")));
 		mnPerfil.setMnemonic('F');
 		menuBar.add(mnPerfil);
 		
@@ -68,17 +69,18 @@ public class PerfilProfessor extends JFrame {
 		mnPerfil.add(mntmNewMenuItem);
 
 		JMenu mnReservas = new JMenu("Reservas");
+		mnReservas.setIcon(new ImageIcon(PerfilProfessor.class.getResource("/br/ufac/laboratorio/gui/images/interface_dialog.gif")));
 		mnReservas.setMnemonic('R');
 		menuBar.add(mnReservas);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Analisar Reservas");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListaHorariosProf lhp = new ListaHorariosProf();
+				AnaliseReservaProf arp = new AnaliseReservaProf(cnx);
 
-				//dispose();
+				
 
-				lhp.setVisible(true);
+				arp.setVisible(true);
 			}
 		});
 		mnReservas.add(mntmNewMenuItem_1);
@@ -87,11 +89,27 @@ public class PerfilProfessor extends JFrame {
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ReservaLaboratorio rl = new ReservaLaboratorio(cnx, professor);
-				//dispose();
+			
 				rl.setVisible(true);
 			}
 		});
 		mnReservas.add(mntmNewMenuItem_2);
+		
+		JMenu mnHorarios = new JMenu("Horarios");
+		mnHorarios.setMnemonic('h');
+		mnHorarios.setIcon(new ImageIcon(PerfilProfessor.class.getResource("/br/ufac/laboratorio/gui/images/icon_clock.gif")));
+		menuBar.add(mnHorarios);
+		
+		JMenuItem mntmVerificarHorarios = new JMenuItem("Verificar horarios");
+		mntmVerificarHorarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaHorariosProf lhp = new ListaHorariosProf(cnx);
+				
+				lhp.setVisible(true);
+			}
+		});
+		mnHorarios.add(mntmVerificarHorarios);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -103,6 +121,7 @@ public class PerfilProfessor extends JFrame {
 		lblProfessor.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 
 		JButton btnSairProf = new JButton("SAIR");
+		btnSairProf.setIcon(new ImageIcon(PerfilProfessor.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnSairProf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -123,6 +142,9 @@ public class PerfilProfessor extends JFrame {
 
 		Icon imagemUfac = new ImageIcon(getClass().getResource("../images/ufac.png"));
 		JLabel lblImagem = new JLabel(imagemUfac);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(PerfilProfessor.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 
 
 
@@ -133,29 +155,31 @@ public class PerfilProfessor extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(84)
-							.addComponent(lblImagem, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE))
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 303, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
 							.addComponent(lblProfessor))
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addContainerGap(399, Short.MAX_VALUE)
-							.addComponent(btnSairProf)))
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
+							.addComponent(btnSairProf))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(90)
+							.addComponent(lblImagem, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-							.addGap(33)
-							.addComponent(lblImagem, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE))
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblProfessor))
-					.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-					.addComponent(btnSairProf)
+					.addGap(39)
+					.addComponent(lblImagem, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnSairProf)
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 

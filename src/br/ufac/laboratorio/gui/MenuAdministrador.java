@@ -7,10 +7,14 @@ import javax.swing.border.EmptyBorder;
 import br.ufac.laboratorio.db.Conexao;
 import br.ufac.laboratorio.exception.DataBaseGenericException;
 import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
+import br.ufac.laboratorio.gui.aluno.ListarAluno;
 import br.ufac.laboratorio.gui.centro.CadastroCentro;
 import br.ufac.laboratorio.gui.centro.MenuEditarCentro;
+import br.ufac.laboratorio.gui.curso.CadastroCurso;
+import br.ufac.laboratorio.gui.curso.ListarCurso;
 import br.ufac.laboratorio.gui.laboratorio.CadastroLaboratorio;
 import br.ufac.laboratorio.gui.laboratorio.EditarLaboratorio;
+import br.ufac.laboratorio.gui.professor.ListarProfessor;
 import br.ufac.laboratorio.gui.reserva.AnaliseReservas;
 import br.ufac.laboratorio.gui.reserva.ListaReservas;
 
@@ -38,23 +42,23 @@ public class MenuAdministrador extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					MenuAdministrador frame = new MenuAdministrador(cnx);
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
+
+	//	/**
+	//	 * Launch the application.
+	//	 */
+//		public static void main(String[] args) {
+//			EventQueue.invokeLater(new Runnable() {
+//				public void run() {
+//					try {
+//						MenuAdministrador frame = new MenuAdministrador(cnx);
+//						frame.setVisible(true);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
 //				}
-//			}
-//		});
-//	}
-//
+//			});
+//		}
+//	
 
 	/**
 	 * Create the frame.
@@ -63,15 +67,17 @@ public class MenuAdministrador extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
 		setLocationRelativeTo(null);
+		setResizable(false);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
 		JMenu mnCentro = new JMenu();
+		mnCentro.setIcon(new ImageIcon(MenuAdministrador.class.getResource("/br/ufac/laboratorio/gui/images/Home16.gif")));
 		mnCentro.setMnemonic('C');
 		mnCentro.setText("Centro");
 		menuBar.add(mnCentro);
-		
+
 		JMenuItem mntmCadastrarCentro = new JMenuItem("Cadastrar Centro");
 		mntmCadastrarCentro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -80,7 +86,7 @@ public class MenuAdministrador extends JFrame {
 			}
 		});
 		mnCentro.add(mntmCadastrarCentro);
-		
+
 		JMenuItem mntmEditarCentro = new JMenuItem("Listar Centros");
 		mntmEditarCentro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -89,48 +95,58 @@ public class MenuAdministrador extends JFrame {
 			}
 		});
 		mnCentro.add(mntmEditarCentro);
-		
+
 		JMenu mnCurso = new JMenu("Curso");
-		mnCurso.setMnemonic('u');
+		mnCurso.setIcon(new ImageIcon(MenuAdministrador.class.getResource("/br/ufac/laboratorio/gui/images/Edit16.gif")));
+		mnCurso.setMnemonic('o');
 		menuBar.add(mnCurso);
-		
-		JMenuItem mntmAdicionarCurso = new JMenuItem("Adicionar Curso");
-		mntmAdicionarCurso.addActionListener(new ActionListener() {
+
+		JMenuItem mntmCadastrarCurso = new JMenuItem("Cadastrar Curso");
+		mntmCadastrarCurso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				CadastroCurso ca = new CadastroCurso();
+				ca.setVisible(true);
 			}
 		});
-		mnCurso.add(mntmAdicionarCurso);
-		
+		mnCurso.add(mntmCadastrarCurso);
+
 		JMenuItem mntmListarCursos = new JMenuItem("Listar Cursos");
+		mntmListarCursos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarCurso lc = new ListarCurso(cnx);
+				lc.setVisible(true);
+			}
+		});
 		mnCurso.add(mntmListarCursos);
-		
-				JMenu mnLaboratorio = new JMenu("Laboratorio");
-				mnLaboratorio.setMnemonic('L');
-				menuBar.add(mnLaboratorio);
-				
-				JMenuItem mntmCadastrarLaboratrio = new JMenuItem("Cadastrar Laboratório");
-				mntmCadastrarLaboratrio.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						CadastroLaboratorio cl = new CadastroLaboratorio(cnx);
-						cl.setVisible(true);
-					}
-				});
-				mnLaboratorio.add(mntmCadastrarLaboratrio);
-				
-				JMenuItem mntmListarLaboratrios = new JMenuItem("Listar Laboratórios");
-				mntmListarLaboratrios.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						EditarLaboratorio el = new EditarLaboratorio(cnx);
-						el.setVisible(true);
-					}
-				});
-				mnLaboratorio.add(mntmListarLaboratrios);
+
+		JMenu mnLaboratorio = new JMenu("Laboratorio");
+		mnLaboratorio.setIcon(new ImageIcon(MenuAdministrador.class.getResource("/br/ufac/laboratorio/gui/images/Host16.gif")));
+		mnLaboratorio.setMnemonic('L');
+		menuBar.add(mnLaboratorio);
+
+		JMenuItem mntmCadastrarLaboratrio = new JMenuItem("Cadastrar Laboratório");
+		mntmCadastrarLaboratrio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadastroLaboratorio cl = new CadastroLaboratorio(cnx);
+				cl.setVisible(true);
+			}
+		});
+		mnLaboratorio.add(mntmCadastrarLaboratrio);
+
+		JMenuItem mntmListarLaboratrios = new JMenuItem("Listar Laboratórios");
+		mntmListarLaboratrios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EditarLaboratorio el = new EditarLaboratorio(cnx);
+				el.setVisible(true);
+			}
+		});
+		mnLaboratorio.add(mntmListarLaboratrios);
 
 		JMenu mnReservas = new JMenu("Reservas");
+		mnReservas.setIcon(new ImageIcon(MenuAdministrador.class.getResource("/br/ufac/laboratorio/gui/images/interface_dialog.gif")));
 		mnReservas.setMnemonic('R');
 		menuBar.add(mnReservas);
-		
+
 		JMenuItem mntmAnalise = new JMenuItem("Analisar Reservas");
 		mntmAnalise.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -139,7 +155,7 @@ public class MenuAdministrador extends JFrame {
 			}
 		});
 		mnReservas.add(mntmAnalise);
-		
+
 		JMenuItem mntmListarReservas = new JMenuItem("Listar Reservas");
 		mntmListarReservas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -148,16 +164,34 @@ public class MenuAdministrador extends JFrame {
 			}
 		});
 		mnReservas.add(mntmListarReservas);
+
+
+		JMenu mnUsuarios = new JMenu("Usuarios");
+		mnUsuarios.setIcon(new ImageIcon(MenuAdministrador.class.getResource("/br/ufac/laboratorio/gui/images/page_user_dark.gif")));
+		mnUsuarios.setMnemonic('u');
+		menuBar.add(mnUsuarios);
+
+		JMenuItem mntmListarAlunos = new JMenuItem("Listar Alunos");
+		mntmListarAlunos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarAluno la = new ListarAluno(cnx);
+				la.setVisible(true);
+			}
+		});
+
+		mnUsuarios.add(mntmListarAlunos);
+
+		JMenuItem mntmListarProfessores = new JMenuItem("Listar Professores");
+		mntmListarProfessores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarProfessor lp = new ListarProfessor(cnx);
+				lp.setVisible(true);
+			}
+		});
+		mnUsuarios.add(mntmListarProfessores);
 		
-		JMenu mnMais = new JMenu("Mais");
-		mnMais.setMnemonic('m');
-		menuBar.add(mnMais);
 		
-		JMenuItem mntmListarAlunosCadastrados = new JMenuItem("Listar Alunos Cadastrados");
-		mnMais.add(mntmListarAlunosCadastrados);
 		
-		JMenuItem mntmListarProfessoresCadastrados = new JMenuItem("Listar Professores Cadastrados");
-		mnMais.add(mntmListarProfessoresCadastrados);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -166,6 +200,7 @@ public class MenuAdministrador extends JFrame {
 		lblAdministrador.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 
 		JButton btnSair = new JButton("Sair");
+		btnSair.setIcon(new ImageIcon(MenuAdministrador.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -180,25 +215,32 @@ public class MenuAdministrador extends JFrame {
 					}
 					dispose();
 				}
-				
+
 			}
 		});
 
-		
-		
+
+
 		Icon imagemUfac = new ImageIcon(getClass().getResource("images/ufac.png"));
 		JLabel lblImagem = new JLabel(imagemUfac);
 		
-		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(MenuAdministrador.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
+
+
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(582, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblAdministrador)
-						.addComponent(btnSair))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 503, Short.MAX_VALUE)
+							.addComponent(lblAdministrador))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap(618, Short.MAX_VALUE)
+							.addComponent(btnSair)))
 					.addGap(16))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(156)
@@ -208,12 +250,15 @@ public class MenuAdministrador extends JFrame {
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblAdministrador)
-					.addGap(27)
-					.addComponent(lblImagem, GroupLayout.PREFERRED_SIZE, 311, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-					.addComponent(btnSair)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblAdministrador)
+							.addGap(27)
+							.addComponent(lblImagem, GroupLayout.PREFERRED_SIZE, 311, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+							.addComponent(btnSair))
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);

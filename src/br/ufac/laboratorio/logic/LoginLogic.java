@@ -27,11 +27,11 @@ public class LoginLogic {
 
 		if(login.isEmpty() || login.length() < 5) {
 			testField = true;
-			camposInvalidos.add("Login");
+			camposInvalidos.add("Login vazio ou menor que 5 caracteres");
 		}
 		if(senha.isEmpty() || senha.length() < 8) {
 			testField = true;
-			camposInvalidos.add("Senha");
+			camposInvalidos.add("Senha deve possuir 8 ou mais caracteres");
 		}
 		if(tipo == 0) {
 			testField = true;
@@ -88,7 +88,7 @@ public class LoginLogic {
 		}
 		if(senha.isEmpty() || senha.length() < 8) {
 			testField = true;
-			camposInvalidos.add("Senha");
+			camposInvalidos.add("Senha deve possuir 8 ou mais caracteres");
 		}
 
 		if(testField) {

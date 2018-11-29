@@ -30,6 +30,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.awt.event.ActionEvent;
@@ -38,6 +39,7 @@ import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import java.awt.event.KeyAdapter;
 
 
 public class TelaInicial extends JFrame {
@@ -68,14 +70,17 @@ public class TelaInicial extends JFrame {
 		    }
 		   }
 		  });
+		  		  
 		 }
+	 
 	/**
 	 * Create the frame.
 	 */
 	public TelaInicial() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 458, 527);
+		setBounds(100, 100, 458, 457);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -95,6 +100,8 @@ public class TelaInicial extends JFrame {
 		al = new AlunoLogic(cnx);
 
 		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/ufac/laboratorio/gui/images/Forward16.gif")));
+		
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login login = null;
@@ -157,8 +164,12 @@ public class TelaInicial extends JFrame {
 				
 			}
 		});
+		
 
+		
+		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/ufac/laboratorio/gui/images/ComposeMail16.gif")));
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource()==btnCadastrar){
@@ -178,57 +189,128 @@ public class TelaInicial extends JFrame {
 		JLabel lblSenha = new JLabel("SENHA");
 
 		tfLogin = new JTextField();
+		
 		tfLogin.setColumns(40);
 
 		jpfSenha = new JPasswordField();
+		jpfSenha.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+					Login login = null;
+					Login login1 = null;
+					
+					try {
+						login1 = new Login(tfLogin.getText() , jpfSenha.getText(), 0);
+					} catch (NoSuchAlgorithmException | UnsupportedEncodingException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					try {
+						login = loginLogic.getLogin(login1.getLogin());					
+					} catch (DataBaseGenericException |
+							EntityLoginNotExistException | DataBaseNotConnectedException | EntityNotExistException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), 
+								"Falha no Login", JOptionPane.ERROR_MESSAGE);
+					}
+					
+					if(login1.getLogin().equals(login.getLogin()) && login1.getSenha().equals(login.getSenha())) {
+							
+						if(login.getTipo() == 1) {
+							MenuAdministrador ma = new MenuAdministrador(cnx);
+							dispose();
+							ma.setVisible(true);						
+						} else if (login.getTipo() == 2) {
+							Professor professor = null;
+							try {
+								professor = pl.getProfessorIdSenha(login.getId());
+							} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityNotExistException
+									| EntityLoginNotExistException e1) {
+								JOptionPane.showMessageDialog(null, e1.getMessage(), 
+										"Falha no Login", JOptionPane.ERROR_MESSAGE);
+							}
+							
+							PerfilProfessor pp = new PerfilProfessor(professor, cnx);
+							dispose();
+							pp.setVisible(true);
+						} else if (login.getTipo() == 3) {
+							Aluno aluno = null;
+							try {
+								aluno = al.getAlunoIdSenha(login.getId());
+							} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityNotExistException
+								| EntityLoginNotExistException e1) {
+							JOptionPane.showMessageDialog(null, e1.getMessage(), 
+									"Falha no Login", JOptionPane.ERROR_MESSAGE);
+						}
+							PerfilAluno pa = new PerfilAluno(aluno, cnx);
+							dispose();
+							pa.setVisible(true);
+						}
+						
+						
+						
+					} else {
+						JOptionPane.showMessageDialog(null, "Senha Errada", "Falha no Login" ,JOptionPane.ERROR_MESSAGE);
+						jpfSenha.setText("");
+					}
+					
+					
+				
+				}
+			}
+		});
+		
 		jpfSenha.setColumns(40);
 
 		JLabel lblUfac = new JLabel("UNIVERSIDADE FEDERAL DO ACRE");
 
 		JLabel lblSistemaDeCadastro = new JLabel("SISTEMA DE GERENCIAMENTO DE LABORATORIO");
 		
-		JLabel lbFoto = new JLabel(imgufac);
+		JLabel lbFoto = new JLabel(new ImageIcon(TelaInicial.class.getResource("/br/ufac/laboratorio/gui/images/Glab.png")));
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(105)
+					.addComponent(lblUfac)
+					.addContainerGap(86, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap(148, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(88)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblSenha)
-								.addComponent(lblLogin))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(jpfSenha, 0, 0, Short.MAX_VALUE)
-								.addComponent(tfLogin, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(60)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGap(28)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+									.addComponent(lblSenha)
+									.addComponent(lblLogin))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+									.addComponent(jpfSenha, 0, 0, Short.MAX_VALUE)
+									.addComponent(tfLogin, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE)))
 							.addComponent(lblSistemaDeCadastro))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(168)
-							.addComponent(btnEntrar))
+							.addGap(118)
+							.addComponent(btnEntrar)
+							.addPreferredGap(ComponentPlacement.RELATED, 115, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(156)
-							.addComponent(btnCadastrar))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(105)
-							.addComponent(lblUfac)))
-					.addContainerGap(51, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(152, Short.MAX_VALUE)
+							.addGap(109)
+							.addComponent(btnCadastrar)
+							.addPreferredGap(ComponentPlacement.RELATED, 104, GroupLayout.PREFERRED_SIZE)))
+					.addGap(86))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(85)
 					.addComponent(lbFoto)
-					.addGap(134))
+					.addContainerGap(113, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblUfac)
-					.addGap(18)
+					.addGap(31)
 					.addComponent(lbFoto)
-					.addPreferredGap(ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+					.addGap(29)
 					.addComponent(lblSistemaDeCadastro)
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
@@ -242,7 +324,7 @@ public class TelaInicial extends JFrame {
 					.addComponent(btnEntrar)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnCadastrar)
-					.addGap(17))
+					.addContainerGap(77, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

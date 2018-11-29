@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
 
 public class CadastroLaboratorio extends JDialog{
 
@@ -52,6 +53,7 @@ public class CadastroLaboratorio extends JDialog{
 		this.cl = new CentroLogic(cnx);
 		setBounds(100, 100, 428, 337);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -71,6 +73,7 @@ public class CadastroLaboratorio extends JDialog{
 		
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setIcon(new ImageIcon(CadastroLaboratorio.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -114,6 +117,7 @@ public class CadastroLaboratorio extends JDialog{
 		tfComputadores.setColumns(10);
 		
 		JButton btnCadastrarLab = new JButton("Cadastrar");
+		btnCadastrarLab.setIcon(new ImageIcon(CadastroLaboratorio.class.getResource("/br/ufac/laboratorio/gui/images/ComposeMail16.gif")));
 		btnCadastrarLab.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource() == btnCadastrarLab) {
@@ -140,14 +144,13 @@ public class CadastroLaboratorio extends JDialog{
 
 			}
 		});
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(CadastroLaboratorio.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(290, Short.MAX_VALUE)
-					.addComponent(lblAdministrador)
-					.addGap(114))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -156,14 +159,9 @@ public class CadastroLaboratorio extends JDialog{
 								.addComponent(lblComputadores)
 								.addComponent(lblCentro)
 								.addComponent(lblNome)))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btnVoltar)))
+						.addComponent(btnVoltar))
 					.addGap(27)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnCadastrarLab)
-							.addGap(259))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -174,36 +172,45 @@ public class CadastroLaboratorio extends JDialog{
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(tfComputadores, GroupLayout.PREFERRED_SIZE, 210, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED, 19, GroupLayout.PREFERRED_SIZE)))
-							.addGap(134))))
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addGap(134))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(btnCadastrarLab)
+							.addContainerGap())))
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(71)
 					.addComponent(lblCadastroLaboratorio)
 					.addContainerGap(194, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
+					.addComponent(lblAdministrador)
+					.addGap(107))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblAdministrador)
-					.addGap(18)
-					.addComponent(lblCadastroLaboratorio)
-					.addPreferredGap(ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNome)
-						.addComponent(tfNomeLab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblCentro)
-						.addComponent(cbCentro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblAdministrador)
+							.addGap(24)
+							.addComponent(lblCadastroLaboratorio)
+							.addPreferredGap(ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNome)
+								.addComponent(tfNomeLab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblCentro)
+								.addComponent(cbCentro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblComputadores)
 						.addComponent(tfComputadores, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(37)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnVoltar)
-						.addComponent(btnCadastrarLab))
-					.addContainerGap())
+						.addComponent(btnCadastrarLab)
+						.addComponent(btnVoltar)))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

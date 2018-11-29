@@ -12,6 +12,7 @@ import br.ufac.laboratorio.exception.EntityNotExistException;
 import br.ufac.laboratorio.exception.EntityTableIsEmptyException;
 import br.ufac.laboratorio.logic.ReservaLogic;
 
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
 
 public class AnaliseReservas extends JDialog {
 
@@ -42,7 +44,10 @@ public class AnaliseReservas extends JDialog {
 	private ReservaLogic rl;
 	JRadioButton rdbtnAceitar;
 	JRadioButton rdbtnRecusar;
+	private ButtonGroup bg = new ButtonGroup();
+	
 	JButton btnSalvarAnalise;
+	private JLabel label;
 	/**
 	 * Create the frame.
 	 */
@@ -61,8 +66,9 @@ public class AnaliseReservas extends JDialog {
 	
 	public AnaliseReservas(Conexao cnx) {
 		this.rl = new ReservaLogic(cnx);
-		setBounds(100, 100, 500, 500);
+		setBounds(100, 100, 750, 452);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -75,16 +81,12 @@ public class AnaliseReservas extends JDialog {
 		JLabel lblAnaliseDeReservas = new JLabel("ANALISE DE RESERVAS");
 		lblAnaliseDeReservas.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		
-		this.rdbtnAceitar = new JRadioButton("Aceitar");
-		rdbtnAceitar.setEnabled(false);
-		
-		this.rdbtnRecusar = new JRadioButton("Recusar");
-		rdbtnRecusar.setEnabled(false);
-		
 		this.btnSalvarAnalise = new JButton("Salvar Analise");
+		btnSalvarAnalise.setIcon(new ImageIcon(AnaliseReservas.class.getResource("/br/ufac/laboratorio/gui/images/Save16.gif")));
 		btnSalvarAnalise.setEnabled(false);
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setIcon(new ImageIcon(AnaliseReservas.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -101,54 +103,68 @@ public class AnaliseReservas extends JDialog {
 		});
 		
 		JScrollPane scrollPane = new JScrollPane();
+		
+		this.rdbtnRecusar = new JRadioButton("Recusar");
+		this.rdbtnAceitar = new JRadioButton("Aceitar");
+		bg.add(rdbtnAceitar);
+		bg.add(rdbtnRecusar);
+		
+		label = new JLabel("");
+		label.setIcon(new ImageIcon(AnaliseReservas.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap(365, Short.MAX_VALUE)
-							.addComponent(lblAdministrador))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(139)
-							.addComponent(lblAnaliseDeReservas))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(153)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(29)
-									.addComponent(btnSalvarAnalise)
-									.addPreferredGap(ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-									.addComponent(btnVoltar)
-									.addGap(11))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(rdbtnAceitar)
-									.addGap(18)
-									.addComponent(rdbtnRecusar)
-									.addPreferredGap(ComponentPlacement.RELATED, 153, Short.MAX_VALUE))))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 469, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(lblAnaliseDeReservas)
+							.addGap(132)
+							.addComponent(lblAdministrador)))
+					.addGap(15))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(btnVoltar)
+					.addPreferredGap(ComponentPlacement.RELATED, 556, Short.MAX_VALUE)
+					.addComponent(btnSalvarAnalise)
 					.addContainerGap())
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(276)
+					.addComponent(rdbtnAceitar)
+					.addGap(18)
+					.addComponent(rdbtnRecusar)
+					.addContainerGap(289, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblAdministrador)
-					.addGap(41)
-					.addComponent(lblAnaliseDeReservas)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 255, GroupLayout.PREFERRED_SIZE)
-					.addGap(28)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(rdbtnAceitar)
-						.addComponent(rdbtnRecusar))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnSalvarAnalise)
-						.addComponent(btnVoltar))
-					.addContainerGap())
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addContainerGap()
+									.addComponent(lblAdministrador))
+								.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+							.addGap(33))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblAnaliseDeReservas)
+							.addGap(18)))
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(28)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnVoltar)
+								.addComponent(btnSalvarAnalise)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(rdbtnRecusar)
+								.addComponent(rdbtnAceitar)))))
 		);
 		
 		table = new JTable(new AnalisesTableModel(carregaDados()));

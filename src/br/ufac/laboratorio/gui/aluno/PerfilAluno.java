@@ -49,11 +49,13 @@ public class PerfilAluno extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		setLocationRelativeTo(null);
-
+		setResizable(false);
+		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
 		JMenu mnPerfil = new JMenu("Perfil");
+		mnPerfil.setIcon(new ImageIcon(PerfilAluno.class.getResource("/br/ufac/laboratorio/gui/images/icon_user.gif")));
 		mnPerfil.setMnemonic('P');
 		menuBar.add(mnPerfil);
 		
@@ -87,6 +89,7 @@ public class PerfilAluno extends JFrame {
 //		mnPerfil.add(btnEditarInforAlu);
 
 		JMenu mnHorarios = new JMenu("Horarios");
+		mnHorarios.setIcon(new ImageIcon(PerfilAluno.class.getResource("/br/ufac/laboratorio/gui/images/icon_clock.gif")));
 		mnHorarios.setMnemonic('H');
 		menuBar.add(mnHorarios);
 		
@@ -129,7 +132,8 @@ public class PerfilAluno extends JFrame {
 		JLabel lblAluno = new JLabel("ALUNO");
 		lblAluno.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 
-		JButton btnSairAlu = new JButton("< SAIR");
+		JButton btnSairAlu = new JButton("SAIR");
+		btnSairAlu.setIcon(new ImageIcon(PerfilAluno.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnSairAlu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -148,37 +152,45 @@ public class PerfilAluno extends JFrame {
 
 		Icon imagemUfac = new ImageIcon(getClass().getResource("../images/ufac.png"));
 		JLabel lblImagem = new JLabel(imagemUfac);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(PerfilAluno.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(84)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addGap(101)
 							.addComponent(lblImagem, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 303, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
 							.addComponent(lblAluno))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addContainerGap(399, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 368, Short.MAX_VALUE)
 							.addComponent(btnSairAlu)))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
-				gl_contentPane.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_contentPane.createSequentialGroup()
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-								.addGap(33)
-								.addComponent(lblImagem, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE))
-							.addComponent(lblAluno))
-						.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+							.addComponent(lblImagem, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addComponent(lblAluno))
+					.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnSairAlu)
-						.addContainerGap())
-			);
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
 
 		JLabel lblNomeAluno = new JLabel(al.getNome());
 		panel.add(lblNomeAluno);

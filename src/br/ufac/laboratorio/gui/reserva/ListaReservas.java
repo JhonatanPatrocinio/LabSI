@@ -15,85 +15,87 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class ListaReservas extends JDialog{
 
-	private JPanel contentPane;
-	private JTable tabListaReservas;
+	private final JPanel contentPanel = new JPanel();
 
 	
-	/**
-	 * Create the frame.
-	 */
+
+
 	public ListaReservas(Conexao cnx) {
-
-		setBounds(100, 100, 500, 500);
+		
+		setBounds(100, 100, 578, 451);
 		setLocationRelativeTo(null);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setModal(true);
+		setResizable(false);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		JLabel lblReservas = new JLabel("RESERVAS");
+		lblReservas.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		JScrollPane spAlunos = new JScrollPane();
 		
-		
-		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
-		lblAdministrador.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		
-		JLabel lblListaDeReservas = new JLabel("LISTA DE RESERVAS");
-		lblListaDeReservas.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		
-		tabListaReservas = new JTable();
-		
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(e.getSource()==btnVoltar){
-
-					//MenuAdministrador ma = new MenuAdministrador();
-
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(ListaReservas.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
+		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
+		gl_contentPanel.setHorizontalGroup(
+			gl_contentPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(spAlunos, GroupLayout.PREFERRED_SIZE, 555, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+							.addGap(180)
+							.addComponent(lblReservas)))
+					.addContainerGap(7, Short.MAX_VALUE))
+		);
+		gl_contentPanel.setVerticalGroup(
+			gl_contentPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblReservas)
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(spAlunos, GroupLayout.PREFERRED_SIZE, 338, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		contentPanel.setLayout(gl_contentPanel);
+		{
+			JPanel buttonPane = new JPanel();
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			JButton btnVoltar = new JButton("Voltar");
+			btnVoltar.setIcon(new ImageIcon(ListaReservas.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
+			btnVoltar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
 					dispose();
-
-					//ma.setVisible(true);
+					
 				}
-			}
-		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(363, Short.MAX_VALUE)
-					.addComponent(lblAdministrador)
-					.addContainerGap())
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(tabListaReservas, GroupLayout.PREFERRED_SIZE, 476, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(8, Short.MAX_VALUE))
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-					.addComponent(btnVoltar)
-					.addContainerGap(409, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(153, Short.MAX_VALUE)
-					.addComponent(lblListaDeReservas)
-					.addGap(147))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblAdministrador)
-					.addGap(42)
-					.addComponent(lblListaDeReservas)
-					.addGap(67)
-					.addComponent(tabListaReservas, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
-					.addGap(53)
-					.addComponent(btnVoltar)
-					.addContainerGap())
-		);
-		contentPane.setLayout(gl_contentPane);
+			});
+			GroupLayout gl_buttonPane = new GroupLayout(buttonPane);
+			gl_buttonPane.setHorizontalGroup(
+				gl_buttonPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_buttonPane.createSequentialGroup()
+						.addComponent(btnVoltar)
+						.addContainerGap(497, Short.MAX_VALUE))
+			);
+			gl_buttonPane.setVerticalGroup(
+				gl_buttonPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(Alignment.TRAILING, gl_buttonPane.createSequentialGroup()
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnVoltar))
+			);
+			buttonPane.setLayout(gl_buttonPane);
+		}
 	}
+
 }

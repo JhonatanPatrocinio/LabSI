@@ -36,6 +36,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
 
 public class EditarProfessor extends JDialog {
 
@@ -57,6 +58,7 @@ public class EditarProfessor extends JDialog {
 		this.cl = new CentroLogic(cnx);
 		this.pl = new ProfessorLogic(cnx);
 		setBounds(100, 100, 500, 500);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -107,6 +109,7 @@ public class EditarProfessor extends JDialog {
 		lblEditarProfessor.setFont(new Font("Lucida Grande", Font.BOLD, 30));
 
 		JButton btnEditarProf = new JButton("Salvar");
+		btnEditarProf.setIcon(new ImageIcon(EditarProfessor.class.getResource("/br/ufac/laboratorio/gui/images/Save16.gif")));
 		btnEditarProf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -215,6 +218,7 @@ public class EditarProfessor extends JDialog {
 		jpfEditarConfSenhaProf = new JPasswordField();
 
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setIcon(new ImageIcon(EditarProfessor.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -241,20 +245,17 @@ public class EditarProfessor extends JDialog {
 		tfTelefone = new JTextField();
 		tfTelefone.setColumns(10);
 		tfTelefone.setText(professor.getTelefone());
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(EditarProfessor.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btnVoltar)
-							.addGap(133)
-							.addComponent(btnEditarProf))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(49)
-							.addComponent(lblEditarProfessor)))
-					.addGap(87))
+					.addComponent(btnVoltar)
+					.addGap(147)
+					.addComponent(btnEditarProf)
+					.addGap(207))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(58)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -268,24 +269,30 @@ public class EditarProfessor extends JDialog {
 						.addComponent(lblLogin))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(jpfEditarConfSenhaProf, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-							.addComponent(jpfEditarSenhaProf, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(tfEditarLoginProf, GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-								.addComponent(tfTelefone, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-								.addComponent(tfEmail, GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-								.addComponent(tfEditarNomeProf, GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-								.addComponent(tfEditarMatriculaProf)
-								.addComponent(cbEditarCentroProf, 0, 253, Short.MAX_VALUE))))
+						.addComponent(tfEditarLoginProf, GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+						.addComponent(tfTelefone, GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+						.addComponent(tfEmail, GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+						.addComponent(tfEditarNomeProf, GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+						.addComponent(tfEditarMatriculaProf, 218, 218, Short.MAX_VALUE)
+						.addComponent(cbEditarCentroProf, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(jpfEditarSenhaProf, GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+						.addComponent(jpfEditarConfSenhaProf, GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE))
 					.addGap(79))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(97, Short.MAX_VALUE)
+					.addComponent(lblEditarProfessor)
+					.addGap(88))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(28)
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
 					.addComponent(lblEditarProfessor)
-					.addPreferredGap(ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+					.addGap(28)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblMatricula)
 						.addComponent(tfEditarMatriculaProf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -317,11 +324,9 @@ public class EditarProfessor extends JDialog {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblConfirmarSenha)
 						.addComponent(jpfEditarConfSenhaProf, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
-					.addGap(37)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnVoltar)
-							.addContainerGap())
+					.addPreferredGap(ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(btnVoltar)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(btnEditarProf)
 							.addGap(20))))

@@ -30,6 +30,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class MenuEditarCentro extends JDialog {
 
@@ -41,6 +43,7 @@ public class MenuEditarCentro extends JDialog {
 	private CentroLogic cl;
 	JButton btnEditar;
 	private JTable table;
+	private JButton btnVoltar;
 //	private DefaultTableModel tableModel = new DefaultTableModel();	
 	
 	/**
@@ -94,6 +97,7 @@ public class MenuEditarCentro extends JDialog {
 	public MenuEditarCentro(Conexao cnx) {
 		this.cl = new CentroLogic(cnx);
 		setBounds(100, 100, 545, 398);
+		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
@@ -101,27 +105,39 @@ public class MenuEditarCentro extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
 		JLabel lblCentros = new JLabel("CENTROS");
+		lblCentros.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		JScrollPane scrollPane = new JScrollPane();
+		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(MenuEditarCentro.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGap(238)
-							.addComponent(lblCentros))
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+							.addComponent(lblCentros)
+							.addGap(133)
+							.addComponent(lblAdministrador))
 						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 503, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(20, Short.MAX_VALUE))
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+							.addContainerGap())))
 		);
 		gl_contentPanel.setVerticalGroup(
-			gl_contentPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_contentPanel.createSequentialGroup()
-					.addComponent(lblCentros)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+			gl_contentPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblAdministrador)
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addGap(7)
+							.addComponent(lblCentros)))
+					.addGap(12)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 279, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(20, Short.MAX_VALUE))
+					.addContainerGap(26, Short.MAX_VALUE))
 		);
 		{
 			table = new JTable(new CentroTableModel(carregaDados()));
@@ -136,10 +152,10 @@ public class MenuEditarCentro extends JDialog {
 		contentPanel.setLayout(gl_contentPanel);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				this.btnEditar = new JButton("Editar");
+				btnEditar.setIcon(new ImageIcon(MenuEditarCentro.class.getResource("/br/ufac/laboratorio/gui/images/Edit16.gif")));
 				btnEditar.setEnabled(false);
 				btnEditar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -163,11 +179,11 @@ public class MenuEditarCentro extends JDialog {
 					}
 				});
 				btnEditar.setActionCommand("OK");
-				buttonPane.add(btnEditar);
 				getRootPane().setDefaultButton(btnEditar);
 			}
 			{
-				JButton btnVoltar = new JButton("Voltar");
+				btnVoltar = new JButton("Voltar");
+				btnVoltar.setIcon(new ImageIcon(MenuEditarCentro.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 				btnVoltar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -175,9 +191,26 @@ public class MenuEditarCentro extends JDialog {
 						
 					}
 				});
-				
-				buttonPane.add(btnVoltar);
 			}
+			GroupLayout gl_buttonPane = new GroupLayout(buttonPane);
+			gl_buttonPane.setHorizontalGroup(
+				gl_buttonPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_buttonPane.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(btnVoltar)
+						.addGap(398)
+						.addComponent(btnEditar)
+						.addContainerGap())
+			);
+			gl_buttonPane.setVerticalGroup(
+				gl_buttonPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_buttonPane.createSequentialGroup()
+						.addGap(5)
+						.addGroup(gl_buttonPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnEditar)
+							.addComponent(btnVoltar)))
+			);
+			buttonPane.setLayout(gl_buttonPane);
 		}
 	} //FIM CONSTRUTOR
 	

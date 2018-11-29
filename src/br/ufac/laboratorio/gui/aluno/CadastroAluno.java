@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
 
 public class CadastroAluno extends JFrame {
 
@@ -64,6 +65,7 @@ public class CadastroAluno extends JFrame {
 		this.al = new AlunoLogic(cnx);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -110,6 +112,7 @@ public class CadastroAluno extends JFrame {
 		lblCadastroAluno.setFont(new Font("Lucida Grande", Font.BOLD, 30));
 
 		JButton btnCadastrarAlu = new JButton("Cadastrar");
+		btnCadastrarAlu.setIcon(new ImageIcon(CadastroAluno.class.getResource("/br/ufac/laboratorio/gui/images/list_users.gif")));
 		btnCadastrarAlu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -161,11 +164,16 @@ public class CadastroAluno extends JFrame {
 		jpfConfSenhaAlu = new JPasswordField();
 		jpfConfSenhaAlu.setColumns(20);
 		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(CadastroAluno.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(107, Short.MAX_VALUE)
+					.addContainerGap()
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
 					.addComponent(lblCadastroAluno)
 					.addGap(91))
 				.addGroup(gl_contentPane.createSequentialGroup()
@@ -181,7 +189,6 @@ public class CadastroAluno extends JFrame {
 						.addComponent(lblSenha))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(btnCadastrarAlu)
 						.addComponent(tfMatriculaAlu)
 						.addComponent(tfNomeAlu, GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
 						.addComponent(tfLoginAlu, GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
@@ -189,39 +196,46 @@ public class CadastroAluno extends JFrame {
 						.addComponent(jpfSenhaAlu, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
 						.addComponent(jpfConfSenhaAlu, 0, 0, Short.MAX_VALUE))
 					.addContainerGap(100, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(194)
+					.addComponent(btnCadastrarAlu)
+					.addContainerGap(207, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(29)
-					.addComponent(lblCadastroAluno)
-					.addGap(98)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(tfMatriculaAlu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblMatricula))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblCurso)
-						.addComponent(cbCursoAlu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNome)
-						.addComponent(tfNomeAlu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(12)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblLogin)
-						.addComponent(tfLoginAlu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblSenha)
-						.addComponent(jpfSenhaAlu, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(29)
+							.addComponent(lblCadastroAluno)
+							.addGap(98)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(tfMatriculaAlu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblMatricula))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblCurso)
+								.addComponent(cbCursoAlu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNome)
+								.addComponent(tfNomeAlu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(12)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblLogin)
+								.addComponent(tfLoginAlu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblSenha)
+								.addComponent(jpfSenhaAlu, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblConfirmarSenha)
 						.addComponent(jpfConfSenhaAlu, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
 					.addComponent(btnCadastrarAlu)
-					.addGap(20))
+					.addGap(21))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

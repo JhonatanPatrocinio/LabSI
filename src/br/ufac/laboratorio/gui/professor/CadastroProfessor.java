@@ -30,6 +30,7 @@ import java.util.List;
 
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
 
 public class CadastroProfessor extends JFrame {
 
@@ -59,6 +60,7 @@ public class CadastroProfessor extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -105,6 +107,7 @@ public class CadastroProfessor extends JFrame {
 		lblCadastroProfessor.setFont(new Font("Lucida Grande", Font.BOLD, 30));
 
 		JButton btnCadastrarProf = new JButton("Cadastrar");
+		btnCadastrarProf.setIcon(new ImageIcon(CadastroProfessor.class.getResource("/br/ufac/laboratorio/gui/images/ComposeMail16.gif")));
 		btnCadastrarProf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -167,83 +170,97 @@ public class CadastroProfessor extends JFrame {
 		tfTelefoneProf = new JTextField();
 		tfTelefoneProf.setColumns(10);
 		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(CadastroProfessor.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
+		
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-				gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-						.addContainerGap(29, Short.MAX_VALUE)
-						.addComponent(lblCadastroProfessor)
-						.addGap(61))
-				.addGroup(gl_contentPane.createSequentialGroup()
-						.addGap(49)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblEmail)
-								.addComponent(lblMatricula)
-								.addComponent(lblConfirmarSenha)
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblSenha)
-								.addComponent(lblLogin)
-								.addComponent(lblNome)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblTelefone)
-										.addComponent(lblCentro)))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(tfTelefoneProf, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-								.addComponent(tfNomeProf, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-								.addComponent(tfEmailProf, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-								.addComponent(cbCentroProf, 0, 207, Short.MAX_VALUE)
-								.addComponent(tfLoginProf, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-								.addComponent(btnCadastrarProf)
-								.addComponent(tfMatriculaProf, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-								.addComponent(jpfSenhaProf, Alignment.TRAILING, 0, 0, Short.MAX_VALUE)
-								.addComponent(jpfConfSenhaProf, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
-						.addGap(85))
-				);
-		gl_contentPane.setVerticalGroup(
-				gl_contentPane.createParallelGroup(Alignment.LEADING)
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addGap(49)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+											.addComponent(lblEmail)
+											.addComponent(lblNome)
+											.addComponent(lblCentro)
+											.addComponent(lblMatricula)
+											.addComponent(lblLogin)
+											.addComponent(lblTelefone)))
+									.addComponent(lblConfirmarSenha)))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(jpfConfSenhaProf, GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+								.addComponent(jpfSenhaProf, 0, 0, Short.MAX_VALUE)
+								.addComponent(tfLoginProf, GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+								.addComponent(tfTelefoneProf, GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+								.addComponent(tfNomeProf, GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+								.addComponent(tfEmailProf, GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+								.addComponent(cbCentroProf, 0, 288, Short.MAX_VALUE)
+								.addComponent(tfMatriculaProf, GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(lblCadastroProfessor)))
+					.addGap(61))
 				.addGroup(gl_contentPane.createSequentialGroup()
-						.addGap(28)
-						.addComponent(lblCadastroProfessor)
-						.addGap(59)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+					.addGap(198)
+					.addComponent(btnCadastrarProf)
+					.addContainerGap(203, Short.MAX_VALUE))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(28)
+							.addComponent(lblCadastroProfessor)
+							.addGap(30)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblMatricula)
 								.addComponent(tfMatriculaProf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblCentro)
-								.addComponent(cbCentroProf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGap(18)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblEmail)
-								.addComponent(tfEmailProf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNome)
-								.addComponent(tfNomeProf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGap(18)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(cbCentroProf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblCentro))
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(tfEmailProf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblEmail))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(tfNomeProf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNome))
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblTelefone)
 								.addComponent(tfTelefoneProf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGap(21)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(tfLoginProf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblLogin))
-						.addGap(18)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(21)
+									.addComponent(lblLogin))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(tfLoginProf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(jpfSenhaProf, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblSenha))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(jpfConfSenhaProf, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-										.addComponent(btnCadastrarProf)
-										.addGap(20))
-								.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(lblConfirmarSenha)
-										.addContainerGap())))
-				);
+								.addComponent(lblSenha)))
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblConfirmarSenha)
+						.addComponent(jpfConfSenhaProf, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addGap(41)
+					.addComponent(btnCadastrarProf)
+					.addContainerGap())
+		);
 		contentPane.setLayout(gl_contentPane);
 	}
 }

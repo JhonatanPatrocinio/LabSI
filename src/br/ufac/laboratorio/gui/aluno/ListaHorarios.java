@@ -11,6 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
 
 public class ListaHorarios extends JDialog {
 
@@ -19,15 +22,15 @@ public class ListaHorarios extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTable tabListaHorarios;
 
 	/**
 	 * Create the frame.
 	 */
 	public ListaHorarios() {
 		
-		setBounds(100, 100, 500, 500);
+		setBounds(100, 100, 500, 392);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -37,9 +40,8 @@ public class ListaHorarios extends JDialog {
 		JLabel lblhorario = new JLabel("HORARIOS");
 		lblhorario.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		
-		tabListaHorarios = new JTable();
-		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setIcon(new ImageIcon(ListaHorarios.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource()==btnVoltar){
@@ -53,31 +55,45 @@ public class ListaHorarios extends JDialog {
 				
 			}
 		});
+		
+		JScrollPane scrollPane = new JScrollPane();
+		
+		JLabel lblAluno = new JLabel("ALUNO");
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(ListaHorarios.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(tabListaHorarios, GroupLayout.PREFERRED_SIZE, 476, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 476, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnVoltar)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+							.addGap(137)
+							.addComponent(lblhorario)))
 					.addContainerGap(8, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(btnVoltar)
-					.addContainerGap(409, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(194, Short.MAX_VALUE)
-					.addComponent(lblhorario)
-					.addGap(192))
+					.addContainerGap(439, Short.MAX_VALUE)
+					.addComponent(lblAluno)
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(67)
-					.addComponent(lblhorario)
-					.addGap(67)
-					.addComponent(tabListaHorarios, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
-					.addGap(53)
-					.addComponent(btnVoltar)
-					.addContainerGap())
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(14)
+							.addComponent(lblhorario))
+						.addComponent(lblAluno)
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 274, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnVoltar))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

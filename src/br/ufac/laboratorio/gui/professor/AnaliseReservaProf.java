@@ -24,8 +24,22 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ListaHorariosProf extends JDialog {
+public class AnaliseReservaProf extends JDialog {
 
+	
+	/* 
+	 *                         		ESSA CLASSE É ONDE VAI SER LISTADO APENAS A RESERVAS FEITAS POR ESSE PROFESSOR
+	 * 								
+	 * 									NELA É SO PRA TER OS DADOS E A SITUACAO DA ANALISE
+	 * 
+	 * 
+	 * 
+	 * */
+	
+	
+	
+	
+	
 
 	/**
 	 * 
@@ -36,7 +50,7 @@ public class ListaHorariosProf extends JDialog {
 	/**
 	 * Create the frame.
 	 */
-	public ListaHorariosProf(Conexao cnx) {
+	public AnaliseReservaProf(Conexao cnx) {
 		
 		setBounds(100, 100, 500, 392);
 		setLocationRelativeTo(null);
@@ -47,8 +61,8 @@ public class ListaHorariosProf extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setModal(true);
 		
-		JLabel lblhorario = new JLabel("HORARIOS");
-		lblhorario.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		JLabel lbSituacaoReserva = new JLabel("ANALISE RESERVA");
+		lbSituacaoReserva.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setIcon(new ImageIcon(ListaHorarios.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
@@ -66,12 +80,12 @@ public class ListaHorariosProf extends JDialog {
 			}
 		});
 		
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane spAnaliseProf = new JScrollPane();
 		
 		JLabel lblProfessor = new JLabel("PROFESSOR");
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(ListaHorariosProf.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
+		label.setIcon(new ImageIcon(AnaliseReservaProf.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -79,30 +93,34 @@ public class ListaHorariosProf extends JDialog {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 476, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnVoltar)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-							.addGap(131)
-							.addComponent(lblhorario)))
+							.addComponent(spAnaliseProf, GroupLayout.PREFERRED_SIZE, 476, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnVoltar))
 					.addContainerGap(8, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(413, Short.MAX_VALUE)
-					.addComponent(lblProfessor)
-					.addContainerGap())
+					.addContainerGap()
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(lblProfessor)
+							.addContainerGap())
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(lbSituacaoReserva)
+							.addGap(154))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(14)
-							.addComponent(lblhorario))
-						.addComponent(lblProfessor)
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 274, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblProfessor)
+							.addGap(4)
+							.addComponent(lbSituacaoReserva))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(spAnaliseProf, GroupLayout.PREFERRED_SIZE, 274, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnVoltar))
 		);

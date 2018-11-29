@@ -36,6 +36,7 @@ import br.ufac.laboratorio.exception.EntityTableIsEmptyException;
 import br.ufac.laboratorio.exception.InvalidFieldException;
 import br.ufac.laboratorio.logic.LaboratorioLogic;
 import br.ufac.laboratorio.logic.ReservaLogic;
+import javax.swing.ImageIcon;
 
 public class ReservaLaboratorio extends JDialog {
 
@@ -76,6 +77,7 @@ public class ReservaLaboratorio extends JDialog {
 		this.rl = new ReservaLogic(cnx);
 		setBounds(100, 100, 500, 450);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -129,6 +131,7 @@ public class ReservaLaboratorio extends JDialog {
 		JLabel lblData = new JLabel("DATA");
 		
 		JButton btnSolicitarLab = new JButton("Solicitar");
+		btnSolicitarLab.setIcon(new ImageIcon(ReservaLaboratorio.class.getResource("/br/ufac/laboratorio/gui/images/SendMail16.gif")));
 		btnSolicitarLab.setEnabled(false);
 		btnSolicitarLab.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -139,6 +142,7 @@ public class ReservaLaboratorio extends JDialog {
 		});
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setIcon(new ImageIcon(ReservaLaboratorio.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -155,6 +159,7 @@ public class ReservaLaboratorio extends JDialog {
 		});
 		
 		JButton btnVerificarHorario = new JButton("Verificar Horario");
+		btnVerificarHorario.setIcon(new ImageIcon(ReservaLaboratorio.class.getResource("/br/ufac/laboratorio/gui/images/Search16.gif")));
 		btnVerificarHorario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int verifica = 0;
@@ -193,11 +198,16 @@ public class ReservaLaboratorio extends JDialog {
 			}
 		});
 		
+		JLabel lblDescricao = new JLabel("DESCRICAO");
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(ReservaLaboratorio.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
+		
 		
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -208,6 +218,7 @@ public class ReservaLaboratorio extends JDialog {
 							.addGap(27)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(15)
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 										.addComponent(lblTermino)
 										.addComponent(lblInicio))
@@ -222,9 +233,9 @@ public class ReservaLaboratorio extends JDialog {
 								.addComponent(cbLaboratorios, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(btnVoltar)
-							.addPreferredGap(ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
 							.addComponent(btnSolicitarLab)
-							.addGap(46)
+							.addGap(86)
 							.addComponent(btnVerificarHorario))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(51)
@@ -237,19 +248,28 @@ public class ReservaLaboratorio extends JDialog {
 					.addComponent(lblHorario)
 					.addGap(129))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(97, Short.MAX_VALUE)
+					.addContainerGap()
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
 					.addComponent(lblReservaLaboratorio)
 					.addGap(83))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(195)
+					.addComponent(lblDescricao)
+					.addContainerGap(222, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblReservaLaboratorio)
-					.addGap(52)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(cbLaboratorios, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblLaboratorio))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblReservaLaboratorio)
+							.addGap(52)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(cbLaboratorios, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblLaboratorio)))
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(12)
@@ -269,7 +289,9 @@ public class ReservaLaboratorio extends JDialog {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(55)
 							.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(lblDescricao)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(taObservacaoLab, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
