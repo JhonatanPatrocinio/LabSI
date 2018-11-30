@@ -167,7 +167,7 @@ public class AnaliseReservas extends JDialog {
 								.addComponent(rdbtnAceitar)))))
 		);
 		
-		table = new JTable(new AnalisesTableModel(carregaDados()));
+		table = new JTable(new ReservaTableModel(carregaDados()));
 		table.getColumnModel().getColumn(0).setPreferredWidth(15);
 		table.getColumnModel().getColumn(1).setPreferredWidth(55);
 		table.getColumnModel().getColumn(2).setPreferredWidth(400);

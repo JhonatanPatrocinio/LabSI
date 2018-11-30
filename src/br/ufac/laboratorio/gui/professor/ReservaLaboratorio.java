@@ -23,12 +23,12 @@ import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
 
 import br.ufac.laboratorio.db.Conexao;
-import br.ufac.laboratorio.entity.Centro;
 import br.ufac.laboratorio.entity.Laboratorio;
 import br.ufac.laboratorio.entity.Professor;
 import br.ufac.laboratorio.entity.Reserva;
 import br.ufac.laboratorio.exception.DataBaseGenericException;
 import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
+import br.ufac.laboratorio.exception.DataExistException;
 import br.ufac.laboratorio.exception.EntityAlreadyExistException;
 import br.ufac.laboratorio.exception.EntityLoginNotExistException;
 import br.ufac.laboratorio.exception.EntityNotExistException;
@@ -162,8 +162,6 @@ public class ReservaLaboratorio extends JDialog {
 		btnVerificarHorario.setIcon(new ImageIcon(ReservaLaboratorio.class.getResource("/br/ufac/laboratorio/gui/images/Search16.gif")));
 		btnVerificarHorario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int verifica = 0;
-				Reserva reserva = null;
 				if(cbLaboratorios.getSelectedIndex() != -1) {
 					String s = cbLaboratorios.getSelectedItem().toString();
 					String [] s2 = s.split(" ");
@@ -175,17 +173,17 @@ public class ReservaLaboratorio extends JDialog {
 					try {
 						lab = lc.getLaboratorioId(Integer.parseInt(s2[0]));
 						rl.addReserva(professor, lab, data, horaInic, horaFim, 0, taObservacaoLab.getText());
-						JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso! ");
+						JOptionPane.showMessageDialog(null, "Reserva realizada com sucesso! ");
 						dispose();
 					} catch (DataBaseGenericException | DataBaseNotConnectedException |
 							EntityAlreadyExistException | InvalidFieldException | 
-							EntityNotExistException | EntityLoginNotExistException e1) {
+							EntityNotExistException | EntityLoginNotExistException | DataExistException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), 
 								"Falha no Cadastro da Reserva", JOptionPane.ERROR_MESSAGE);
 
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Selecione um Centro! ");
+					JOptionPane.showMessageDialog(null, "Selecione um Laboratório! ");
 				}
 //				if(verifica == 0) {
 //					JOptionPane.showMessageDialog(null, "Não existe reservas para esta data \n É possivel fazer a solicitação", "Reserva pode ser efetuada", JOptionPane.INFORMATION_MESSAGE);

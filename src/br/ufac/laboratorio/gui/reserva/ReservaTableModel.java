@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 import br.ufac.laboratorio.entity.Reserva;
 
-public class AnalisesTableModel extends AbstractTableModel {
+public class ReservaTableModel extends AbstractTableModel {
 
 	/**
 	 * 
@@ -15,7 +15,7 @@ public class AnalisesTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	private List<Reserva> reservas;
 	
-	public AnalisesTableModel(List<Reserva> reservas) {
+	public ReservaTableModel(List<Reserva> reservas) {
 		this.reservas = reservas;
 	}
 	
@@ -40,10 +40,10 @@ public class AnalisesTableModel extends AbstractTableModel {
 		case 0: dado = r.getId(); break;
 		case 1: dado = r.getIdProfessor().getNome(); break;
 		case 2: dado = r.getIdLaboratorio().getNome(); break;
-		case 3: dado = r.getIdData().getDataUsuario(); break;
-		case 4: dado = r.getIdData().getHorarioInicio(); break;
-		case 5: dado = r.getIdData().getHorarioTermino(); break;
-		case 6: dado = "Aguardando Análise"; break;
+		case 3: dado = r.getDataUsuario(); break;
+		case 4: dado = r.getHorarioInicio(); break;
+		case 5: dado = r.getHorarioTermino(); break;
+		case 6: dado = r.getStatusPorCod(r.getStatus()); break;
 		case 7: dado = r.getObs(); break;
 		default: throw new IndexOutOfBoundsException();
 		}
@@ -61,8 +61,8 @@ public class AnalisesTableModel extends AbstractTableModel {
 		case 1: nome = "PROFESSOR"; break;		
 		case 2: nome = "LABORATORIO"; break;
 		case 3: nome = "DATA"; break;
-		case 4: nome = "HORARIO INICIO"; break;
-		case 5: nome = "HORARIO FIM"; break;
+		case 4: nome = "COMEÇA"; break;
+		case 5: nome = "TERMINA"; break;
 		case 6: nome = "STATUS"; break;
 		case 7: nome = "OBSERVAÇÕES"; break;
 		}		

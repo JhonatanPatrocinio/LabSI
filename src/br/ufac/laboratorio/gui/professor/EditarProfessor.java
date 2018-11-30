@@ -180,7 +180,7 @@ public class EditarProfessor extends JDialog {
 							
 							
 							try {
-								prof = pl.getProfessor(professor.getId());
+								prof = pl.getProfessorId(professor.getId());
 								PerfilProfessor pp = new PerfilProfessor(prof, cnx);
 								dispose();
 								pp.setVisible(true);

@@ -1,27 +1,36 @@
 package br.ufac.laboratorio.gui.professor;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import br.ufac.laboratorio.db.Conexao;
+import br.ufac.laboratorio.entity.Professor;
+import br.ufac.laboratorio.entity.Reserva;
+import br.ufac.laboratorio.exception.DataBaseGenericException;
+import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
+import br.ufac.laboratorio.exception.EntityLoginNotExistException;
+import br.ufac.laboratorio.exception.EntityNotExistException;
+import br.ufac.laboratorio.exception.EntityTableIsEmptyException;
 import br.ufac.laboratorio.gui.aluno.ListaHorarios;
+import br.ufac.laboratorio.gui.reserva.ReservaTableModel;
+import br.ufac.laboratorio.logic.ReservaLogic;
 
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTable;
-import javax.swing.JRadioButton;
+import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class AnaliseReservaProf extends JDialog {
@@ -46,12 +55,26 @@ public class AnaliseReservaProf extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	private JTable table;
+	private ReservaLogic rl;
 	/**
 	 * Create the frame.
 	 */
-	public AnaliseReservaProf(Conexao cnx) {
+	
+	public List<Reserva> carregaDados(int idProf){
+		List<Reserva> reservas = new ArrayList<>();
+		try {
+			reservas = rl.getReservasPorProfessor(idProf);
+		} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityTableIsEmptyException |
+				EntityNotExistException | EntityLoginNotExistException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), 
+					"Falha ao Buscar Reservas", JOptionPane.ERROR_MESSAGE);
+		}
 		
+		return reservas;
+	}
+	public AnaliseReservaProf(Professor professor, Conexao cnx) {
+		this.rl = new ReservaLogic(cnx);
 		setBounds(100, 100, 500, 392);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -90,23 +113,22 @@ public class AnaliseReservaProf extends JDialog {
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(spAnaliseProf, GroupLayout.PREFERRED_SIZE, 476, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnVoltar))
-					.addContainerGap(8, Short.MAX_VALUE))
+					.addComponent(btnVoltar)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addPreferredGap(ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblProfessor)
 							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lbSituacaoReserva)
 							.addGap(154))))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addComponent(spAnaliseProf, GroupLayout.PREFERRED_SIZE, 476, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -124,6 +146,19 @@ public class AnaliseReservaProf extends JDialog {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnVoltar))
 		);
+		
+		table = new JTable(new ReservaTableModel(carregaDados(professor.getId())));
+		table.getColumnModel().getColumn(0).setPreferredWidth(15);
+		table.getColumnModel().getColumn(1).setPreferredWidth(55);
+		table.getColumnModel().getColumn(2).setPreferredWidth(400);
+		table.getColumnModel().getColumn(3).setPreferredWidth(15);
+		table.getColumnModel().getColumn(4).setPreferredWidth(55);
+		table.getColumnModel().getColumn(5).setPreferredWidth(400);
+		table.getColumnModel().getColumn(6).setPreferredWidth(15);
+		table.getColumnModel().getColumn(7).setPreferredWidth(15);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		spAnaliseProf.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}
 }

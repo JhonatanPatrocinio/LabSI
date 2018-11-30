@@ -4,23 +4,29 @@ public class Reserva {
 	private int id;
 	private Professor idProfessor;
 	private Laboratorio idLaboratorio;
-	private Data idData;
-	private int status;
+	private String data;
+	private String horarioInicio;
+	private String horarioTermino;
+	private int status; // status = 0,1,2,3; Analise, Aceito, Recusado, Utilizado
 	private String obs;
 	
-	public Reserva(int id, Professor idProf, Laboratorio idLab, Data idData, int status, String obs) {
+	public Reserva(int id, Professor idProf, Laboratorio idLab, String data, String horarioInicio, String horarioTermino, int status, String obs) {
 		this.id = id;
 		this.idProfessor = idProf;
 		this.idLaboratorio = idLab;
-		this.idData = idData;
+		this.data = data;
+		this.horarioInicio = horarioInicio;
+		this.horarioTermino = horarioTermino;
 		this.status = status;
 		this.obs = obs;
 	}
 	
-	public Reserva(Professor idProf, Laboratorio idLab, Data idData, int status, String obs) {
+	public Reserva(Professor idProf, Laboratorio idLab, String data, String horarioInicio, String horarioTermino, int status, String obs) {
 		this.idProfessor = idProf;
 		this.idLaboratorio = idLab;
-		this.idData = idData;
+		this.data = data;
+		this.horarioInicio = horarioInicio;
+		this.horarioTermino = horarioTermino;
 		this.status = status;
 		this.obs = obs;
 	}
@@ -45,28 +51,41 @@ public class Reserva {
 		this.idLaboratorio = idLaboratorio;
 	}
 
-	public Data getIdData() {
-		return idData;
-	}
-
-	public void setIdData(Data idData) {
-		this.idData = idData;
-	}
-
 	public int getStatus() {
 		return status;
 	}
-
-	public void setStatus(int status) {
-		this.status = status;
+	
+	public String getStatusPorCod(int cod) {
+		if(cod == 0)
+			return "Aguardando Analise";
+		else if(cod == 1)
+			return "Solicitação Aceita";
+		else if(cod == 2)
+			return "Solicitação Recusada";
+		else
+			return "Utilizado";
 	}
-
 	public String getObs() {
 		return obs;
 	}
 
-	public void setObs(String obs) {
-		this.obs = obs;
+	public String getData() {
+		return data;
+	}
+
+	public String getHorarioInicio() {
+		return horarioInicio;
+	}
+
+	public String getHorarioTermino() {
+		return horarioTermino;
+	}
+	
+	public String getDataUsuario() {
+		String[] stringData;
+		stringData = data.split("-");
+		
+		return stringData[2]+"/"+stringData[1]+"/"+stringData[0];
 	}
 	
 

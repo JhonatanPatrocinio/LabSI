@@ -32,6 +32,7 @@ public class ListaHorariosProf extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTable table;
 
 	/**
 	 * Create the frame.
@@ -76,20 +77,20 @@ public class ListaHorariosProf extends JDialog {
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 476, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnVoltar)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-							.addGap(131)
-							.addComponent(lblhorario)))
-					.addContainerGap(8, Short.MAX_VALUE))
+					.addContainerGap()
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addGap(131)
+					.addComponent(lblhorario)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(413, Short.MAX_VALUE)
+					.addContainerGap(405, Short.MAX_VALUE)
 					.addComponent(lblProfessor)
+					.addContainerGap())
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 476, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addComponent(btnVoltar)
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -104,8 +105,12 @@ public class ListaHorariosProf extends JDialog {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 274, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnVoltar))
+					.addComponent(btnVoltar)
+					.addGap(5))
 		);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}
 }

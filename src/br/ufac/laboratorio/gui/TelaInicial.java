@@ -164,10 +164,7 @@ public class TelaInicial extends JFrame {
 				
 			}
 		});
-		
-
-		
-		
+				
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/ufac/laboratorio/gui/images/ComposeMail16.gif")));
 		btnCadastrar.addActionListener(new ActionListener() {

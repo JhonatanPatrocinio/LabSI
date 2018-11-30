@@ -4,8 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-import javax.swing.JOptionPane;
-
 import br.ufac.laboratorio.db.*;
 import br.ufac.laboratorio.entity.*;
 import br.ufac.laboratorio.exception.*;
@@ -37,9 +35,9 @@ public class ProfessorLogic {
 		List<String> camposInvalidos = new ArrayList<String>();
 		boolean testField = false;
 
-		if(matricula.length() < 11){
+		if(matricula.length() != 11){
 			testField = true;
-			camposInvalidos.add("Matrícula");
+			camposInvalidos.add("Matrícula - 11 Caracteres");
 		}
 
 		if(nome.isEmpty() || nome.length() > 100){
@@ -48,14 +46,14 @@ public class ProfessorLogic {
 		}
 		if(email.isEmpty() || email.length() > 100 || !(email.contains("@"))) {
 			testField = true;
-			camposInvalidos.add("Email");
+			camposInvalidos.add("Email Invalido!");
 		}
 
 		try {
 			centro = cl.getCentroSigla(centro1);
 		} catch (EntityNotExistException e) {
 			testField = true;
-			camposInvalidos.add("Centro");
+			camposInvalidos.add("Centro não Existe");
 		}
 
 		try {
@@ -73,7 +71,6 @@ public class ProfessorLogic {
 		try {
 			loginLogic.addLogin(login, senha, tipo);
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 
 		login1 = loginLogic.getLogin(login);
@@ -94,7 +91,7 @@ public class ProfessorLogic {
 
 	}
 
-	public Professor getProfessor(int id) throws
+	public Professor getProfessorId(int id) throws
 	DataBaseGenericException,
 	DataBaseNotConnectedException,
 	EntityNotExistException,

@@ -76,7 +76,7 @@ public class PerfilProfessor extends JFrame {
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Analisar Reservas");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AnaliseReservaProf arp = new AnaliseReservaProf(cnx);
+				AnaliseReservaProf arp = new AnaliseReservaProf(professor, cnx);
 
 				
 

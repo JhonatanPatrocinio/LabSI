@@ -117,14 +117,14 @@ public class MenuEditarCentro extends JDialog {
 					.addContainerGap()
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
+							.addGap(12))
+						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
 							.addComponent(lblCentros)
 							.addGap(133)
-							.addComponent(lblAdministrador))
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
-							.addContainerGap())))
+							.addComponent(lblAdministrador))))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -136,8 +136,8 @@ public class MenuEditarCentro extends JDialog {
 							.addGap(7)
 							.addComponent(lblCentros)))
 					.addGap(12)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 279, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(26, Short.MAX_VALUE))
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		{
 			table = new JTable(new CentroTableModel(carregaDados()));
@@ -198,17 +198,18 @@ public class MenuEditarCentro extends JDialog {
 					.addGroup(gl_buttonPane.createSequentialGroup()
 						.addContainerGap()
 						.addComponent(btnVoltar)
-						.addGap(398)
+						.addGap(328)
 						.addComponent(btnEditar)
 						.addContainerGap())
 			);
 			gl_buttonPane.setVerticalGroup(
 				gl_buttonPane.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_buttonPane.createSequentialGroup()
-						.addGap(5)
+						.addContainerGap()
 						.addGroup(gl_buttonPane.createParallelGroup(Alignment.BASELINE)
 							.addComponent(btnEditar)
-							.addComponent(btnVoltar)))
+							.addComponent(btnVoltar))
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 			);
 			buttonPane.setLayout(gl_buttonPane);
 		}
