@@ -1,56 +1,54 @@
-package br.ufac.laboratorio.gui.reserva;
+package br.ufac.laboratorio.gui.professor;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import br.ufac.laboratorio.entity.Professor;
 
-import br.ufac.laboratorio.entity.Reserva;
-
-public class ReservaTableModel extends AbstractTableModel {
+public class ListarProfessorTableModel extends AbstractTableModel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<Reserva> reservas;
+	private List<Professor> professores;
 	
-	public ReservaTableModel(List<Reserva> reservas) {
-		this.reservas = reservas;
+	public ListarProfessorTableModel(List<Professor> professores) {
+		this.professores = professores;
 	}
-	
 	@Override
 	public int getRowCount() {
-		return this.reservas.size();
+		return this.professores.size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		return 8;
+		return 7;
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Reserva r;
+		Professor p;
 		Object dado = null;
 		
-		r = reservas.get(rowIndex);
+		p = professores.get(rowIndex);
 		
 		switch (columnIndex) {
-		case 0: dado = r.getId(); break;
-		case 1: dado = r.getIdProfessor().getNome(); break;
-		case 2: dado = r.getIdLaboratorio().getNome(); break;
-		case 3: dado = r.getDataUsuario(); break;
-		case 4: dado = r.getHorarioInicioUsuario(); break;
-		case 5: dado = r.getHorarioTerminoUsuario(); break;
-		case 6: dado = r.getStatusPorCod(r.getStatus()); break;
-		case 7: dado = r.getObs(); break;
+		case 0: dado = p.getId()				; break;
+		case 1: dado = p.getMatricula()			; break;
+		case 2: dado = p.getNome()				; break;
+		case 3: dado = p.getEmail()				; break;
+		case 4: dado = p.getTelefone()			; break;
+		case 5: dado = p.getCentro().getSigla()	; break;
+		case 6: dado = p.getLogin().getLogin()	; break;
 		default: throw new IndexOutOfBoundsException();
 		}
 		
 		return dado;
 	}
 	
+
 	@Override
 	public String getColumnName(int columnIndex) {
 
@@ -58,13 +56,12 @@ public class ReservaTableModel extends AbstractTableModel {
 		
 		switch (columnIndex) {
 		case 0: nome = "ID"; break;
-		case 1: nome = "PROFESSOR"; break;		
-		case 2: nome = "LABORATORIO"; break;
-		case 3: nome = "DATA"; break;
-		case 4: nome = "COMEÇA"; break;
-		case 5: nome = "TERMINA"; break;
-		case 6: nome = "STATUS"; break;
-		case 7: nome = "OBSERVAÇÕES"; break;
+		case 1: nome = "MATRICULA"; break;		
+		case 2: nome = "NOME"; break;
+		case 3: nome = "EMAIL"; break;
+		case 4: nome = "TELEFONE"; break;
+		case 5: nome = "CENTRO"; break;
+		case 6: nome = "LOGIN"; break;
 		}		
 		return nome; 	
 	}
@@ -82,7 +79,6 @@ public class ReservaTableModel extends AbstractTableModel {
 		case 4: obj = String.class; break;
 		case 5: obj = String.class; break;	
 		case 6: obj = String.class; break;
-		case 7: obj = String.class; break;
 
 		default: obj = null; break;
 		}		
@@ -93,5 +89,6 @@ public class ReservaTableModel extends AbstractTableModel {
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
     }
+
 
 }

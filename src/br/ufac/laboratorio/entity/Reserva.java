@@ -76,9 +76,20 @@ public class Reserva {
 	public String getHorarioInicio() {
 		return horarioInicio;
 	}
+	
+	public String getHorarioInicioUsuario() {
+		String[] aux = horarioInicio.split(":");
+		return aux[0]+":"+aux[1];
+	}
 
 	public String getHorarioTermino() {
 		return horarioTermino;
+	}
+	
+
+	public String getHorarioTerminoUsuario() {
+		String[] aux = horarioTermino.split(":");
+		return aux[0]+":"+aux[1];
 	}
 	
 	public String getDataUsuario() {
@@ -86,6 +97,10 @@ public class Reserva {
 		stringData = data.split("-");
 		
 		return stringData[2]+"/"+stringData[1]+"/"+stringData[0];
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 

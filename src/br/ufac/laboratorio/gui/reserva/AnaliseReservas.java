@@ -57,13 +57,24 @@ public class AnaliseReservas extends JDialog {
 			reservas = rl.getReservasPorStatus(0);
 		} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityTableIsEmptyException |
 				EntityNotExistException | EntityLoginNotExistException e) {
+			dispose();
 			JOptionPane.showMessageDialog(null, e.getMessage(), 
 					"Falha ao Buscar Reservas", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		return reservas;
 	}
-	
+	public void recarregaTabela(){
+		table.setModel((new ReservaTableModel(carregaDados())));
+		table.getColumnModel().getColumn(0).setPreferredWidth(20);
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);
+		table.getColumnModel().getColumn(2).setPreferredWidth(200);
+		table.getColumnModel().getColumn(3).setPreferredWidth(150);
+		table.getColumnModel().getColumn(4).setPreferredWidth(100);
+		table.getColumnModel().getColumn(5).setPreferredWidth(100);
+		table.getColumnModel().getColumn(6).setPreferredWidth(250);
+		table.getColumnModel().getColumn(7).setPreferredWidth(300);
+	}
 	public AnaliseReservas(Conexao cnx) {
 		this.rl = new ReservaLogic(cnx);
 		setBounds(100, 100, 750, 452);
@@ -82,6 +93,45 @@ public class AnaliseReservas extends JDialog {
 		lblAnaliseDeReservas.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		
 		this.btnSalvarAnalise = new JButton("Salvar Analise");
+		btnSalvarAnalise.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Reserva reserva = null;
+				int id = (int) table.getValueAt(table.getSelectedRow(), 0);
+				try {
+					reserva = rl.getReservaId(id);
+				}catch (DataBaseGenericException | DataBaseNotConnectedException | 
+						EntityNotExistException | EntityLoginNotExistException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage(), 
+							"Falha ao Buscar Reserva", JOptionPane.ERROR_MESSAGE);
+					dispose();
+				}
+				if(rdbtnAceitar.isSelected()) {
+					reserva.setStatus(1);
+					try {
+						rl.updReserva(reserva);
+						JOptionPane.showMessageDialog(null, " Salvo! ");
+						recarregaTabela();
+					}catch (DataBaseGenericException | DataBaseNotConnectedException |
+							EntityNotExistException | EntityLoginNotExistException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), 
+								"Falha ao Atualizar Reserva", JOptionPane.ERROR_MESSAGE);
+						dispose();
+					}
+				} else {
+					reserva.setStatus(2);
+					try {
+						rl.updReserva(reserva);
+						JOptionPane.showMessageDialog(null, " Salvo! ");
+						recarregaTabela();
+					}catch (DataBaseGenericException | DataBaseNotConnectedException |
+							EntityNotExistException | EntityLoginNotExistException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), 
+								"Falha ao Atualizar Reserva", JOptionPane.ERROR_MESSAGE);
+						dispose();
+					}
+				}
+			}
+		});
 		btnSalvarAnalise.setIcon(new ImageIcon(AnaliseReservas.class.getResource("/br/ufac/laboratorio/gui/images/Save16.gif")));
 		btnSalvarAnalise.setEnabled(false);
 		
@@ -108,6 +158,8 @@ public class AnaliseReservas extends JDialog {
 		this.rdbtnAceitar = new JRadioButton("Aceitar");
 		bg.add(rdbtnAceitar);
 		bg.add(rdbtnRecusar);
+		rdbtnAceitar.setEnabled(false);
+		rdbtnRecusar.setEnabled(false);
 		
 		label = new JLabel("");
 		label.setIcon(new ImageIcon(AnaliseReservas.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
@@ -168,14 +220,14 @@ public class AnaliseReservas extends JDialog {
 		);
 		
 		table = new JTable(new ReservaTableModel(carregaDados()));
-		table.getColumnModel().getColumn(0).setPreferredWidth(15);
-		table.getColumnModel().getColumn(1).setPreferredWidth(55);
-		table.getColumnModel().getColumn(2).setPreferredWidth(400);
-		table.getColumnModel().getColumn(3).setPreferredWidth(15);
-		table.getColumnModel().getColumn(4).setPreferredWidth(55);
-		table.getColumnModel().getColumn(5).setPreferredWidth(400);
-		table.getColumnModel().getColumn(6).setPreferredWidth(15);
-		table.getColumnModel().getColumn(7).setPreferredWidth(15);
+		table.getColumnModel().getColumn(0).setPreferredWidth(20);
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);
+		table.getColumnModel().getColumn(2).setPreferredWidth(200);
+		table.getColumnModel().getColumn(3).setPreferredWidth(150);
+		table.getColumnModel().getColumn(4).setPreferredWidth(100);
+		table.getColumnModel().getColumn(5).setPreferredWidth(100);
+		table.getColumnModel().getColumn(6).setPreferredWidth(250);
+		table.getColumnModel().getColumn(7).setPreferredWidth(300);
 	
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.addMouseListener(new HabilitarBtnEdicao());

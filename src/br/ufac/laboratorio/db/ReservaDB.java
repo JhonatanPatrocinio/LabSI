@@ -144,6 +144,18 @@ public class ReservaDB {
 
 		return reservas;
 	}
+	
+	public boolean updReserva(Reserva r) throws
+	DataBaseGenericException,
+	DataBaseNotConnectedException,
+	EntityNotExistException, 
+	EntityLoginNotExistException {
+
+		String sqlAtualiza = "UPDATE reservas "
+				+ " SET status = "+r.getStatus()+" WHERE id = " + r.getId()+";";	
+		getReservaId(r.getId());
+		return cnx.atualiza(sqlAtualiza) > 0;
+	}
 
 	public List<Reserva> getReservasPorStatus(int status) throws
 	DataBaseGenericException,

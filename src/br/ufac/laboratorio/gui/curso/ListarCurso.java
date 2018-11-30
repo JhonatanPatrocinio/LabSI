@@ -1,8 +1,5 @@
 package br.ufac.laboratorio.gui.curso;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -14,7 +11,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JToolBar;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -23,6 +19,10 @@ import java.awt.Font;
 
 public class ListarCurso extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 
 	/**
@@ -45,6 +45,8 @@ public class ListarCurso extends JDialog {
 		
 		
 		setBounds(100, 100, 494, 429);
+		setLocationRelativeTo(null);
+		setResizable(false);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(

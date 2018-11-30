@@ -3,8 +3,6 @@ package br.ufac.laboratorio.logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import br.ufac.laboratorio.db.Conexao;
 import br.ufac.laboratorio.db.ReservaDB;
 import br.ufac.laboratorio.entity.*;
@@ -70,6 +68,23 @@ public class ReservaLogic {
 	EntityNotExistException, 
 	EntityLoginNotExistException {
 		return rdb.getReservaId(id);
+	}
+	
+	public boolean updReserva(Reserva r) throws 
+	DataBaseGenericException, 
+	DataBaseNotConnectedException, 
+	EntityNotExistException, 
+	EntityLoginNotExistException {
+		return rdb.updReserva(r);
+	}
+	
+	public List<Reserva> getReservas() throws
+	DataBaseGenericException,
+	DataBaseNotConnectedException,
+	EntityTableIsEmptyException,
+	EntityNotExistException,
+	EntityLoginNotExistException {
+		return rdb.getReservas();
 	}
 
 	public List<Reserva> getReservasPorStatus(int status) throws

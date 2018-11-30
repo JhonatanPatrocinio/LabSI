@@ -18,10 +18,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import javax.swing.JTable;
 
 public class ListarAluno extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -57,32 +59,33 @@ public class ListarAluno extends JDialog {
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(spAlunos, GroupLayout.PREFERRED_SIZE, 555, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(7, Short.MAX_VALUE))
-				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
 					.addComponent(lblAlunos)
 					.addGap(131)
 					.addComponent(lblAdministrador))
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addGap(12)
+					.addComponent(spAlunos, GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+					.addGap(12))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addComponent(lblAdministrador)
-							.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE))
+						.addComponent(lblAdministrador)
 						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addContainerGap()
 							.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
 								.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblAlunos))
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addComponent(spAlunos, GroupLayout.PREFERRED_SIZE, 338, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblAlunos))))
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(spAlunos, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
+		
+		table = new JTable();
+		spAlunos.setViewportView(table);
 		contentPanel.setLayout(gl_contentPanel);
 		{
 			JPanel buttonPane = new JPanel();
@@ -113,5 +116,4 @@ public class ListarAluno extends JDialog {
 			buttonPane.setLayout(gl_buttonPane);
 		}
 	}
-
 }
