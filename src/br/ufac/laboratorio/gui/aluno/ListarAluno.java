@@ -9,21 +9,38 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import br.ufac.laboratorio.db.Conexao;
+import br.ufac.laboratorio.entity.*;
+import br.ufac.laboratorio.exception.DataBaseGenericException;
+import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
+import br.ufac.laboratorio.exception.EntityLoginNotExistException;
+import br.ufac.laboratorio.exception.EntityNotExistException;
+import br.ufac.laboratorio.exception.EntityTableIsEmptyException;
+import br.ufac.laboratorio.logic.AlunoLogic;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 public class ListarAluno extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
+	private AlunoLogic al;
 
 	/**
 	 * Launch the application.
@@ -41,7 +58,22 @@ public class ListarAluno extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
+	public List<Aluno> carregaDados(){
+		List<Aluno> alunos = new ArrayList<>();
+		try {
+			alunos = al.getAlunos();
+		} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityTableIsEmptyException |
+				EntityNotExistException | EntityLoginNotExistException e) {
+			dispose();
+			JOptionPane.showMessageDialog(null, e.getMessage(), 
+					"Falha ao Buscar Reservas", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		return alunos;
+	}
+	
 	public ListarAluno(Conexao cnx) {
+		this.al = new AlunoLogic(cnx);
 		setBounds(100, 100, 578, 451);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -84,7 +116,13 @@ public class ListarAluno extends JDialog {
 					.addContainerGap())
 		);
 		
-		table = new JTable();
+		table = new JTable(new ListarAlunoTableModel(carregaDados()));
+		table.getColumnModel().getColumn(0).setPreferredWidth(20);
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);
+		table.getColumnModel().getColumn(2).setPreferredWidth(200);
+		table.getColumnModel().getColumn(3).setPreferredWidth(100);
+		table.getColumnModel().getColumn(4).setPreferredWidth(250);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		spAlunos.setViewportView(table);
 		contentPanel.setLayout(gl_contentPanel);
 		{

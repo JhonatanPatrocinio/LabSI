@@ -83,7 +83,7 @@ public class AlunoDB {
 		
 		String sqlBusca = "SELECT id, matricula, nome, id_curso, id_login"
 				+" FROM alunos"
-				+" WHERE id_login ="+ id + ";";
+				+" WHERE id ="+ id + ";";
 		
 		Aluno aluno = null;
 		Curso curso = null;

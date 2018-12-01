@@ -86,7 +86,17 @@ public class AlunoLogic {
 
 	}
 	
-	public Aluno getAluno(int id) throws
+//	public Aluno getAluno(int id) throws
+//	DataBaseGenericException,
+//	DataBaseNotConnectedException,
+//	EntityNotExistException,
+//	EntityLoginNotExistException {
+//
+//		return adb.getAlunoId(id);
+//
+//	}
+	
+	public Aluno getAlunoId(int id) throws
 	DataBaseGenericException,
 	DataBaseNotConnectedException,
 	EntityNotExistException,

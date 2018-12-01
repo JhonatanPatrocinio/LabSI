@@ -54,7 +54,7 @@ public class EditarAluno extends JDialog {
 		this.cl = new CursoLogic(cnx);
 		this.aluL = new AlunoLogic(cnx);
 		setBounds(100, 100, 500, 500);
-		setLocationRelativeTo(null);
+//		setLocationRelativeTo(null);
 		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -148,7 +148,7 @@ public class EditarAluno extends JDialog {
 							
 							
 							try {
-								alu = aluL.getAluno(al.getId());
+								alu = aluL.getAlunoId(al.getId());
 								PerfilAluno pa = new PerfilAluno(alu, cnx);
 								dispose();
 								pa.setVisible(true);
