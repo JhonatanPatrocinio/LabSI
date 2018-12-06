@@ -114,9 +114,6 @@ public class PerfilProfessor extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		JPanel panel = new JPanel();
-		panel.setBorder(null);
-
 		JLabel lblProfessor = new JLabel("PROFESSOR");
 		lblProfessor.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 
@@ -130,7 +127,7 @@ public class PerfilProfessor extends JFrame {
 						cnx.desconecte();
 					} catch (DataBaseNotConnectedException | DataBaseGenericException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), 
-								"Falha ao Editar", JOptionPane.ERROR_MESSAGE);
+								"Falha ao Desconectar", JOptionPane.ERROR_MESSAGE);
 					}
 					dispose();
 
@@ -145,6 +142,18 @@ public class PerfilProfessor extends JFrame {
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(PerfilProfessor.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		
+				//Alterar o nome do professor que esta na amostra
+				JLabel lblNomeProfessor = new JLabel(professor.getNome());
+				panel_1.add(lblNomeProfessor);
+				lblNomeProfessor.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+		
+		JLabel label_1 = new JLabel((String) null);
+		label_1.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+		panel_1.add(label_1);
 
 
 
@@ -156,15 +165,15 @@ public class PerfilProfessor extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 303, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 303, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
 							.addComponent(lblProfessor))
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 492, Short.MAX_VALUE)
 							.addComponent(btnSairProf))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(90)
+							.addGap(95)
 							.addComponent(lblImagem, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
@@ -172,21 +181,16 @@ public class PerfilProfessor extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblProfessor))
-					.addGap(39)
+						.addComponent(lblProfessor)
+						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+					.addGap(40)
 					.addComponent(lblImagem, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addComponent(btnSairProf)
 						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
-
-		//Alterar o nome do professor que esta na amostra
-		JLabel lblNomeProfessor = new JLabel(professor.getNome());
-		panel.add(lblNomeProfessor);
-		lblNomeProfessor.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 		contentPane.setLayout(gl_contentPane);
 	}
 }

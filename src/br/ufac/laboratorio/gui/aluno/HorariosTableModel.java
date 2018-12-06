@@ -1,54 +1,56 @@
-package br.ufac.laboratorio.gui.professor;
+package br.ufac.laboratorio.gui.aluno;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import br.ufac.laboratorio.entity.Professor;
 
-public class ListarProfessorTableModel extends AbstractTableModel {
+import br.ufac.laboratorio.entity.Reserva;
+
+public class HorariosTableModel extends AbstractTableModel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<Professor> professores;
+	private List<Reserva> reservas;
 	
-	public ListarProfessorTableModel(List<Professor> professores) {
-		this.professores = professores;
+	public HorariosTableModel(List<Reserva> reservas) {
+		this.reservas = reservas;
 	}
+	
 	@Override
 	public int getRowCount() {
-		return this.professores.size();
+		return this.reservas.size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		return 7;
+		return 8;
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Professor p;
+		Reserva r;
 		Object dado = null;
 		
-		p = professores.get(rowIndex);
+		r = reservas.get(rowIndex);
 		
 		switch (columnIndex) {
-		case 0: dado = p.getId()				; break;
-		case 1: dado = p.getMatricula()			; break;
-		case 2: dado = p.getNome()				; break;
-		case 3: dado = p.getEmail()				; break;
-		case 4: dado = p.getTelefone()			; break;
-		case 5: dado = p.getCentro().getSigla()	; break;
-		case 6: dado = p.getLogin().getLogin()	; break;
+		case 0: dado = r.getId(); break;
+		case 1: dado = r.getIdProfessor().getNome(); break;
+		case 2: dado = r.getIdLaboratorio().getNome(); break;
+		case 3: dado = r.getDataUsuario(); break;
+		case 4: dado = r.getHorarioInicioUsuario(); break;
+		case 5: dado = r.getHorarioTerminoUsuario(); break;
+		case 6: dado = r.getStatusPorCod(r.getStatus()); break;
+		case 7: dado = r.getObs(); break;
 		default: throw new IndexOutOfBoundsException();
 		}
 		
 		return dado;
 	}
 	
-
 	@Override
 	public String getColumnName(int columnIndex) {
 
@@ -56,12 +58,13 @@ public class ListarProfessorTableModel extends AbstractTableModel {
 		
 		switch (columnIndex) {
 		case 0: nome = "ID"; break;
-		case 1: nome = "MATRICULA"; break;		
-		case 2: nome = "NOME"; break;
-		case 3: nome = "EMAIL"; break;
-		case 4: nome = "TELEFONE"; break;
-		case 5: nome = "CENTRO"; break;
-		case 6: nome = "LOGIN"; break;
+		case 1: nome = "PROFESSOR"; break;		
+		case 2: nome = "LABORATORIO"; break;
+		case 3: nome = "DATA"; break;
+		case 4: nome = "COMEÇA"; break;
+		case 5: nome = "TERMINA"; break;
+		case 6: nome = "STATUS"; break;
+		case 7: nome = "OBSERVAÇÕES"; break;
 		}		
 		return nome; 	
 	}
@@ -79,6 +82,7 @@ public class ListarProfessorTableModel extends AbstractTableModel {
 		case 4: obj = String.class; break;
 		case 5: obj = String.class; break;	
 		case 6: obj = String.class; break;
+		case 7: obj = String.class; break;
 
 		default: obj = null; break;
 		}		
@@ -89,6 +93,5 @@ public class ListarProfessorTableModel extends AbstractTableModel {
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
     }
-
 
 }

@@ -54,7 +54,7 @@ public class EditarAluno extends JDialog {
 		this.cl = new CursoLogic(cnx);
 		this.aluL = new AlunoLogic(cnx);
 		setBounds(100, 100, 500, 500);
-//		setLocationRelativeTo(null);
+		setLocationRelativeTo(null);
 		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

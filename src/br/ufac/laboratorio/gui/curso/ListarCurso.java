@@ -44,7 +44,7 @@ public class ListarCurso extends JDialog {
 	public ListarCurso(Conexao cnx) {
 		
 		
-		setBounds(100, 100, 494, 429);
+		setBounds(100, 100, 550, 429);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,17 +84,17 @@ public class ListarCurso extends JDialog {
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(btnVoltar)
-					.addPreferredGap(ComponentPlacement.RELATED, 347, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 403, Short.MAX_VALUE)
 					.addComponent(btnEditar)
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnEditar)
-						.addComponent(btnVoltar)))
+						.addComponent(btnVoltar))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		
@@ -116,13 +116,14 @@ public class ListarCurso extends JDialog {
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
 							.addComponent(lblCursos)
-							.addGap(106)
-							.addComponent(lblAdministrador))
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE))
+							.addGap(127)
+							.addComponent(lblAdministrador)
+							.addGap(11))
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE))
 					.addContainerGap())
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -130,15 +131,11 @@ public class ListarCurso extends JDialog {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, 365, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(lblAdministrador))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addContainerGap()
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(lblCursos)
-										.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))))
+								.addComponent(lblAdministrador)
+								.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblCursos))
 							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 322, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED)

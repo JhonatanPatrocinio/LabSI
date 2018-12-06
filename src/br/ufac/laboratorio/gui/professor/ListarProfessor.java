@@ -31,6 +31,7 @@ import br.ufac.laboratorio.logic.ProfessorLogic;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import java.awt.Font;
 
 public class ListarProfessor extends JDialog {
 
@@ -41,22 +42,8 @@ public class ListarProfessor extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	private ProfessorLogic pl;
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			ListarProfessor dialog = new ListarProfessor();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
-	/**
-	 * Create the dialog.
-	 */
+	 
 	public List<Professor> carregaDados(){
 		List<Professor> professores = new ArrayList<>();
 		try {
@@ -73,7 +60,7 @@ public class ListarProfessor extends JDialog {
 	
 	public ListarProfessor(Conexao cnx) {
 		this.pl = new ProfessorLogic(cnx);
-		setBounds(100, 100, 578, 451);
+		setBounds(100, 100, 610, 451);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
@@ -81,6 +68,7 @@ public class ListarProfessor extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
 		JLabel lblProfessor = new JLabel("PROFESSORES");
+		lblProfessor.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		JScrollPane spProfessor = new JScrollPane();
 		
 		JLabel label = new JLabel("");
@@ -89,37 +77,27 @@ public class ListarProfessor extends JDialog {
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
+							.addContainerGap()
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+							.addComponent(lblProfessor)
+							.addGap(107)
 							.addComponent(lblAdministrador))
 						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGap(202)
-							.addComponent(lblProfessor)
-							.addContainerGap(216, Short.MAX_VALUE))))
-				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addGap(12)
-					.addComponent(spProfessor, GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+							.addGap(12)
+							.addComponent(spProfessor, GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)))
 					.addGap(12))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblAdministrador)
-								.addGroup(gl_contentPanel.createSequentialGroup()
-									.addGap(16)
-									.addComponent(lblProfessor)))
-							.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE))
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)))
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblProfessor)
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblAdministrador))
+					.addGap(20)
 					.addComponent(spProfessor, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
@@ -139,6 +117,7 @@ public class ListarProfessor extends JDialog {
 			JPanel buttonPane = new JPanel();
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			JButton btnVoltar = new JButton("Voltar");
+			btnVoltar.setIcon(new ImageIcon(ListarProfessor.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 			btnVoltar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
@@ -150,14 +129,15 @@ public class ListarProfessor extends JDialog {
 			gl_buttonPane.setHorizontalGroup(
 				gl_buttonPane.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_buttonPane.createSequentialGroup()
+						.addContainerGap()
 						.addComponent(btnVoltar)
-						.addContainerGap(497, Short.MAX_VALUE))
+						.addContainerGap(504, Short.MAX_VALUE))
 			);
 			gl_buttonPane.setVerticalGroup(
-				gl_buttonPane.createParallelGroup(Alignment.LEADING)
-					.addGroup(Alignment.TRAILING, gl_buttonPane.createSequentialGroup()
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnVoltar))
+				gl_buttonPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(Alignment.LEADING, gl_buttonPane.createSequentialGroup()
+						.addComponent(btnVoltar)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 			);
 			buttonPane.setLayout(gl_buttonPane);
 		}

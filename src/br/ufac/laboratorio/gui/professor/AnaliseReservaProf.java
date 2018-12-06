@@ -57,9 +57,6 @@ public class AnaliseReservaProf extends JDialog {
 	private JPanel contentPane;
 	private JTable table;
 	private ReservaLogic rl;
-	/**
-	 * Create the frame.
-	 */
 	
 	public List<Reserva> carregaDados(int idProf){
 		List<Reserva> reservas = new ArrayList<>();
@@ -75,7 +72,7 @@ public class AnaliseReservaProf extends JDialog {
 	}
 	public AnaliseReservaProf(Professor professor, Conexao cnx) {
 		this.rl = new ReservaLogic(cnx);
-		setBounds(100, 100, 500, 392);
+		setBounds(100, 100, 700, 392);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		contentPane = new JPanel();
@@ -111,37 +108,31 @@ public class AnaliseReservaProf extends JDialog {
 		label.setIcon(new ImageIcon(AnaliseReservaProf.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(btnVoltar)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnVoltar)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblProfessor)
-							.addContainerGap())
-						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+							.addGap(181)
 							.addComponent(lbSituacaoReserva)
-							.addGap(154))))
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-					.addComponent(spAnaliseProf, GroupLayout.PREFERRED_SIZE, 476, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+							.addComponent(lblProfessor))
+						.addComponent(spAnaliseProf, GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblProfessor)
-							.addGap(4)
-							.addComponent(lbSituacaoReserva))
+						.addComponent(lblProfessor)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(lbSituacaoReserva)
+								.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))))
+					.addGap(12)
 					.addComponent(spAnaliseProf, GroupLayout.PREFERRED_SIZE, 274, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnVoltar))

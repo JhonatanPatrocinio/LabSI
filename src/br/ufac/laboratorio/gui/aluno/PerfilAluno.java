@@ -14,6 +14,8 @@ import javax.swing.border.MatteBorder;
 
 import br.ufac.laboratorio.db.Conexao;
 import br.ufac.laboratorio.entity.Aluno;
+import br.ufac.laboratorio.exception.DataBaseGenericException;
+import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
 import br.ufac.laboratorio.gui.TelaInicial;
 import br.ufac.laboratorio.gui.professor.EditarProfessor;
 import br.ufac.laboratorio.gui.professor.ListaHorariosProf;
@@ -96,7 +98,7 @@ public class PerfilAluno extends JFrame {
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Verificar Horários");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListaHorarios lh = new ListaHorarios();
+				ListaHorarios lh = new ListaHorarios(cnx);
 
 				//dispose();
 
@@ -139,11 +141,17 @@ public class PerfilAluno extends JFrame {
 
 				if(e.getSource()==btnSairAlu){
 
-					TelaInicial ti = new TelaInicial();
+					if(e.getSource()==btnSairAlu){
+						try {
+							cnx.desconecte();
+						} catch (DataBaseNotConnectedException | DataBaseGenericException e1) {
+							JOptionPane.showMessageDialog(null, e1.getMessage(), 
+									"Falha ao Desconectar", JOptionPane.ERROR_MESSAGE);
+						}
+						dispose();
 
-					dispose();
-
-					ti.setVisible(true);
+						
+					}
 				}
 
 			}

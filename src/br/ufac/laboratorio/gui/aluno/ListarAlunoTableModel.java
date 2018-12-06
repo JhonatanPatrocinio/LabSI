@@ -5,17 +5,22 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import br.ufac.laboratorio.entity.Aluno;
+import br.ufac.laboratorio.entity.Professor;
 
-public class ListarAlunoTableModel extends AbstractTableModel{
+public class ListarAlunoTableModel extends AbstractTableModel {
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	private List<Aluno> alunos;
+	private List<Aluno> aluno;
 	
-	public ListarAlunoTableModel(List<Aluno> alunos) {
-		this.alunos = alunos;
+	public ListarAlunoTableModel(List<Aluno> aluno) {
+		this.aluno = aluno;
 	}
 	@Override
 	public int getRowCount() {
-		return this.alunos.size();
+		return this.aluno.size();
 	}
 
 	@Override
@@ -28,14 +33,14 @@ public class ListarAlunoTableModel extends AbstractTableModel{
 		Aluno a;
 		Object dado = null;
 		
-		a = alunos.get(rowIndex);
+		a = aluno.get(rowIndex);
 		
 		switch (columnIndex) {
 		case 0: dado = a.getId()				; break;
 		case 1: dado = a.getMatricula()			; break;
 		case 2: dado = a.getNome()				; break;
-		case 3: dado = a.getCurso().getCod()	; break;
-		case 4: dado = a.getLogin().getLogin()	; break;
+		case 3: dado = a.getCurso().getNome()	; break;
+		case 4: dado = a.getLogin().getLogin()  ; break;
 		default: throw new IndexOutOfBoundsException();
 		}
 		
@@ -70,6 +75,7 @@ public class ListarAlunoTableModel extends AbstractTableModel{
 		case 3: obj = String.class; break;
 		case 4: obj = String.class; break;
 
+
 		default: obj = null; break;
 		}		
 
@@ -79,4 +85,6 @@ public class ListarAlunoTableModel extends AbstractTableModel{
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
     }
+
+
 }

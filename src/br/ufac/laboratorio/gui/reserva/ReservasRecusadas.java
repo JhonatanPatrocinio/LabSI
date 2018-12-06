@@ -1,7 +1,27 @@
 package br.ufac.laboratorio.gui.reserva;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import br.ufac.laboratorio.db.Conexao;
@@ -11,28 +31,10 @@ import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
 import br.ufac.laboratorio.exception.EntityLoginNotExistException;
 import br.ufac.laboratorio.exception.EntityNotExistException;
 import br.ufac.laboratorio.exception.EntityTableIsEmptyException;
+import br.ufac.laboratorio.gui.reserva.ListaReservas.HabilitarBtnEdicao;
 import br.ufac.laboratorio.logic.ReservaLogic;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import java.awt.Font;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
-import javax.swing.ListSelectionModel;
-
-public class ListaReservas extends JDialog{
+public class ReservasRecusadas extends JDialog {
 
 	/**
 	 * 
@@ -41,7 +43,7 @@ public class ListaReservas extends JDialog{
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	private ReservaLogic rl;
-	
+
 	public List<Reserva> carregaDados(){
 		List<Reserva> reservas = new ArrayList<>();
 		try {
@@ -52,7 +54,7 @@ public class ListaReservas extends JDialog{
 			JOptionPane.showMessageDialog(null, e.getMessage(), 
 					"Falha ao Buscar Reservas", JOptionPane.ERROR_MESSAGE);
 		}
-		
+
 		return reservas;
 	}
 	public void recarregaTabela(){
@@ -67,30 +69,31 @@ public class ListaReservas extends JDialog{
 		table.getColumnModel().getColumn(7).setPreferredWidth(300);
 	}
 
-	public ListaReservas(Conexao cnx) {
+	public ReservasRecusadas(Conexao cnx) {
 		this.rl = new ReservaLogic(cnx);
 		setBounds(100, 100, 900, 451);
 		setLocationRelativeTo(null);
-		setResizable(false);
+		//setResizable(false);
 		setModal(true);
+		
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		JLabel lblReservas = new JLabel("RESERVAS");
+		JLabel lblReservas = new JLabel("RESERVAS RECUSADAS");
 		lblReservas.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		JScrollPane spAlunos = new JScrollPane();
-		
+
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(ListaReservas.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
-			gl_contentPanel.createParallelGroup(Alignment.TRAILING)
+			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-							.addGap(306)
+							.addGap(262)
 							.addComponent(lblReservas))
 						.addComponent(spAlunos, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE))
 					.addContainerGap())
@@ -106,8 +109,9 @@ public class ListaReservas extends JDialog{
 					.addComponent(spAlunos, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
-		
+
 		table = new JTable(new ReservaTableModel(carregaDados()));
+		
 		table.getColumnModel().getColumn(0).setPreferredWidth(20);
 		table.getColumnModel().getColumn(1).setPreferredWidth(200);
 		table.getColumnModel().getColumn(2).setPreferredWidth(200);
@@ -127,70 +131,39 @@ public class ListaReservas extends JDialog{
 			btnVoltar.setIcon(new ImageIcon(ListaReservas.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 			btnVoltar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+
 					dispose();
-					
+
 				}
 			});
-			
-			JButton btnHistorico = new JButton("Historico");
-			btnHistorico.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					HistoricoReservas hr = new HistoricoReservas(cnx);
-					
-					dispose();
-					
-					hr.setVisible(true);
-					
-				}
-			});
-			btnHistorico.setIcon(new ImageIcon(ListaReservas.class.getResource("/br/ufac/laboratorio/gui/images/icon_clock.gif")));
-			
-			JButton btnFinalizarReserva = new JButton("Finalizar Reserva");
-			btnFinalizarReserva.setEnabled(false);
-			btnFinalizarReserva.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					
-				}
-			});
-			btnFinalizarReserva.setSelectedIcon(new ImageIcon(ListaReservas.class.getResource("/br/ufac/laboratorio/gui/images/Save16.gif")));
-			btnFinalizarReserva.setIcon(new ImageIcon(ListaReservas.class.getResource("/br/ufac/laboratorio/gui/images/Forward16.gif")));
 			GroupLayout gl_buttonPane = new GroupLayout(buttonPane);
 			gl_buttonPane.setHorizontalGroup(
 				gl_buttonPane.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_buttonPane.createSequentialGroup()
 						.addContainerGap()
 						.addComponent(btnVoltar)
-						.addGap(284)
-						.addComponent(btnFinalizarReserva)
-						.addPreferredGap(ComponentPlacement.RELATED, 325, Short.MAX_VALUE)
-						.addComponent(btnHistorico)
-						.addContainerGap())
+						.addContainerGap(504, Short.MAX_VALUE))
 			);
 			gl_buttonPane.setVerticalGroup(
 				gl_buttonPane.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_buttonPane.createSequentialGroup()
-						.addGroup(gl_buttonPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(btnVoltar)
-							.addComponent(btnHistorico)
-							.addComponent(btnFinalizarReserva))
+						.addComponent(btnVoltar)
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 			);
 			buttonPane.setLayout(gl_buttonPane);
 		}
 	} //FIM CONSTRUCTOR
-	
 	class HabilitarBtnEdicao extends MouseAdapter {
 
 		public void mousePressed(MouseEvent e) {
 			if (table.getSelectedRow() >= 0) {
 
 			}else {
-;
+				;
 			}
 
 		}
 	}
 }
+
+
