@@ -40,6 +40,7 @@ public class CadastroCentro extends JDialog {
 		cl = new CentroLogic(cnx);
 		setBounds(100, 100, 450, 307);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -103,7 +104,7 @@ public class CadastroCentro extends JDialog {
 		label.setIcon(new ImageIcon(CadastroCentro.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap(6, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -112,9 +113,10 @@ public class CadastroCentro extends JDialog {
 							.addComponent(lblCadastroCentro))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(label, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-							.addGap(263)
-							.addComponent(lblAdministrador))))
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addGap(257)
+							.addComponent(lblAdministrador)))
+					.addContainerGap())
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(85)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblSigla)
@@ -124,7 +126,7 @@ public class CadastroCentro extends JDialog {
 						.addComponent(tfSiglaCadas)
 						.addComponent(tfNomeCentro, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(124, Short.MAX_VALUE))
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(btnVoltar)
 					.addGap(86)
@@ -134,9 +136,9 @@ public class CadastroCentro extends JDialog {
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblAdministrador)
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblAdministrador))
 					.addGap(42)
 					.addComponent(lblCadastroCentro)
 					.addGap(34)
@@ -151,7 +153,7 @@ public class CadastroCentro extends JDialog {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnCadastrarCentro)
 						.addComponent(btnVoltar))
-					.addContainerGap(72, Short.MAX_VALUE))
+					.addContainerGap(11, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

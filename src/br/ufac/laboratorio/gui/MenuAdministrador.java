@@ -17,7 +17,7 @@ import br.ufac.laboratorio.gui.laboratorio.EditarLaboratorio;
 import br.ufac.laboratorio.gui.professor.ListarProfessor;
 import br.ufac.laboratorio.gui.reserva.AnaliseReservas;
 import br.ufac.laboratorio.gui.reserva.ListaReservas;
-import br.ufac.laboratorio.gui.reserva.ReservasRecusadas;
+
 
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -166,14 +166,7 @@ public class MenuAdministrador extends JFrame {
 		});
 		mnReservas.add(mntmListarReservas);
 		
-		JMenuItem mntmReservasRecusadas = new JMenuItem("Reservas Recusadas");
-		mntmReservasRecusadas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ReservasRecusadas rr = new ReservasRecusadas(cnx);
-				rr.setVisible(true);
-			}
-		});
-		mnReservas.add(mntmReservasRecusadas);
+		
 
 
 		JMenu mnUsuarios = new JMenu("Usuarios");

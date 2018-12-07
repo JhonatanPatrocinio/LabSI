@@ -1,6 +1,5 @@
 package br.ufac.laboratorio.gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -87,7 +86,7 @@ public class TelaInicial extends JFrame {
 		Icon imgufac = new ImageIcon(getClass().getResource("images/ufac.png"));
 		cnx = new Conexao();
 		try {
-			cnx.conecte(DB_URL, "root", "1995");
+			cnx.conecte(DB_URL, "root", "tiago0616");
 		} catch (DataBaseAlreadyConnectedException | 
 				AccessDeniedForUserException | 
 				DataBaseGenericException e) {

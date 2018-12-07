@@ -44,7 +44,7 @@ public class ListarCurso extends JDialog {
 	public ListarCurso(Conexao cnx) {
 		
 		
-		setBounds(100, 100, 550, 429);
+		setBounds(100, 100, 550, 443);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
