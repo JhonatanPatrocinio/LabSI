@@ -41,7 +41,7 @@ public class ListaReservas extends JDialog{
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	private ReservaLogic rl;
-	
+	JButton btnFinalizarReserva;
 	public List<Reserva> carregaDados(){
 		List<Reserva> reservas = new ArrayList<>();
 		try {
@@ -125,29 +125,17 @@ public class ListaReservas extends JDialog{
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			JButton btnVoltar = new JButton("Voltar");
 			btnVoltar.setIcon(new ImageIcon(ListaReservas.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
-			btnVoltar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					dispose();
-					
-				}
-			});
-			
+			btnVoltar.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent e) { dispose();} });
 			JButton btnHistorico = new JButton("Historico");
 			btnHistorico.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
 					HistoricoReservas hr = new HistoricoReservas(cnx);
-					
 					dispose();
-					
-					hr.setVisible(true);
-					
+					hr.setVisible(true);	
 				}
 			});
 			btnHistorico.setIcon(new ImageIcon(ListaReservas.class.getResource("/br/ufac/laboratorio/gui/images/icon_clock.gif")));
-			
-			JButton btnFinalizarReserva = new JButton("Finalizar Reserva");
+			this.btnFinalizarReserva = new JButton("Finalizar Reserva");
 			btnFinalizarReserva.setEnabled(false);
 			btnFinalizarReserva.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -185,11 +173,11 @@ public class ListaReservas extends JDialog{
 	class HabilitarBtnEdicao extends MouseAdapter {
 
 		public void mousePressed(MouseEvent e) {
-			if (table.getSelectedRow() >= 0) {
-
-			}else {
-;
-			}
+			if (table.getSelectedRow() >= 0)
+				btnFinalizarReserva.setEnabled(true);
+			else
+				btnFinalizarReserva.setEnabled(false);
+		
 
 		}
 	}

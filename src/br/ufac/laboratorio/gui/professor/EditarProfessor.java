@@ -112,73 +112,13 @@ public class EditarProfessor extends JDialog {
 		btnEditarProf.setIcon(new ImageIcon(EditarProfessor.class.getResource("/br/ufac/laboratorio/gui/images/Save16.gif")));
 		btnEditarProf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				//ESSE CODIGO JA ESTAVA AQUI, COLOQUEI O CODIGO DO MODELO NOVO
-				
-//				if(e.getSource()==btnEditarProf){
-//					if(jpfEditarSenhaProf.getText().equals(jpfEditarConfSenhaProf.getText())) {
-//						System.out.println(professor.getId());			
-//						System.out.println(professor.getMatricula());
-//						System.out.println(tfEditarNomeProf.getText());
-//						System.out.println(tfEmail.getText());				
-//						System.out.println(tfTelefone.getText());
-//						System.out.println(professor.getLogin().getLogin());
-//						System.out.println(jpfEditarSenhaProf.getText());
-//						
-//						try {
-//							pl.updProfessor(professor.getId(),professor.getMatricula(), tfEditarNomeProf.getText(), tfEmail.getText(), 
-//									tfTelefone.getText(), professor.getLogin().getLogin(), 
-//									jpfEditarSenhaProf.getText(), 2);
-//							JOptionPane.showMessageDialog(null, " Editado! ");
-//							
-//						} catch (NoSuchAlgorithmException | UnsupportedEncodingException | DataBaseGenericException
-//								| DataBaseNotConnectedException | InvalidFieldException
-//								| EntityNotExistException | EntityLoginNotExistException e1) {
-//							// TODO Auto-generated catch block
-//							JOptionPane.showMessageDialog(null, e1.getMessage(), 
-//									"Falha ao Editar", JOptionPane.ERROR_MESSAGE);
-//							jpfEditarConfSenhaProf.setText("");
-//							jpfEditarSenhaProf.setText("");
-//							
-//							
-//						}
-//						
-//						Professor prof = null;
-//						
-//						try {
-//							prof = pl.getProfessor(professor.getId());
-//						} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityNotExistException
-//								| EntityLoginNotExistException e1) {
-//							JOptionPane.showMessageDialog(null, e1.getMessage(), 
-//									"Falha ao Editar", JOptionPane.ERROR_MESSAGE);
-//						}
-//						
-//						
-//						//PerfilProfessor pp = new PerfilProfessor(prof, cnx);
-//
-//						dispose();
-//
-//						//pp.setVisible(true);
-//
-//					} else {
-//						JOptionPane.showMessageDialog(null, "Senhas Diferentes", 
-//								"Falha ao Editar", JOptionPane.ERROR_MESSAGE);
-//					}
-//				}
-//
-//			}
-//		});
-				
 				if(e.getSource()==btnEditarProf){
-					if(jpfEditarSenhaProf.getText().equals(jpfEditarConfSenhaProf.getText())) {
-												
+					if(jpfEditarSenhaProf.getText().equals(jpfEditarConfSenhaProf.getText())) {								
 						Professor prof = null;
 						try {
 							pl.updProfessor(professor.getId(),professor.getMatricula(), tfEditarNomeProf.getText(), tfEmail.getText(), 
 									tfTelefone.getText(), professor.getLogin().getLogin(), 
-									jpfEditarSenhaProf.getText(), 2);
-							
-							
+									jpfEditarSenhaProf.getText(), 2);					
 							try {
 								prof = pl.getProfessorId(professor.getId());
 								PerfilProfessor pp = new PerfilProfessor(prof, cnx);
@@ -187,11 +127,9 @@ public class EditarProfessor extends JDialog {
 							} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityNotExistException
 									| EntityLoginNotExistException e1) {
 								JOptionPane.showMessageDialog(null, e1.getMessage(), 
-										"Falha ao Editar2", JOptionPane.ERROR_MESSAGE);
+										"Falha ao Buscar Professor", JOptionPane.ERROR_MESSAGE);
 							}
-							
 							JOptionPane.showMessageDialog(null, " Editado! ");
-							
 						} catch (NoSuchAlgorithmException | UnsupportedEncodingException | DataBaseGenericException
 								| DataBaseNotConnectedException | InvalidFieldException
 								| EntityNotExistException | EntityLoginNotExistException e1) {

@@ -147,9 +147,7 @@ public class ProfessorLogic {
 		try {
 			loginLogic.updLogin(login, senha, tipo);
 		}catch (InvalidFieldException e) {
-			testField = true;
-			camposInvalidos.add(e.getMessage());
-			throw new InvalidFieldException("Professor", camposInvalidos);
+			throw new InvalidFieldException(e.getMessage());
 		}
 		
 		

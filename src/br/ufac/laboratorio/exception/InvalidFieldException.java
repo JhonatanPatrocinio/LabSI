@@ -14,4 +14,8 @@ public class InvalidFieldException extends Exception {
 				+ entidade + "' " 
 				+ listaDeCampos.toString());
 	}
+	
+	public InvalidFieldException(String message){
+		super(message);
+	}
 }

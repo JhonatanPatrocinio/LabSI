@@ -44,15 +44,7 @@ public class AnaliseReservaProf extends JDialog {
 	 * 
 	 * 
 	 * */
-	
-	
-	
-	
-	
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
@@ -88,22 +80,13 @@ public class AnaliseReservaProf extends JDialog {
 		btnVoltar.setIcon(new ImageIcon(ListaHorarios.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(e.getSource()==btnVoltar){
-
-					//PerfilAluno pa = new PerfilAluno();
-
+				if(e.getSource()==btnVoltar)
 					dispose();
-
-					//pa.setVisible(true);
-				}
-				
 			}
 		});
 		
 		JScrollPane spAnaliseProf = new JScrollPane();
-		
 		JLabel lblProfessor = new JLabel("PROFESSOR");
-		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(AnaliseReservaProf.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -139,14 +122,14 @@ public class AnaliseReservaProf extends JDialog {
 		);
 		
 		table = new JTable(new ReservaTableModel(carregaDados(professor.getId())));
-		table.getColumnModel().getColumn(0).setPreferredWidth(15);
-		table.getColumnModel().getColumn(1).setPreferredWidth(55);
-		table.getColumnModel().getColumn(2).setPreferredWidth(400);
-		table.getColumnModel().getColumn(3).setPreferredWidth(15);
-		table.getColumnModel().getColumn(4).setPreferredWidth(55);
-		table.getColumnModel().getColumn(5).setPreferredWidth(400);
-		table.getColumnModel().getColumn(6).setPreferredWidth(15);
-		table.getColumnModel().getColumn(7).setPreferredWidth(15);
+		table.getColumnModel().getColumn(0).setPreferredWidth(20);
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);
+		table.getColumnModel().getColumn(2).setPreferredWidth(200);
+		table.getColumnModel().getColumn(3).setPreferredWidth(150);
+		table.getColumnModel().getColumn(4).setPreferredWidth(100);
+		table.getColumnModel().getColumn(5).setPreferredWidth(100);
+		table.getColumnModel().getColumn(6).setPreferredWidth(250);
+		table.getColumnModel().getColumn(7).setPreferredWidth(300);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		spAnaliseProf.setViewportView(table);
