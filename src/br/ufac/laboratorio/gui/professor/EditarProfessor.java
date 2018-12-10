@@ -1,9 +1,6 @@
 package br.ufac.laboratorio.gui.professor;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -12,8 +9,6 @@ import br.ufac.laboratorio.entity.Centro;
 import br.ufac.laboratorio.entity.Professor;
 import br.ufac.laboratorio.exception.DataBaseGenericException;
 import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
-import br.ufac.laboratorio.exception.EntityAlreadyExistException;
-import br.ufac.laboratorio.exception.EntityLoginAlreadyExistException;
 import br.ufac.laboratorio.exception.EntityLoginNotExistException;
 import br.ufac.laboratorio.exception.EntityNotExistException;
 import br.ufac.laboratorio.exception.InvalidFieldException;
@@ -40,6 +35,7 @@ import javax.swing.ImageIcon;
 
 public class EditarProfessor extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tfEditarMatriculaProf;
 	private JTextField tfEditarNomeProf;
@@ -51,9 +47,7 @@ public class EditarProfessor extends JDialog {
 	private JTextField tfTelefone;
 	private ProfessorLogic pl;
 
-	/**
-	 * Create the frame.
-	 */
+	@SuppressWarnings({"unused", "rawtypes", "unchecked"})
 	public EditarProfessor(Professor professor, Conexao cnx) {
 		this.cl = new CentroLogic(cnx);
 		this.pl = new ProfessorLogic(cnx);
@@ -121,32 +115,30 @@ public class EditarProfessor extends JDialog {
 									jpfEditarSenhaProf.getText(), 2);					
 							try {
 								prof = pl.getProfessorId(professor.getId());
-								PerfilProfessor pp = new PerfilProfessor(prof, cnx);
-								dispose();
-								pp.setVisible(true);
+								
 							} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityNotExistException
 									| EntityLoginNotExistException e1) {
 								JOptionPane.showMessageDialog(null, e1.getMessage(), 
 										"Falha ao Buscar Professor", JOptionPane.ERROR_MESSAGE);
+								dispose();
 							}
 							JOptionPane.showMessageDialog(null, " Editado! ");
+							PerfilProfessor pp = new PerfilProfessor(prof, cnx);
+							dispose();
+							pp.setVisible(true);
 						} catch (NoSuchAlgorithmException | UnsupportedEncodingException | DataBaseGenericException
 								| DataBaseNotConnectedException | InvalidFieldException
 								| EntityNotExistException | EntityLoginNotExistException e1) {
-							// TODO Auto-generated catch block
 							JOptionPane.showMessageDialog(null, e1.getMessage(), 
 									"Falha ao Editar", JOptionPane.ERROR_MESSAGE);
 							jpfEditarConfSenhaProf.setText("");
-							jpfEditarSenhaProf.setText("");
-							
-							
+							jpfEditarSenhaProf.setText("");							
 						}
 					} else {
 						JOptionPane.showMessageDialog(null, "Senhas Diferentes", 
 								"Falha ao Editar", JOptionPane.ERROR_MESSAGE);
 					}
 				}
-
 			}
 		});
 				
@@ -159,16 +151,11 @@ public class EditarProfessor extends JDialog {
 		btnVoltar.setIcon(new ImageIcon(EditarProfessor.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				if(e.getSource()==btnVoltar){
-
-					//PerfilProfessor pp = new PerfilProfessor(professor, cnx);
-
+					PerfilProfessor pp = new PerfilProfessor(professor, cnx);
 					dispose();
-
-					//pp.setVisible(true);
+					pp.setVisible(true);
 				}
-
 			}
 		});
 		

@@ -29,9 +29,6 @@ import javax.swing.ImageIcon;
 
 public class EditLab extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfComputadorLab;
@@ -41,9 +38,6 @@ public class EditLab extends JDialog {
 	private LaboratorioLogic llc;
 	private CentroLogic cl;
 
-	/**
-	 * Launch the application.
-	 */
 //	public static void main(String[] args) {
 //		try {
 //			EditLab dialog = new EditLab();
@@ -53,10 +47,7 @@ public class EditLab extends JDialog {
 //			e.printStackTrace();
 //		}
 //	}
-
-	/**
-	 * Create the dialog.
-	 */
+	@SuppressWarnings({"unused", "rawtypes", "unchecked"})
 	public EditLab(Laboratorio lab, Conexao cnx) {
 		this.llc = new LaboratorioLogic(cnx);
 		this.cl = new CentroLogic(cnx);

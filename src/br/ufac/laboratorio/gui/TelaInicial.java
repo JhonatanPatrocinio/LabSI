@@ -16,8 +16,8 @@ import br.ufac.laboratorio.exception.DataBaseGenericException;
 import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
 import br.ufac.laboratorio.exception.EntityLoginNotExistException;
 import br.ufac.laboratorio.exception.EntityNotExistException;
-import br.ufac.laboratorio.gui.MenuAdministrador;
-import br.ufac.laboratorio.gui.aluno.PerfilAluno;
+import br.ufac.laboratorio.gui.admin.MenuAdministrador;
+import br.ufac.laboratorio.gui.admin.PerfilAluno;
 import br.ufac.laboratorio.gui.professor.PerfilProfessor;
 import br.ufac.laboratorio.logic.AlunoLogic;
 import br.ufac.laboratorio.logic.LoginLogic;
@@ -68,13 +68,9 @@ public class TelaInicial extends JFrame {
 		     e.printStackTrace();
 		    }
 		   }
-		  });
-		  		  
+		  });		  
 		 }
-	 
-	/**
-	 * Create the frame.
-	 */
+
 	public TelaInicial() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 458, 457);
@@ -83,34 +79,29 @@ public class TelaInicial extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		Icon imgufac = new ImageIcon(getClass().getResource("images/ufac.png"));
 		cnx = new Conexao();
 		try {
-			cnx.conecte(DB_URL, "root", "tiago0616");
+			cnx.conecte(DB_URL, "root", "1995");
 		} catch (DataBaseAlreadyConnectedException | 
 				AccessDeniedForUserException | 
 				DataBaseGenericException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), 
 					"Falha na Conexao", JOptionPane.ERROR_MESSAGE);
 		}	
-
 		loginLogic = new LoginLogic(cnx);
 		pl = new ProfessorLogic(cnx);
 		al = new AlunoLogic(cnx);
-
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/ufac/laboratorio/gui/images/Forward16.gif")));
-		
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login login = null;
 				Login login1 = null;
-				
 				try {
 					login1 = new Login(tfLogin.getText() , jpfSenha.getText(), 0);
 				} catch (NoSuchAlgorithmException | UnsupportedEncodingException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Falha ao criptografar a senha", 
+							"Falha no Algoritmo", JOptionPane.ERROR_MESSAGE);
 				}
 				try {
 					login = loginLogic.getLogin(login1.getLogin());					
@@ -119,9 +110,7 @@ public class TelaInicial extends JFrame {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), 
 							"Falha no Login", JOptionPane.ERROR_MESSAGE);
 				}
-				
 				if(login1.getLogin().equals(login.getLogin()) && login1.getSenha().equals(login.getSenha())) {
-						
 					if(login.getTipo() == 1) {
 						MenuAdministrador ma = new MenuAdministrador(cnx);
 						dispose();
@@ -135,7 +124,6 @@ public class TelaInicial extends JFrame {
 							JOptionPane.showMessageDialog(null, e1.getMessage(), 
 									"Falha no Login", JOptionPane.ERROR_MESSAGE);
 						}
-						
 						PerfilProfessor pp = new PerfilProfessor(professor, cnx);
 						dispose();
 						pp.setVisible(true);
@@ -152,9 +140,6 @@ public class TelaInicial extends JFrame {
 						dispose();
 						pa.setVisible(true);
 					}
-					
-					
-					
 				} else {
 					JOptionPane.showMessageDialog(null, "Senha Errada", "Falha no Login" ,JOptionPane.ERROR_MESSAGE);
 					jpfSenha.setText("");
@@ -170,24 +155,16 @@ public class TelaInicial extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource()==btnCadastrar){
 					CadastroEscolha ce = new CadastroEscolha(cnx);
-
 					dispose();
-
 					ce.setVisible(true);
 				}
-
-
 			}
 		});
 
 		JLabel lblLogin = new JLabel("LOGIN");
-
 		JLabel lblSenha = new JLabel("SENHA");
-
 		tfLogin = new JTextField();
-		
 		tfLogin.setColumns(40);
-
 		jpfSenha = new JPasswordField();
 		jpfSenha.addKeyListener(new KeyAdapter() {
 			@Override

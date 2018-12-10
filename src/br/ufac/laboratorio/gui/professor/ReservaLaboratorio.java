@@ -7,7 +7,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -25,7 +24,6 @@ import com.toedter.calendar.JDateChooser;
 import br.ufac.laboratorio.db.Conexao;
 import br.ufac.laboratorio.entity.Laboratorio;
 import br.ufac.laboratorio.entity.Professor;
-import br.ufac.laboratorio.entity.Reserva;
 import br.ufac.laboratorio.exception.DataBaseGenericException;
 import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
 import br.ufac.laboratorio.exception.DataExistException;
@@ -66,7 +64,7 @@ public class ReservaLaboratorio extends JDialog {
 	private String formataHora(String hora, String minuto) {
 		return  ""+ hora +":"+ minuto +""; 
 	}
-
+	@SuppressWarnings({"unused", "rawtypes", "unchecked"})
 	public ReservaLaboratorio(Conexao cnx, Professor professor) {
 		this.lc = new LaboratorioLogic(cnx);
 		this.rl = new ReservaLogic(cnx);

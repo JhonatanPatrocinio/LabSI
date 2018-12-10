@@ -95,6 +95,14 @@ public class ReservaLogic {
 	EntityLoginNotExistException {
 		return rdb.getReservasPorStatus(status);
 	}
+	public List<Reserva> getReservasPorStatuseOrdenadoPorData(int status) throws
+	DataBaseGenericException,
+	DataBaseNotConnectedException,
+	EntityTableIsEmptyException,
+	EntityNotExistException,
+	EntityLoginNotExistException {
+		return rdb.getReservasPorStatuseOrdenadoPorData(status);
+	}
 	public List<Reserva> getReservasPorProfessor(int idProf) throws 
 	DataBaseGenericException, 
 	DataBaseNotConnectedException, 

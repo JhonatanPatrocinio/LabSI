@@ -1,7 +1,4 @@
-package br.ufac.laboratorio.gui.aluno;
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+package br.ufac.laboratorio.gui.admin;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,43 +7,32 @@ import javax.swing.GroupLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.border.MatteBorder;
 
 import br.ufac.laboratorio.db.Conexao;
 import br.ufac.laboratorio.entity.Aluno;
 import br.ufac.laboratorio.exception.DataBaseGenericException;
 import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
-import br.ufac.laboratorio.gui.TelaInicial;
-import br.ufac.laboratorio.gui.professor.EditarProfessor;
-import br.ufac.laboratorio.gui.professor.ListaHorariosProf;
+import br.ufac.laboratorio.gui.aluno.EditarAluno;
+import br.ufac.laboratorio.gui.aluno.ListaHorarios;
 
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JToolBar;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 
 public class PerfilAluno extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	
-	/**
-	 * Create the frame.
-	 */
 	public PerfilAluno(Aluno al, Conexao cnx) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
@@ -65,31 +51,11 @@ public class PerfilAluno extends JFrame {
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EditarAluno ea = new EditarAluno(al, cnx);
-
 				//dispose();
-
 				ea.setVisible(true);
 			}
 		});
 		mnPerfil.add(mntmNewMenuItem);
-
-//		JButton btnEditarInforAlu = new JButton("Editar Informações");
-//		btnEditarInforAlu.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				
-//				if(e.getSource()==btnEditarInforAlu){
-//					
-//					EditarAluno ea = new EditarAluno(al, cnx);
-//					
-//					//dispose();
-//					
-//					ea.setVisible(true);
-//				}
-//			}
-//			
-//		});
-//		mnPerfil.add(btnEditarInforAlu);
-
 		JMenu mnHorarios = new JMenu("Horarios");
 		mnHorarios.setIcon(new ImageIcon(PerfilAluno.class.getResource("/br/ufac/laboratorio/gui/images/icon_clock.gif")));
 		mnHorarios.setMnemonic('H');
@@ -99,31 +65,11 @@ public class PerfilAluno extends JFrame {
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListaHorarios lh = new ListaHorarios(cnx);
-
 				//dispose();
-
 				lh.setVisible(true);
 			}
 		});
 		mnHorarios.add(mntmNewMenuItem_1);
-
-//		JButton btnVerificarHorarios = new JButton("Verificar Horarios");
-//		mnHorarios.add(btnVerificarHorarios);
-//		btnVerificarHorarios.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//
-//				if(e.getSource()==btnVerificarHorarios){
-//
-//					ListaHorarios lh = new ListaHorarios();
-//
-//					//dispose();
-//
-//					lh.setVisible(true);
-//				}
-//			}
-//
-//
-//		});
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -140,7 +86,6 @@ public class PerfilAluno extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if(e.getSource()==btnSairAlu){
-
 					if(e.getSource()==btnSairAlu){
 						try {
 							cnx.desconecte();
@@ -149,8 +94,6 @@ public class PerfilAluno extends JFrame {
 									"Falha ao Desconectar", JOptionPane.ERROR_MESSAGE);
 						}
 						dispose();
-
-						
 					}
 				}
 

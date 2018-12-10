@@ -191,6 +191,40 @@ public class ReservaDB {
 		return reservas;
 	}
 	
+	public List<Reserva> getReservasPorStatuseOrdenadoPorData(int status) throws
+	DataBaseGenericException,
+	DataBaseNotConnectedException,
+	EntityTableIsEmptyException,
+	EntityNotExistException,
+	EntityLoginNotExistException {
+
+		Reserva r = null;
+		Professor professor = null;
+		Laboratorio lab = null;
+		List<Reserva> reservas = new ArrayList<>();
+
+		String sqlBusca = "SELECT id, id_professor, id_laboratorio, data_reserva, horario_inicio, horario_termino, status, obs FROM"
+				+ " reservas WHERE status = "+ status + " ORDER BY data_reserva;";
+		rs = cnx.consulte(sqlBusca);
+		try {
+			if(rs.next()) {
+				rs.beforeFirst();
+				while (rs.next()) {
+					professor = pdb.getProfessorId(rs.getInt(2));
+					lab = ldb.getLaboratorioId(rs.getInt(3));
+					r = new Reserva(rs.getInt(1), professor, lab, rs.getString(4), rs.getString(5),
+							rs.getString(6), rs.getInt(7), rs.getString(8));
+					reservas.add(r);
+				}
+			} else 
+				throw new EntityTableIsEmptyException("Reservas Para Analises");
+		} catch (SQLException e) {
+			throw new DataBaseGenericException(e.getErrorCode(), e.getMessage());
+		}
+
+		return reservas;
+	}
+	
 	public List<Reserva> getReservasPorProfessor(int idProf) throws
 	DataBaseGenericException,
 	DataBaseNotConnectedException,

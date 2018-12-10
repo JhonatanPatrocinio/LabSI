@@ -5,8 +5,8 @@ import br.ufac.laboratorio.entity.Centro;
 import br.ufac.laboratorio.exception.*;
 
 public class CentroDBTeste {
-
 	static final String DB_URL = "jdbc:mysql://localhost/laboratorio?useSSL=false";	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws DataBaseNotConnectedException, EntityNotExistException, EntityAlreadyExistException {
 		// TODO Auto-generated method stub
 		

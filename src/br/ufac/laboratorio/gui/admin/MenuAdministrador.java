@@ -1,4 +1,4 @@
-package br.ufac.laboratorio.gui;
+package br.ufac.laboratorio.gui.admin;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -7,14 +7,12 @@ import javax.swing.border.EmptyBorder;
 import br.ufac.laboratorio.db.Conexao;
 import br.ufac.laboratorio.exception.DataBaseGenericException;
 import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
-import br.ufac.laboratorio.gui.aluno.ListarAluno;
 import br.ufac.laboratorio.gui.centro.CadastroCentro;
 import br.ufac.laboratorio.gui.centro.MenuEditarCentro;
 import br.ufac.laboratorio.gui.curso.CadastroCurso;
 import br.ufac.laboratorio.gui.curso.ListarCurso;
 import br.ufac.laboratorio.gui.laboratorio.CadastroLaboratorio;
 import br.ufac.laboratorio.gui.laboratorio.EditarLaboratorio;
-import br.ufac.laboratorio.gui.professor.ListarProfessor;
 import br.ufac.laboratorio.gui.reserva.AnaliseReservas;
 import br.ufac.laboratorio.gui.reserva.ListaReservas;
 

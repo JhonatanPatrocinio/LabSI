@@ -1,7 +1,6 @@
-package br.ufac.laboratorio.gui.professor;
+package br.ufac.laboratorio.gui.admin;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -25,7 +24,6 @@ import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
 import br.ufac.laboratorio.exception.EntityLoginNotExistException;
 import br.ufac.laboratorio.exception.EntityNotExistException;
 import br.ufac.laboratorio.exception.EntityTableIsEmptyException;
-import br.ufac.laboratorio.gui.reserva.ReservaTableModel;
 import br.ufac.laboratorio.logic.ProfessorLogic;
 
 import javax.swing.ImageIcon;

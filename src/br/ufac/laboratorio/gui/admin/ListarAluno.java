@@ -1,4 +1,4 @@
-package br.ufac.laboratorio.gui.aluno;
+package br.ufac.laboratorio.gui.admin;
 
 import java.awt.BorderLayout;
 
@@ -16,9 +16,7 @@ import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
 import br.ufac.laboratorio.exception.EntityLoginNotExistException;
 import br.ufac.laboratorio.exception.EntityNotExistException;
 import br.ufac.laboratorio.exception.EntityTableIsEmptyException;
-import br.ufac.laboratorio.gui.professor.ListarProfessorTableModel;
 import br.ufac.laboratorio.logic.AlunoLogic;
-import br.ufac.laboratorio.logic.ProfessorLogic;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;

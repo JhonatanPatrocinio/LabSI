@@ -1,9 +1,5 @@
 package br.ufac.laboratorio.gui.aluno;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -15,6 +11,7 @@ import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
 import br.ufac.laboratorio.exception.EntityLoginNotExistException;
 import br.ufac.laboratorio.exception.EntityNotExistException;
 import br.ufac.laboratorio.exception.InvalidFieldException;
+import br.ufac.laboratorio.gui.admin.PerfilAluno;
 import br.ufac.laboratorio.logic.AlunoLogic;
 import br.ufac.laboratorio.logic.CursoLogic;
 
@@ -38,6 +35,7 @@ import javax.swing.ImageIcon;
 
 public class EditarAluno extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tdEditarAlu;
 	private JTextField tfEditarNomeAlu;
@@ -47,9 +45,7 @@ public class EditarAluno extends JDialog {
 	private CursoLogic cl;
 	private AlunoLogic aluL;
 
-	/**
-	 * Create the frame.
-	 */
+	@SuppressWarnings({"unused", "rawtypes", "unchecked"})
 	public EditarAluno(Aluno al, Conexao cnx) {
 		this.cl = new CursoLogic(cnx);
 		this.aluL = new AlunoLogic(cnx);
@@ -61,20 +57,12 @@ public class EditarAluno extends JDialog {
 		setContentPane(contentPane);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setModal(true);
-		
-		
 		JLabel lblMatricula = new JLabel("MATRICULA");
-		
 		JLabel lblNome = new JLabel("NOME");
-		
 		JLabel lblLogin = new JLabel("LOGIN");
-		
 		JLabel lblCurso = new JLabel("CURSO");
-		
 		JLabel lblSenha = new JLabel("SENHA");
-		
 		JLabel lblConfirmarSenha = new JLabel("CONFIRMAR SENHA");
-		
 		tdEditarAlu = new JTextField();
 		tdEditarAlu.setEditable(false);
 		tdEditarAlu.setEnabled(false);
@@ -112,41 +100,13 @@ public class EditarAluno extends JDialog {
 		btnEditarAlu.setIcon(new ImageIcon(EditarAluno.class.getResource("/br/ufac/laboratorio/gui/images/Save16.gif")));
 		btnEditarAlu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				
-//				String Vazia = "";
-//				
-//				if(e.getSource()==btnEditarAlu){
-//					if(tfEditarLoginAlu.getText().compareTo(Vazia)== 0 || tfEditarNomeAlu.getText().compareTo(Vazia)== 0 || jpfEditarSenhaAlu.getText().compareTo(Vazia)== 0 || jpfEditarConfSenhaAlu.getText().compareTo(Vazia)== 0 ) {
-//						JOptionPane.showMessageDialog(null, "Confira todas as informações! ");
-//						
-//					}else 
-//						
-//					if(jpfEditarSenhaAlu.getText().compareTo(jpfEditarConfSenhaAlu.getText()) !=0) {
-//						JOptionPane.showMessageDialog(null, "Confira a senha ");
-//					}
-//					
-//				else {
-//						JOptionPane.showMessageDialog(null, "Edição realizada com sucesso! ");
-//						//PerfilAluno pa = new PerfilAluno();
-//
-//						dispose();
-//
-//						//pa.setVisible(true);
-//					}
-//				}
-//				
-//			}
-//		});
 				if(e.getSource()==btnEditarAlu){
-					if(jpfEditarSenhaAlu.getText().equals(jpfEditarConfSenhaAlu.getText())) {
-												
+					if(jpfEditarSenhaAlu.getText().equals(jpfEditarConfSenhaAlu.getText())) {					
 						Aluno alu = null;
 						try {
 							aluL.updAluno(al.getId(),al.getMatricula(), tfEditarNomeAlu.getText(),
 									al.getLogin().getLogin(), 
 									jpfEditarSenhaAlu.getText(), 3);
-							
-							
 							try {
 								alu = aluL.getAlunoId(al.getId());
 								PerfilAluno pa = new PerfilAluno(alu, cnx);
@@ -157,7 +117,6 @@ public class EditarAluno extends JDialog {
 								JOptionPane.showMessageDialog(null, e1.getMessage(), 
 										"Falha ao Editar2", JOptionPane.ERROR_MESSAGE);
 							}
-							
 							JOptionPane.showMessageDialog(null, " Editado! ");
 							
 						} catch (NoSuchAlgorithmException | UnsupportedEncodingException | DataBaseGenericException
@@ -168,40 +127,23 @@ public class EditarAluno extends JDialog {
 									"Falha ao Editar", JOptionPane.ERROR_MESSAGE);
 							jpfEditarConfSenhaAlu.setText("");
 							jpfEditarSenhaAlu.setText("");
-							
-							
 						}
 					} else {
 						JOptionPane.showMessageDialog(null, "Senhas Diferentes", 
 								"Falha ao Editar", JOptionPane.ERROR_MESSAGE);
 					}
 				}
-
 			}
 		});
-		
-		jpfEditarSenhaAlu = new JPasswordField();
-//		jpfEditarSenhaAlu.setColumns(20);
-		
+		jpfEditarSenhaAlu = new JPasswordField();		
 		jpfEditarConfSenhaAlu = new JPasswordField();
-		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setIcon(new ImageIcon(EditarAluno.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if(e.getSource()==btnVoltar){
-
-					//PerfilAluno pa = new PerfilAluno();
-
-					dispose();
-
-					//pa.setVisible(true);
-				}
-				
+				if(e.getSource()==btnVoltar) dispose();			
 			}
 		});
-		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(EditarAluno.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

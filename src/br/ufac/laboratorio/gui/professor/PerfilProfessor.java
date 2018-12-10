@@ -31,15 +31,9 @@ import javax.swing.JMenuItem;
 
 public class PerfilProfessor extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Create the frame.
-	 */
 	public PerfilProfessor(Professor professor, Conexao cnx) {
 
 
@@ -60,9 +54,7 @@ public class PerfilProfessor extends JFrame {
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EditarProfessor ep = new EditarProfessor(professor, cnx);
-
-				//dispose();
-
+				dispose();
 				ep.setVisible(true);
 			}
 		});

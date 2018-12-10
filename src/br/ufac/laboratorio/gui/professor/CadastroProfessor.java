@@ -34,9 +34,6 @@ import javax.swing.ImageIcon;
 
 public class CadastroProfessor extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tfMatriculaProf;
@@ -45,15 +42,11 @@ public class CadastroProfessor extends JFrame {
 	private JPasswordField jpfSenhaProf;
 	private JPasswordField jpfConfSenhaProf;
 	private ProfessorLogic pl;
-
 	private CentroLogic cl;
 	private JTextField tfEmailProf;
 	private JTextField tfTelefoneProf;
 
-	
-	/**
-	 * Create the frame.
-	 */
+	@SuppressWarnings({"unused", "rawtypes", "unchecked"})
 	public CadastroProfessor(Conexao cnx) {
 		this.pl = new ProfessorLogic(cnx);
 		this.cl = new CentroLogic(cnx);
@@ -92,7 +85,6 @@ public class CadastroProfessor extends JFrame {
 		try {
 			centros = cl.getCentros();
 		} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityTableIsEmptyException e2) {
-			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e2.getMessage(), 
 					"Falha no Centro", JOptionPane.ERROR_MESSAGE);
 		}
@@ -132,7 +124,6 @@ public class CadastroProfessor extends JFrame {
 								| DataBaseNotConnectedException | EntityAlreadyExistException | InvalidFieldException
 								| EntityNotExistException | EntityLoginNotExistException
 								| EntityLoginAlreadyExistException e1) {
-							// TODO Auto-generated catch block
 							JOptionPane.showMessageDialog(null, e1.getMessage(), 
 									"Falha no Cadastro Professor", JOptionPane.ERROR_MESSAGE);
 							jpfConfSenhaProf.setText("");

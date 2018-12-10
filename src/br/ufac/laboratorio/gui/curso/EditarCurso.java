@@ -1,8 +1,6 @@
 package br.ufac.laboratorio.gui.curso;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -22,13 +20,11 @@ import javax.swing.ImageIcon;
 
 public class EditarCurso extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfCodigoCursoEdit;
 	private JTextField tfNomeCursoEdit;
 
-	/**
-	 * Launch the application.
-	 */
 //	public static void main(String[] args) {
 //		try {
 //			EditarCurso dialog = new EditarCurso();
@@ -39,9 +35,6 @@ public class EditarCurso extends JDialog {
 //		}
 //	}
 
-	/**
-	 * Create the dialog.
-	 */
 	public EditarCurso(Conexao cnx) {
 		setBounds(100, 100, 450, 270);
 		setLocationRelativeTo(null);

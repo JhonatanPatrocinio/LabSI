@@ -28,14 +28,12 @@ import javax.swing.ImageIcon;
 
 public class CadastroCentro extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tfNomeCentro;
 	private JTextField tfSiglaCadas;
 	private CentroLogic cl;
-	
-	/**
-	 * Create the frame.
-	 */
+
 	public CadastroCentro(Conexao cnx) {
 		cl = new CentroLogic(cnx);
 		setBounds(100, 100, 450, 307);

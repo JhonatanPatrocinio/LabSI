@@ -35,19 +35,13 @@ import javax.swing.ImageIcon;
 
 public class CadastroLaboratorio extends JDialog{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tfNomeLab;
 	private JTextField tfComputadores;
 	private LaboratorioLogic llc;
 	private CentroLogic cl;
-
-	/**
-	 * Create the frame.
-	 */
+	@SuppressWarnings({"unused", "rawtypes", "unchecked"})
 	public CadastroLaboratorio(Conexao cnx) {
 		this.llc = new LaboratorioLogic(cnx);
 		this.cl = new CentroLogic(cnx);

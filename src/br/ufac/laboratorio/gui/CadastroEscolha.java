@@ -1,8 +1,5 @@
 package br.ufac.laboratorio.gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -17,21 +14,16 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 
 public class CadastroEscolha extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	//private Conexao cnx;
-
-	/**
-	 * Create the frame.
-	 */
-	public CadastroEscolha(Conexao cnx) {
-//		this.cnx = cnx;
+	
+	CadastroEscolha(Conexao cnx) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 383);
 		setResizable(false);
@@ -51,14 +43,10 @@ public class CadastroEscolha extends JFrame {
 
 				if(e.getSource()==btnAluno){
 					CadastroAluno ca = new CadastroAluno(cnx);
-
 					dispose();
-
 					ca.setVisible(true);
 				}
 			}
-
-
 		});
 
 		JButton btnProfessor = new JButton("PROFESSOR");
@@ -69,12 +57,9 @@ public class CadastroEscolha extends JFrame {
 				
 				if(e.getSource()==btnProfessor){
 					CadastroProfessor cp = new CadastroProfessor(cnx);
-
 					dispose();
-
 					cp.setVisible(true);
 				}
-				
 			}
 		});
 		

@@ -1,11 +1,10 @@
-package br.ufac.laboratorio.gui.aluno;
+package br.ufac.laboratorio.gui.admin;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 import br.ufac.laboratorio.entity.Aluno;
-import br.ufac.laboratorio.entity.Professor;
 
 public class ListarAlunoTableModel extends AbstractTableModel {
 

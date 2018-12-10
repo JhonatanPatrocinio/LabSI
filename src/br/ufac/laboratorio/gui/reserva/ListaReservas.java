@@ -45,7 +45,7 @@ public class ListaReservas extends JDialog{
 	public List<Reserva> carregaDados(){
 		List<Reserva> reservas = new ArrayList<>();
 		try {
-			reservas = rl.getReservas();
+			reservas = rl.getReservasPorStatus(1);
 		} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityTableIsEmptyException |
 				EntityNotExistException | EntityLoginNotExistException e) {
 			dispose();
@@ -139,7 +139,9 @@ public class ListaReservas extends JDialog{
 			btnFinalizarReserva.setEnabled(false);
 			btnFinalizarReserva.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					if(e.getSource() == btnFinalizarReserva) {
+						
+					}
 					
 				}
 			});

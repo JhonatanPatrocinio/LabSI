@@ -10,23 +10,19 @@ import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
 import br.ufac.laboratorio.exception.EntityLoginNotExistException;
 import br.ufac.laboratorio.exception.EntityNotExistException;
 import br.ufac.laboratorio.exception.EntityTableIsEmptyException;
-import br.ufac.laboratorio.gui.reserva.ReservaTableModel;
-
+import br.ufac.laboratorio.gui.professor.ListaHorarioNormalTableModel;
 import br.ufac.laboratorio.logic.ReservaLogic;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -47,7 +43,7 @@ public class ListaHorarios extends JDialog {
 	public List<Reserva> carregaDados(){
 		List<Reserva> reservas = new ArrayList<>();
 		try {
-			reservas = rl.getReservas();
+			reservas = rl.getReservasPorStatuseOrdenadoPorData(1);
 		} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityTableIsEmptyException |
 				EntityNotExistException | EntityLoginNotExistException e) {
 			dispose();
@@ -57,18 +53,6 @@ public class ListaHorarios extends JDialog {
 		
 		return reservas;
 	}
-	public void recarregaTabela(){
-		table.setModel((new ReservaTableModel(carregaDados())));
-		table.getColumnModel().getColumn(0).setPreferredWidth(20);
-		table.getColumnModel().getColumn(1).setPreferredWidth(200);
-		table.getColumnModel().getColumn(2).setPreferredWidth(200);
-		table.getColumnModel().getColumn(3).setPreferredWidth(150);
-		table.getColumnModel().getColumn(4).setPreferredWidth(100);
-		table.getColumnModel().getColumn(5).setPreferredWidth(100);
-		table.getColumnModel().getColumn(6).setPreferredWidth(250);
-		table.getColumnModel().getColumn(7).setPreferredWidth(300);
-	}
-
 	
 	public ListaHorarios(Conexao cnx) {
 		this.rl = new ReservaLogic(cnx);
@@ -88,22 +72,12 @@ public class ListaHorarios extends JDialog {
 		btnVoltar.setIcon(new ImageIcon(ListaHorarios.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(e.getSource()==btnVoltar){
-
-					//PerfilAluno pa = new PerfilAluno();
-
-					dispose();
-
-					//pa.setVisible(true);
-				}
-				
+				if(e.getSource()==btnVoltar) dispose();	
 			}
 		});
 		
 		JScrollPane spHorarios = new JScrollPane();
-		
 		JLabel lblAluno = new JLabel("ALUNO");
-		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(ListaHorarios.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -137,29 +111,15 @@ public class ListaHorarios extends JDialog {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnVoltar))
 		);
-		table = new JTable(new ReservaTableModel(carregaDados()));
-		table.getColumnModel().getColumn(0).setPreferredWidth(20);
+		table = new JTable(new ListaHorarioNormalTableModel(carregaDados()));
+		table.getColumnModel().getColumn(0).setPreferredWidth(200);
 		table.getColumnModel().getColumn(1).setPreferredWidth(200);
-		table.getColumnModel().getColumn(2).setPreferredWidth(200);
-		table.getColumnModel().getColumn(3).setPreferredWidth(150);
+		table.getColumnModel().getColumn(2).setPreferredWidth(150);
+		table.getColumnModel().getColumn(3).setPreferredWidth(100);
 		table.getColumnModel().getColumn(4).setPreferredWidth(100);
-		table.getColumnModel().getColumn(5).setPreferredWidth(100);
-		table.getColumnModel().getColumn(6).setPreferredWidth(250);
-		table.getColumnModel().getColumn(7).setPreferredWidth(300);
+		table.getColumnModel().getColumn(5).setPreferredWidth(200);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.addMouseListener(new HabilitarBtnEdicao());
 		spHorarios.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
-	}
-	class HabilitarBtnEdicao extends MouseAdapter {
-
-		public void mousePressed(MouseEvent e) {
-			if (table.getSelectedRow() >= 0) {
-
-			}else {
-;
-			}
-
-		}
 	}
 }

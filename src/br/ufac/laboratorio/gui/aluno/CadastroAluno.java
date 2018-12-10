@@ -1,8 +1,5 @@
 package br.ufac.laboratorio.gui.aluno;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -42,9 +39,6 @@ import javax.swing.ImageIcon;
 
 public class CadastroAluno extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tfMatriculaAlu;
@@ -56,10 +50,7 @@ public class CadastroAluno extends JFrame {
 	private CursoLogic cl;
 	private AlunoLogic al;
 
-	
-	/**
-	 * Create the frame.
-	 */
+	@SuppressWarnings({"unused", "rawtypes", "unchecked"})
 	public CadastroAluno(Conexao cnx) {
 		this.cl = new CursoLogic(cnx);
 		this.al = new AlunoLogic(cnx);
@@ -107,10 +98,8 @@ public class CadastroAluno extends JFrame {
 			cbCursoAlu.addItem(str);
 		}
 		cbCursoAlu.setSelectedIndex(-1);
-		
 		JLabel lblCadastroAluno = new JLabel("CADASTRO ALUNO");
 		lblCadastroAluno.setFont(new Font("Lucida Grande", Font.BOLD, 30));
-
 		JButton btnCadastrarAlu = new JButton("Cadastrar");
 		btnCadastrarAlu.setIcon(new ImageIcon(CadastroAluno.class.getResource("/br/ufac/laboratorio/gui/images/list_users.gif")));
 		btnCadastrarAlu.addActionListener(new ActionListener() {
@@ -119,18 +108,14 @@ public class CadastroAluno extends JFrame {
 				if(e.getSource()==btnCadastrarAlu){	
 					if(jpfSenhaAlu.getText().equals(jpfConfSenhaAlu.getText())) {
 						String s = cbCursoAlu.getSelectedItem().toString();
-						String [] s2 = s.split(" ");
-						
-						
+						String [] s2 = s.split(" ");					
 						try {
 							al.addAluno(tfMatriculaAlu.getText(), tfNomeAlu.getText(), Integer.parseInt(s2[0]), tfLoginAlu.getText(), 
 								jpfSenhaAlu.getText(), 3);
 							JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso! ");
 							cnx.desconecte();
 							TelaInicial ti = new TelaInicial();
-
 							dispose();
-
 							ti.setVisible(true);
 						}catch(NoSuchAlgorithmException | UnsupportedEncodingException | DataBaseGenericException
 								| DataBaseNotConnectedException | EntityAlreadyExistException | InvalidFieldException
@@ -141,20 +126,12 @@ public class CadastroAluno extends JFrame {
 							jpfConfSenhaAlu.setText("");
 							jpfSenhaAlu.setText("");
 							tfLoginAlu.setText("");
-						
 						}
-				
 					} else {
 						JOptionPane.showMessageDialog(null, "Senhas Diferentes",
 								"Falha no Cadastro Aluno", JOptionPane.ERROR_MESSAGE);
-					
 					}
-				
-				
-			
 				}
-
-
 			}
 		});
 		

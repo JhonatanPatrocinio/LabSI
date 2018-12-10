@@ -1,4 +1,4 @@
-package br.ufac.laboratorio.gui.professor;
+package br.ufac.laboratorio.gui.admin;
 
 import java.util.List;
 
