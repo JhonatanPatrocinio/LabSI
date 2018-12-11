@@ -1,14 +1,29 @@
 package br.ufac.laboratorio.gui.curso;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.util.*;
+import br.ufac.laboratorio.db.*;
+import br.ufac.laboratorio.entity.*;
+import br.ufac.laboratorio.exception.*;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import br.ufac.laboratorio.db.Conexao;
+import br.ufac.laboratorio.exception.DataBaseGenericException;
+import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
+import br.ufac.laboratorio.exception.EntityAlreadyExistException;
+import br.ufac.laboratorio.exception.InvalidFieldException;
+import br.ufac.laboratorio.logic.CursoLogic;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -17,12 +32,29 @@ import javax.swing.ImageIcon;
 
 public class CadastroCurso extends JDialog {
 
-	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfCodigoCurso;
 	private JTextField tfNomeCurso;
+	private CursoLogic cl;
 
-	public CadastroCurso() {
+	/**
+	 * Launch the application.
+	 */
+	//public static void main(String[] args) {
+		//try {
+			//CadastroCurso dialog = new CadastroCurso();
+			//dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			//dialog.setVisible(true);
+		//} catch (Exception e) {
+			//e.printStackTrace();
+	//	}
+	//}
+
+	/**
+	 * Create the dialog.
+	 */
+	public CadastroCurso(Conexao cnx) {
+		cl= new CursoLogic(cnx);
 		setBounds(100, 100, 450, 310);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -32,14 +64,34 @@ public class CadastroCurso extends JDialog {
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setIcon(new ImageIcon(CadastroCurso.class.getResource("/br/ufac/laboratorio/gui/images/list_users.gif")));
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource()==btnCadastrar) {
+					try {
+						cl.addCurso(Integer.parseInt(tfCodigoCurso.getText()), tfNomeCurso.getText());
+						JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso! ");
+						dispose();
+					}catch (DataBaseGenericException | DataBaseNotConnectedException |
+							EntityAlreadyExistException | InvalidFieldException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), 
+								"Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
+						tfCodigoCurso.setText("");
+						tfNomeCurso.setText("");
+					}
+				}
+			}
+		});
 		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setIcon(new ImageIcon(CadastroCurso.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				if(e.getSource()==btnVoltar){
+				
 				dispose();
 				
+			}
 			}
 		});
 		

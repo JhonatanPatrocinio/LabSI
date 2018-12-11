@@ -55,7 +55,8 @@ public class TelaInicial extends JFrame {
 	static Conexao cnx;
 
 
-	static final String DB_URL = "jdbc:mysql://localhost/laboratorio?useSSL=false";
+	//static final String DB_URL = "jdbc:mysql://localhost/laboratorio?useSSL=false";
+	static final String DB_URL = "jdbc:mysql://localhost/laboratorio?useTimezone=true&serverTimezone=UTC";
 
 	 public static void main(String[] args) {
 		  EventQueue.invokeLater(new Runnable() {
@@ -80,7 +81,7 @@ public class TelaInicial extends JFrame {
 		setContentPane(contentPane);
 		cnx = new Conexao();
 		try {
-			cnx.conecte(DB_URL, "root", "1995");
+			cnx.conecte(DB_URL, "root", "aluno");
 		} catch (DataBaseAlreadyConnectedException | 
 				AccessDeniedForUserException | 
 				DataBaseGenericException e) {

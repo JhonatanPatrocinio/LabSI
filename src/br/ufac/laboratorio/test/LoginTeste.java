@@ -22,7 +22,7 @@ public class LoginTeste {
 		Conexao cnx = new Conexao();
 		
 		try {
-			cnx.conecte(DB_URL, "root", "1997");
+			cnx.conecte(DB_URL, "root", "aluno");
 		
 //			loginLogic = new LoginLogic(cnx);
 //			loginLogic.addLogin("admin", "senha123", 1);

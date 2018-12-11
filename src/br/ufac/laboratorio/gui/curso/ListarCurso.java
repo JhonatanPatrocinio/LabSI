@@ -6,24 +6,44 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import br.ufac.laboratorio.db.Conexao;
+import br.ufac.laboratorio.entity.Centro;
+import br.ufac.laboratorio.entity.Curso;
+import br.ufac.laboratorio.exception.DataBaseGenericException;
+import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
+import br.ufac.laboratorio.exception.EntityTableIsEmptyException;
+import br.ufac.laboratorio.gui.centro.CentroTableModel;
+import br.ufac.laboratorio.logic.CentroLogic;
+import br.ufac.laboratorio.logic.CursoLogic;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import javax.swing.JTable;
 
 public class ListarCurso extends JDialog {
 
 	/**
 	 * 
 	 */
+	
+	
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+
+	JButton btnEditar;
+	private CursoLogic cl;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -41,9 +61,22 @@ public class ListarCurso extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
+	public List<Curso> carregaDados(){
+		List<Curso> cursos = new ArrayList<>();
+		try {
+			cursos = cl.getCursos();
+		} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityTableIsEmptyException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), 
+					"Falha ao Buscar Curso", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		return cursos;
+	}
+
+	
 	public ListarCurso(Conexao cnx) {
 		
-		
+		this.cl = new CursoLogic(cnx);
 		setBounds(100, 100, 550, 443);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -61,7 +94,7 @@ public class ListarCurso extends JDialog {
 		
 		JPanel panel = new JPanel();
 		
-		JButton btnEditar = new JButton("Editar");
+		this.btnEditar = new JButton("Editar");
 		btnEditar.setIcon(new ImageIcon(ListarCurso.class.getResource("/br/ufac/laboratorio/gui/images/Edit16.gif")));
 		btnEditar.setEnabled(false);
 		btnEditar.addActionListener(new ActionListener() {
@@ -142,6 +175,28 @@ public class ListarCurso extends JDialog {
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(1))
 		);
+		
+		table = new JTable();
+		table = new JTable(new CursoTableModel(carregaDados()));
+		table.getColumnModel().getColumn(0).setPreferredWidth(15);
+		table.getColumnModel().getColumn(1).setPreferredWidth(55);
+		table.getColumnModel().getColumn(2).setPreferredWidth(400);
+		scrollPane.setViewportView(table);
+	
+		
+		
+		
 		getContentPane().setLayout(groupLayout);
+	}
+	class HabilitarBtnEdicao extends MouseAdapter {
+
+		public void mousePressed(MouseEvent e) {
+			if (table.getSelectedRow() >= 0) {
+				btnEditar.setEnabled(true);
+			}else {
+				btnEditar.setEnabled(false);
+			}
+
+		}
 	}
 }

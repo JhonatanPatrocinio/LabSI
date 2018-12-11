@@ -103,7 +103,7 @@ public class MenuAdministrador extends JFrame {
 		JMenuItem mntmCadastrarCurso = new JMenuItem("Cadastrar Curso");
 		mntmCadastrarCurso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CadastroCurso ca = new CadastroCurso();
+				CadastroCurso ca = new CadastroCurso(cnx);
 				ca.setVisible(true);
 			}
 		});
