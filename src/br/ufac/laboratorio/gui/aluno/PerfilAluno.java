@@ -1,4 +1,4 @@
-package br.ufac.laboratorio.gui.admin;
+package br.ufac.laboratorio.gui.aluno;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,8 +12,6 @@ import br.ufac.laboratorio.db.Conexao;
 import br.ufac.laboratorio.entity.Aluno;
 import br.ufac.laboratorio.exception.DataBaseGenericException;
 import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
-import br.ufac.laboratorio.gui.aluno.EditarAluno;
-import br.ufac.laboratorio.gui.aluno.ListaHorarios;
 
 import java.awt.Color;
 import javax.swing.JLabel;

@@ -17,7 +17,7 @@ import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
 import br.ufac.laboratorio.exception.EntityLoginNotExistException;
 import br.ufac.laboratorio.exception.EntityNotExistException;
 import br.ufac.laboratorio.gui.admin.MenuAdministrador;
-import br.ufac.laboratorio.gui.admin.PerfilAluno;
+import br.ufac.laboratorio.gui.aluno.PerfilAluno;
 import br.ufac.laboratorio.gui.professor.PerfilProfessor;
 import br.ufac.laboratorio.logic.AlunoLogic;
 import br.ufac.laboratorio.logic.LoginLogic;
@@ -25,7 +25,6 @@ import br.ufac.laboratorio.logic.ProfessorLogic;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;

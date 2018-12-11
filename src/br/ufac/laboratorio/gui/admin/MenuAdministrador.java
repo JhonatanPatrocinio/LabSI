@@ -219,17 +219,10 @@ public class MenuAdministrador extends JFrame {
 
 			}
 		});
-
-
-
-		Icon imagemUfac = new ImageIcon(getClass().getResource("images/ufac.png"));
+		Icon imagemUfac = new ImageIcon(getClass().getResource("/br/ufac/laboratorio/gui/images/ufac.png"));
 		JLabel lblImagem = new JLabel(imagemUfac);
-		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(MenuAdministrador.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
-
-
-
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
