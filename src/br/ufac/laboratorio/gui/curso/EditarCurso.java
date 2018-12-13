@@ -1,17 +1,27 @@
 package br.ufac.laboratorio.gui.curso;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import br.ufac.laboratorio.db.Conexao;
+import br.ufac.laboratorio.entity.Curso;
+import br.ufac.laboratorio.exception.DataBaseGenericException;
+import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
+import br.ufac.laboratorio.exception.EntityNotExistException;
+import br.ufac.laboratorio.exception.InvalidFieldException;
+import br.ufac.laboratorio.gui.centro.MenuEditarCentro;
+import br.ufac.laboratorio.logic.CursoLogic;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -20,11 +30,14 @@ import javax.swing.ImageIcon;
 
 public class EditarCurso extends JDialog {
 
-	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfCodigoCursoEdit;
 	private JTextField tfNomeCursoEdit;
+	private CursoLogic cl;
 
+	/**
+	 * Launch the application.
+	 */
 //	public static void main(String[] args) {
 //		try {
 //			EditarCurso dialog = new EditarCurso();
@@ -35,7 +48,11 @@ public class EditarCurso extends JDialog {
 //		}
 //	}
 
-	public EditarCurso(Conexao cnx) {
+	/**
+	 * Create the dialog.
+	 */
+	public EditarCurso(Curso curso,Conexao cnx) {
+		this.cl= new CursoLogic(cnx);
 		setBounds(100, 100, 450, 270);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -45,15 +62,39 @@ public class EditarCurso extends JDialog {
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.setIcon(new ImageIcon(EditarCurso.class.getResource("/br/ufac/laboratorio/gui/images/Save16.gif")));
-		btnSalvar.setEnabled(false);
+		btnSalvar.setEnabled(true);
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					cl.updCurso(Integer.parseInt(tfCodigoCursoEdit.getText()), tfNomeCursoEdit.getText());
+					JOptionPane.showMessageDialog(null, " Editado! ");
+					MenuEditarCurso mec = new MenuEditarCurso(cnx);
+					dispose();
+					mec.setVisible(true);
+				} catch (DataBaseGenericException | DataBaseNotConnectedException | InvalidFieldException |
+						EntityNotExistException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage(), 
+							"Falha ao Atualizar Curso", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				
+			}
+		});
+		
+
 		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setIcon(new ImageIcon(EditarCurso.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(e.getSource()==btnVoltar){
+
+					MenuEditarCurso mec = new MenuEditarCurso(cnx);
+
 				
 				dispose();
-				
+				mec.setVisible(true);
+			}
 			}
 		});
 		
@@ -63,14 +104,16 @@ public class EditarCurso extends JDialog {
 		
 		tfCodigoCursoEdit = new JTextField();
 		tfCodigoCursoEdit.setColumns(10);
+		tfCodigoCursoEdit.setEditable(false);
+		tfCodigoCursoEdit.setText(Integer.toString(curso.getCod()));
 		
 		tfNomeCursoEdit = new JTextField();
 		tfNomeCursoEdit.setColumns(100);
-		
+		tfNomeCursoEdit.setText(curso.getNome());
 		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
 		lblAdministrador.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		
-		JLabel lblCadastrarCurso = new JLabel("CADASTRAR CURSO");
+		JLabel lblCadastrarCurso = new JLabel("EDITAR CURSO");
 		lblCadastrarCurso.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		
 		JLabel label = new JLabel("");
