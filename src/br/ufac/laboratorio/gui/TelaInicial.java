@@ -81,7 +81,7 @@ public class TelaInicial extends JFrame {
 		setContentPane(contentPane);
 		cnx = new Conexao();
 		try {
-			cnx.conecte(DB_URL, "root", "aluno");
+			cnx.conecte(DB_URL, "root", "1995");
 		} catch (DataBaseAlreadyConnectedException | 
 				AccessDeniedForUserException | 
 				DataBaseGenericException e) {
@@ -98,7 +98,7 @@ public class TelaInicial extends JFrame {
 				Login login = null;
 				Login login1 = null;
 				try {
-					login1 = new Login(tfLogin.getText() , jpfSenha.getText(), 0);
+					login1 = new Login(tfLogin.getText() , new String (jpfSenha.getPassword()), 0);
 				} catch (NoSuchAlgorithmException | UnsupportedEncodingException e2) {
 					JOptionPane.showMessageDialog(null, "Falha ao criptografar a senha", 
 							"Falha no Algoritmo", JOptionPane.ERROR_MESSAGE);
@@ -174,7 +174,7 @@ public class TelaInicial extends JFrame {
 					Login login1 = null;
 					
 					try {
-						login1 = new Login(tfLogin.getText() , jpfSenha.getText(), 0);
+						login1 = new Login(tfLogin.getText() , new String (jpfSenha.getPassword()), 0);
 					} catch (NoSuchAlgorithmException | UnsupportedEncodingException e2) {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();

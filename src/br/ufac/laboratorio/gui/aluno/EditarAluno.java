@@ -98,12 +98,12 @@ public class EditarAluno extends JDialog {
 		btnEditarAlu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource()==btnEditarAlu){
-					if(jpfEditarSenhaAlu.getText().equals(jpfEditarConfSenhaAlu.getText())) {					
+					if(new String (jpfEditarSenhaAlu.getPassword()).equals(new String (jpfEditarConfSenhaAlu.getPassword()))) {					
 						Aluno alu = null;
 						try {
 							aluL.updAluno(al.getId(),al.getMatricula(), tfEditarNomeAlu.getText(),
 									al.getLogin().getLogin(), 
-									jpfEditarSenhaAlu.getText(), 3);
+									new String (jpfEditarSenhaAlu.getPassword()), 3);
 							try {
 								alu = aluL.getAlunoId(al.getId());
 								PerfilAluno pa = new PerfilAluno(alu, cnx);

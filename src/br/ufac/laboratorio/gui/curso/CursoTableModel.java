@@ -3,8 +3,6 @@ package br.ufac.laboratorio.gui.curso;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
-
-import br.ufac.laboratorio.entity.Centro;
 import br.ufac.laboratorio.entity.Curso;
 
 public class CursoTableModel extends AbstractTableModel {

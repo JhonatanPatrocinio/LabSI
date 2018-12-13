@@ -104,7 +104,7 @@ public class CadastroProfessor extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if(e.getSource()==btnCadastrarProf){
-					if(jpfSenhaProf.getText().equals(jpfConfSenhaProf.getText())) {
+					if(new String (jpfSenhaProf.getPassword()).equals(new String (jpfConfSenhaProf.getPassword()))) {
 						String s = cbCentroProf.getSelectedItem().toString();
 						String [] s2 = s.split(" ");
 												
@@ -112,7 +112,7 @@ public class CadastroProfessor extends JFrame {
 						try {
 							pl.addProfessor(tfMatriculaProf.getText(), tfNomeProf.getText(), tfEmailProf.getText(), 
 									tfTelefoneProf.getText(), s2[0], tfLoginProf.getText(), 
-									jpfSenhaProf.getText(), 2);
+									new String (jpfSenhaProf.getPassword()), 2);
 							JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso! ");
 							cnx.desconecte();
 							TelaInicial ti = new TelaInicial();

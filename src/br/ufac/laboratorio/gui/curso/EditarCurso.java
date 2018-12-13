@@ -1,7 +1,6 @@
 package br.ufac.laboratorio.gui.curso;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -14,7 +13,6 @@ import br.ufac.laboratorio.exception.DataBaseGenericException;
 import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
 import br.ufac.laboratorio.exception.EntityNotExistException;
 import br.ufac.laboratorio.exception.InvalidFieldException;
-import br.ufac.laboratorio.gui.centro.MenuEditarCentro;
 import br.ufac.laboratorio.logic.CursoLogic;
 
 import javax.swing.GroupLayout;
@@ -30,6 +28,7 @@ import javax.swing.ImageIcon;
 
 public class EditarCurso extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfCodigoCursoEdit;
 	private JTextField tfNomeCursoEdit;

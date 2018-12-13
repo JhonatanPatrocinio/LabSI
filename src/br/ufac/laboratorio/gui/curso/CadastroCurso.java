@@ -1,12 +1,6 @@
 package br.ufac.laboratorio.gui.curso;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.util.*;
-import br.ufac.laboratorio.db.*;
-import br.ufac.laboratorio.entity.*;
-import br.ufac.laboratorio.exception.*;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -32,27 +26,12 @@ import javax.swing.ImageIcon;
 
 public class CadastroCurso extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfCodigoCurso;
 	private JTextField tfNomeCurso;
 	private CursoLogic cl;
 
-	/**
-	 * Launch the application.
-	 */
-	//public static void main(String[] args) {
-		//try {
-			//CadastroCurso dialog = new CadastroCurso();
-			//dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			//dialog.setVisible(true);
-		//} catch (Exception e) {
-			//e.printStackTrace();
-	//	}
-	//}
-
-	/**
-	 * Create the dialog.
-	 */
 	public CadastroCurso(Conexao cnx) {
 		cl= new CursoLogic(cnx);
 		setBounds(100, 100, 450, 310);

@@ -106,12 +106,12 @@ public class CadastroAluno extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(e.getSource()==btnCadastrarAlu){	
-					if(jpfSenhaAlu.getText().equals(jpfConfSenhaAlu.getText())) {
+					if(new String (jpfSenhaAlu.getPassword()).equals(new String (jpfConfSenhaAlu.getPassword()))) {
 						String s = cbCursoAlu.getSelectedItem().toString();
 						String [] s2 = s.split(" ");					
 						try {
 							al.addAluno(tfMatriculaAlu.getText(), tfNomeAlu.getText(), Integer.parseInt(s2[0]), tfLoginAlu.getText(), 
-								jpfSenhaAlu.getText(), 3);
+								new String (jpfSenhaAlu.getPassword()), 3);
 							JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso! ");
 							cnx.desconecte();
 							TelaInicial ti = new TelaInicial();

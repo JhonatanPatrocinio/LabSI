@@ -6,17 +6,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import br.ufac.laboratorio.db.Conexao;
-import br.ufac.laboratorio.entity.Centro;
 import br.ufac.laboratorio.entity.Curso;
 import br.ufac.laboratorio.exception.DataBaseGenericException;
 import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
 import br.ufac.laboratorio.exception.EntityNotExistException;
 import br.ufac.laboratorio.exception.EntityTableIsEmptyException;
-import br.ufac.laboratorio.exception.InvalidFieldException;
-import br.ufac.laboratorio.gui.centro.CentroTableModel;
-import br.ufac.laboratorio.gui.centro.EditarCentro;
-import br.ufac.laboratorio.gui.curso.MenuEditarCurso.HabilitarBtnEdicao;
-import br.ufac.laboratorio.logic.CentroLogic;
 import br.ufac.laboratorio.logic.CursoLogic;
 
 import javax.swing.GroupLayout;
@@ -37,11 +31,6 @@ import javax.swing.JTable;
 
 public class ListarCurso extends JDialog {
 
-	/**
-	 * 
-	 */
-	
-	
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 
@@ -49,22 +38,6 @@ public class ListarCurso extends JDialog {
 	private CursoLogic cl;
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			ListarCurso dialog = new ListarCurso();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public List<Curso> carregaDados(){
 		List<Curso> cursos = new ArrayList<>();
 		try {
@@ -77,7 +50,6 @@ public class ListarCurso extends JDialog {
 		return cursos;
 	}
 
-	
 	public ListarCurso(Conexao cnx) {
 		
 		this.cl = new CursoLogic(cnx);

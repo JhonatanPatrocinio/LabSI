@@ -60,15 +60,10 @@ public class EditarProfessor extends JDialog {
 		this.setModal(true);
 
 		JLabel lblMatricula = new JLabel("MATRICULA");
-
 		JLabel lblNome = new JLabel("NOME");
-
 		JLabel lblLogin = new JLabel("LOGIN");
-
 		JLabel lblCentro = new JLabel("CENTRO");
-
 		JLabel lblSenha = new JLabel("SENHA");
-
 		JLabel lblConfirmarSenha = new JLabel("CONFIRMAR SENHA");
 
 		tfEditarMatriculaProf = new JTextField();
@@ -101,18 +96,17 @@ public class EditarProfessor extends JDialog {
 		cbEditarCentroProf.addItem(str);
 		JLabel lblEditarProfessor = new JLabel("EDITAR PROFESSOR");
 		lblEditarProfessor.setFont(new Font("Lucida Grande", Font.BOLD, 30));
-
 		JButton btnEditarProf = new JButton("Salvar");
 		btnEditarProf.setIcon(new ImageIcon(EditarProfessor.class.getResource("/br/ufac/laboratorio/gui/images/Save16.gif")));
 		btnEditarProf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource()==btnEditarProf){
-					if(jpfEditarSenhaProf.getText().equals(jpfEditarConfSenhaProf.getText())) {								
+					if(new String (jpfEditarSenhaProf.getPassword()).equals(new String (jpfEditarConfSenhaProf.getPassword()))) {								
 						Professor prof = null;
 						try {
 							pl.updProfessor(professor.getId(),professor.getMatricula(), tfEditarNomeProf.getText(), tfEmail.getText(), 
 									tfTelefone.getText(), professor.getLogin().getLogin(), 
-									jpfEditarSenhaProf.getText(), 2);					
+									new String (jpfEditarSenhaProf.getPassword()), 2);					
 							try {
 								prof = pl.getProfessorId(professor.getId());
 								
@@ -141,12 +135,8 @@ public class EditarProfessor extends JDialog {
 				}
 			}
 		});
-				
-
 		jpfEditarSenhaProf = new JPasswordField();
-
 		jpfEditarConfSenhaProf = new JPasswordField();
-
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setIcon(new ImageIcon(EditarProfessor.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
 		btnVoltar.addActionListener(new ActionListener() {
@@ -160,17 +150,13 @@ public class EditarProfessor extends JDialog {
 		});
 		
 		JLabel lblEmail = new JLabel("EMAIL");
-		
 		tfEmail = new JTextField();
 		tfEmail.setColumns(10);
 		tfEmail.setText(professor.getEmail());
-		
 		JLabel lblNewLabel = new JLabel("TELEFONE");
-		
 		tfTelefone = new JTextField();
 		tfTelefone.setColumns(10);
 		tfTelefone.setText(professor.getTelefone());
-		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(EditarProfessor.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
