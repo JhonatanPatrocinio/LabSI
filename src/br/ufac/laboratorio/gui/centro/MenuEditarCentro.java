@@ -213,7 +213,7 @@ public class MenuEditarCentro extends JDialog {
 		}
 	} //FIM CONSTRUTOR
 	
-	class HabilitarBtnEdicao extends MouseAdapter {
+	 class HabilitarBtnEdicao extends MouseAdapter {
 
 		public void mousePressed(MouseEvent e) {
 			if (table.getSelectedRow() >= 0) {

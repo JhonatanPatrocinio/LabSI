@@ -10,8 +10,12 @@ import br.ufac.laboratorio.entity.Centro;
 import br.ufac.laboratorio.entity.Curso;
 import br.ufac.laboratorio.exception.DataBaseGenericException;
 import br.ufac.laboratorio.exception.DataBaseNotConnectedException;
+import br.ufac.laboratorio.exception.EntityNotExistException;
 import br.ufac.laboratorio.exception.EntityTableIsEmptyException;
+import br.ufac.laboratorio.exception.InvalidFieldException;
 import br.ufac.laboratorio.gui.centro.CentroTableModel;
+import br.ufac.laboratorio.gui.centro.EditarCentro;
+import br.ufac.laboratorio.gui.curso.MenuEditarCurso.HabilitarBtnEdicao;
 import br.ufac.laboratorio.logic.CentroLogic;
 import br.ufac.laboratorio.logic.CursoLogic;
 
@@ -99,8 +103,27 @@ public class ListarCurso extends JDialog {
 		btnEditar.setEnabled(false);
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(e.getSource() == btnEditar) {
+					Curso curso = null;
+					int id = (int) table.getValueAt(table.getSelectedRow(), 0);
+					try {
+						curso = cl.getCursoId(id);
+					} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityNotExistException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), 
+								"Falha ao Buscar Curso", JOptionPane.ERROR_MESSAGE);
+					}
+					EditarCurso ec = new EditarCurso(curso, cnx);
+					
+					dispose();
+					
+					ec.setVisible(true);
+					
+				}
+				
 			}
 		});
+			
+		
 		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setIcon(new ImageIcon(ListarCurso.class.getResource("/br/ufac/laboratorio/gui/images/Undo16.gif")));
@@ -181,6 +204,7 @@ public class ListarCurso extends JDialog {
 		table.getColumnModel().getColumn(0).setPreferredWidth(15);
 		table.getColumnModel().getColumn(1).setPreferredWidth(55);
 		table.getColumnModel().getColumn(2).setPreferredWidth(400);
+		table.addMouseListener(new HabilitarBtnEdicao());
 		scrollPane.setViewportView(table);
 	
 		

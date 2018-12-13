@@ -57,7 +57,7 @@ public class CursoDB {
 	EntityNotExistException {
 
 		
-		String sqlAtualiza = "UPDATE cursos SET nome = '" + c.getNome() + " WHERE cod = '" + c.getCod() +"';";
+		String sqlAtualiza = "UPDATE cursos SET nome = '" + c.getNome() + "' WHERE cod = " + c.getCod() +";";
 
 		getCurso(c.getCod());
 		return cnx.atualiza(sqlAtualiza) > 0;
@@ -68,7 +68,7 @@ public class CursoDB {
 	DataBaseNotConnectedException,
 	EntityNotExistException {
 
-		String sqlDelete = "DELETE FROM cursos WHERE cod = '" + c.getCod() + "';";
+		String sqlDelete = "DELETE FROM cursos WHERE cod = " + c.getCod() + ";";
 
 		getCurso(c.getCod());
 		return cnx.atualiza(sqlDelete) > 0;
