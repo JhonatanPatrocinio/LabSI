@@ -37,9 +37,6 @@ public class EditarLaboratorio extends JDialog {
 	private LaboratorioLogic lc;
 	private JTable table;
 	JButton btnSalvarLab;
-	/**
-	 * Create the frame.
-	 */
 	
 	public List<Laboratorio> carregaDados(){
 		List<Laboratorio> laboratorios = new ArrayList<>();

@@ -93,7 +93,6 @@ public class LaboratorioDB {
 				+ "computadores = '"+ l.getComputadores()	+ "' "
 				+ " WHERE id = " 	+ l.getId() 			+";";
 
-		getLaboratorioNome(l.getNome());
 		return cnx.atualiza(sqlAtualiza) > 0;
 	}
 
