@@ -42,9 +42,12 @@ public class EditarLaboratorio extends JDialog {
 		List<Laboratorio> laboratorios = new ArrayList<>();
 		try {
 			laboratorios = lc.getLaboratorios();
-		} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityTableIsEmptyException | EntityNotExistException e) {
+		} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityNotExistException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), 
 					"Falha ao Buscar Laboratorios", JOptionPane.ERROR_MESSAGE);
+		} catch (EntityTableIsEmptyException  e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), 
+					"Laboratorios", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		return laboratorios;

@@ -42,40 +42,7 @@ public class MenuEditarCentro extends JDialog {
 	JButton btnEditar;
 	private JTable table;
 	private JButton btnVoltar;
-//	private DefaultTableModel tableModel = new DefaultTableModel();	
-	
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			MenuEditarCentro dialog = new MenuEditarCentro();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-	
-	/*	public void carregaDados(DefaultTableModel model) {//Depois da aula.
-	model.setNumRows(0);//zerar a lista do modelo
-	List<Centro> centros = new ArrayList<>();
-		try {
-			centros = cl.getCentros();
-		} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityTableIsEmptyException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), 
-					"Falha no Cadastro", JOptionPane.ERROR_MESSAGE);
-		}
-		
-		for(Centro centro : centros) {
-			model.addRow(new Object[] {
-					centro.getId(),
-					centro.getSigla(),
-					centro.getNome()
-			});
-		}
-	
-}*/
+
 	
 	public List<Centro> carregaDados(){
 		List<Centro> centros = new ArrayList<>();
@@ -89,9 +56,6 @@ public class MenuEditarCentro extends JDialog {
 		return centros;
 	}
 
-	/**
-	 * Create the dialog.
-	 */
 	public MenuEditarCentro(Conexao cnx) {
 		this.cl = new CentroLogic(cnx);
 		setBounds(100, 100, 545, 398);

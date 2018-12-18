@@ -161,3 +161,4 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 INSERT INTO logins (login, senha, tipo) VALUES ('admin', 'E7D80FFEEFA212B7C5C55700E4F7193E', 1);
 INSERT INTO cursos (cod, nome) VALUES (30, 'Sistemas de Informação');
 INSERT INTO centros (sigla, nome) VALUES ('CCET', 'Centro Ciências Exatas da Terra');
+INSERT INTO laboratorios (nome, id_centro, computadores) values ('Lab 1', 1, 50);

@@ -46,11 +46,14 @@ public class ListaReservas extends JDialog{
 		List<Reserva> reservas = new ArrayList<>();
 		try {
 			reservas = rl.getReservasPorStatus(1);
-		} catch (DataBaseGenericException | DataBaseNotConnectedException | EntityTableIsEmptyException |
+		} catch (DataBaseGenericException | DataBaseNotConnectedException |
 				EntityNotExistException | EntityLoginNotExistException e) {
 			dispose();
 			JOptionPane.showMessageDialog(null, e.getMessage(), 
 					"Falha ao Buscar Reservas", JOptionPane.ERROR_MESSAGE);
+		} catch (EntityTableIsEmptyException  e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), 
+					"Reservas", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		return reservas;
