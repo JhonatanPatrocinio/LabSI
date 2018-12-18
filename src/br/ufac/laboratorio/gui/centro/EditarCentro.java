@@ -133,9 +133,10 @@ public class EditarCentro extends JDialog{
 		JLabel lblSigla = new JLabel("SIGLA");	
 		tfSigla = new JTextField();
 		tfSigla.setColumns(10);
-		
-		tfEditarCentro.setText(centro.getNome());
 		tfSigla.setText(centro.getSigla());
+		tfSigla.setEditable(false);
+		tfEditarCentro.setText(centro.getNome());
+		
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(EditarCentro.class.getResource("/br/ufac/laboratorio/gui/images/GlabIcone.png")));
